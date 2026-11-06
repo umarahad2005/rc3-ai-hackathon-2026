@@ -1,5 +1,11 @@
 # RUN.md: Task 4 Track A, Automated PR Reviewer (every command)
 
+> **First, in every new PowerShell window,** point `$REPO` at your clone of this repo:
+> ```powershell
+> $REPO = "$HOME\rc3-ai-hackathon-2026"   # change if you cloned it elsewhere
+> ```
+
+
 **What it does:** a ticket (in any format) becomes Jira JSON. A developer pushes code, and the tool opens a PR automatically. It then reads the ticket and the diff and asks the LLM whether the acceptance criteria are met.
 - **Fulfilled:** status `ai-pr-reviewer` = Success, a PASSED comment, and an **automatic merge**.
 - **Not fulfilled, or anything goes wrong:** status = **Failed**, a comment saying what is missing, and **no merge**.
@@ -13,10 +19,10 @@ Each block is complete. Paste it into the window named in its title. Sections 0�
 
 ### Block 1: first time only (any window)
 ```powershell
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+cd $REPO\task4a-ai-pr-reviewer
 pip install -r requirements.txt
 pip install pypdf
-if (-not (Test-Path .env)) { Copy-Item .env.example .env }
+if (-not (Test-Path .env)) { New-Item .env -ItemType File | Out-Null }
 notepad .env
 ```
 In Notepad, set `GEMINI_API_KEY=...`, `GEMINI_MODEL=gemini-flash-lite-latest`, `JIRA_TICKETS_DIR=tickets/jira` and `WEBHOOK_SECRET=...`, then save. To make a secret:
@@ -26,7 +32,7 @@ python -c "import secrets; print(secrets.token_hex(32))"
 
 ### Block 2: check everything works (Window A)
 ```powershell
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+cd $REPO\task4a-ai-pr-reviewer
 $env:GITHUB_TOKEN = (gh auth token)
 python -m pytest -q
 python cli.py import-tickets
@@ -36,7 +42,7 @@ Expect: `64 passed`, the tickets imported, and a `decision=` line.
 
 ### Block 3: start the reviewer server (Window A); it stops any old server first
 ```powershell
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+cd $REPO\task4a-ai-pr-reviewer
 Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }
 $env:GITHUB_TOKEN = (gh auth token)
 python cli.py serve --port 8000
@@ -76,8 +82,8 @@ Summary: Show class full message
 Acceptance Criteria:
 - When a class reaches its capacity, members see the message "Class full".
 - A member cannot book a class that is full.
-"@ | Set-Content C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA\tickets\inbox\RC3-10.txt -Encoding utf8
-Push-Location C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA; python cli.py import-tickets; Pop-Location
+"@ | Set-Content $REPO\task4a-ai-pr-reviewer\tickets\inbox\RC3-10.txt -Encoding utf8
+Push-Location $REPO\task4a-ai-pr-reviewer; python cli.py import-tickets; Pop-Location
 ```
 
 ### Block 8: push GOOD code, which should be MERGED (Window C)
@@ -159,7 +165,7 @@ Each PR should have **exactly one** "AI review" comment per push.
 
 ### Block 13 (alternative to Blocks 3–5): automation without ngrok (Window A)
 ```powershell
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+cd $REPO\task4a-ai-pr-reviewer
 Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }
 $env:GITHUB_TOKEN = (gh auth token)
 python cli.py watch --repo umarahad2005/rc3-pr-reviewer-demo --interval 10
@@ -168,7 +174,7 @@ Then run Blocks 8–12 as before. Use either `serve` + ngrok **or** `watch`, nev
 
 ### Block 14: before you zip and submit
 ```powershell
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+cd $REPO\task4a-ai-pr-reviewer
 python -m pytest -q *> demo\tests_offline.txt
 $k = $env:GEMINI_API_KEY; if ($k) { (Get-ChildItem -Recurse -File -Exclude .env | Select-String -SimpleMatch -Pattern $k).Count }
 Compress-Archive -Path (Get-ChildItem -Force | Where-Object { $_.Name -notin '.env','__pycache__','.pytest_cache','.watch_state.json' }) -DestinationPath ..\task4_trackA_submission.zip -Force
@@ -197,10 +203,10 @@ ngrok update
 
 ## 1. One-time setup
 ```powershell
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+cd $REPO\task4a-ai-pr-reviewer
 pip install -r requirements.txt          # requests, google-genai, pytest
 pip install pypdf                        # only for importing .pdf tickets
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) { New-Item .env -ItemType File | Out-Null }
 notepad .env
 ```
 
@@ -305,7 +311,7 @@ type tickets\jira\RC3-10.json
 ### 4.4 Other ways to get tickets
 ```powershell
 # Task 1 CSV -> Jira JSON
-python csv_to_jira_json.py ..\task1\out\clear\tickets_jira.csv tickets\jira
+python csv_to_jira_json.py ..\task1-jira-ticket-generator\out\clear\tickets_jira.csv tickets\jira
 
 # Save a real Jira ticket as a file: open this URL in a logged-in browser and save the page
 #   https://<site>.atlassian.net/rest/api/2/issue/RC3-5   ->  tickets\jira\RC3-5.json
@@ -336,7 +342,7 @@ Output stages:
 ## 6. Full automation, local (no public URL): `watch`
 **Window A** (the reviewer; leave it running):
 ```powershell
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+cd $REPO\task4a-ai-pr-reviewer
 $env:GITHUB_TOKEN = (gh auth token)
 python cli.py import-tickets
 python cli.py watch --repo umarahad2005/rc3-pr-reviewer-demo --interval 10
@@ -386,7 +392,7 @@ Put the output in `.env` as `WEBHOOK_SECRET=<value>`, and in GitHub (8.4). Never
 ### 8.3 Start the server and the tunnel
 ```powershell
 # Window A: server
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+cd $REPO\task4a-ai-pr-reviewer
 $env:GITHUB_TOKEN = (gh auth token)
 python cli.py serve --port 8000
 
@@ -512,8 +518,8 @@ Expect: `no ticket ID in branch or title`, then `decision=BLOCK`. No AI call and
 
 ### 9.5 Ticket without acceptance criteria → BLOCKED (safety)
 ```powershell
-"Key: RC3-11`nSummary: Something vague`n`nPlease improve the app." | Set-Content C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA\tickets\inbox\RC3-11.txt
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA; python cli.py import-tickets; cd $env:TEMP\demo-live
+"Key: RC3-11`nSummary: Something vague`n`nPlease improve the app." | Set-Content $REPO\task4a-ai-pr-reviewer\tickets\inbox\RC3-11.txt
+cd $REPO\task4a-ai-pr-reviewer; python cli.py import-tickets; cd $env:TEMP\demo-live
 git checkout main; git pull; git checkout -b feature/RC3-11-vague
 Add-Content booking.py "`n# RC3-11"
 git commit -am "RC3-11 vague"
@@ -580,7 +586,7 @@ Check that no secret is inside the folder before you zip it. This must print `0`
 ```powershell
 $k = $env:GEMINI_API_KEY; (Get-ChildItem -Recurse -File -Exclude .env | Select-String -SimpleMatch -Pattern $k).Count
 ```
-**Do not include `.env` in the zip.** Only `.env.example` belongs there.
+**Never include `.env` in the zip or the repo.**
 
 ## 15. Saved demo evidence (in `demo/`)
 | File | Shows |
@@ -605,7 +611,7 @@ Sir gives you one ticket and one piece of code. The ticket goes in as a Jira tic
 
 ### Step 0: setup (Window A)
 ```powershell
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+cd $REPO\task4a-ai-pr-reviewer
 $env:GITHUB_TOKEN = (gh auth token)
 ```
 
@@ -687,7 +693,7 @@ start "https://github.com/umarahad2005/rc3-pr-reviewer-demo/pull/$n"
 
 ### Step 1: import the ticket (Window A)
 ```powershell
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+cd $REPO\task4a-ai-pr-reviewer
 $env:GITHUB_TOKEN = (gh auth token)
 python cli.py import-tickets
 type tickets\jira\RC3-20.json
@@ -709,7 +715,7 @@ cd $env:TEMP\demo-live
 git checkout main; git pull
 git checkout -b "feature/RC3-20-userController-$(Get-Date -Format HHmmss)"
 New-Item -ItemType Directory -Force controllers | Out-Null
-Copy-Item C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA\demo\userController.js controllers\userController.js
+Copy-Item $REPO\task4a-ai-pr-reviewer\demo\userController.js controllers\userController.js
 git add controllers\userController.js
 git commit -m "RC3-20 configuration APIs (userController.js)"
 git push -u origin HEAD
@@ -722,7 +728,7 @@ cd $env:TEMP\demo-live
 git checkout main; git pull
 git checkout -b "feature/RC3-20-WUserController-$(Get-Date -Format HHmmss)"
 New-Item -ItemType Directory -Force controllers | Out-Null
-Copy-Item C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA\demo\WUserController.js controllers\WUserController.js
+Copy-Item $REPO\task4a-ai-pr-reviewer\demo\WUserController.js controllers\WUserController.js
 git add controllers\WUserController.js
 git commit -m "RC3-20 configuration APIs (WUserController.js)"
 git push -u origin HEAD
@@ -742,7 +748,7 @@ After the `git push` in Step 3 or 4:
 ```powershell
 gh pr create -R umarahad2005/rc3-pr-reviewer-demo --title "RC3-20 configuration APIs" --body "Review against RC3-20" --base main
 $n = gh pr list -R umarahad2005/rc3-pr-reviewer-demo --limit 1 --json number --jq '.[0].number'
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+cd $REPO\task4a-ai-pr-reviewer
 python cli.py review --repo umarahad2005/rc3-pr-reviewer-demo --pr $n --dry-run   # preview, changes nothing
 python cli.py review --repo umarahad2005/rc3-pr-reviewer-demo --pr $n             # real: status + comment (+ merge)
 echo $LASTEXITCODE                                                                   # 1 = blocked
@@ -750,7 +756,7 @@ echo $LASTEXITCODE                                                              
 
 ### Save the evidence
 ```powershell
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+cd $REPO\task4a-ai-pr-reviewer
 python cli.py import-tickets *> demo\import_rc3_20_log.txt
 python cli.py review --repo umarahad2005/rc3-pr-reviewer-demo --pr $n --dry-run *> demo\run_rc3_20_review.txt
 gh pr list -R umarahad2005/rc3-pr-reviewer-demo --state all *> demo\pr_list.txt
@@ -763,7 +769,7 @@ gh pr list -R umarahad2005/rc3-pr-reviewer-demo --state all *> demo\pr_list.txt
 ## 18. One command: `python start.py` (start once, then just push)
 
 ```powershell
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+cd $REPO\task4a-ai-pr-reviewer
 python start.py                 # LIVE: status, comment, and merge if the code passes
 python start.py --dry-run       # decide only, change nothing on GitHub
 python start.py --repo owner/name --interval 10

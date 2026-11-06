@@ -201,7 +201,7 @@ Details, evidence and the "Not tested" list: [TESTING.md](TESTING.md) and [defec
 ## How this was built
 
 - The plan was drafted with AI help in a planning conversation (shared with Task 2):
-  `chats/00_planning_chat_task2_and_task1.txt`.
+  `../chats/task1-task2_planning_chat.txt`.
   Short version: `PLAN.md`; full spec: `PLAN_full.md`.
 - The code was built with Claude Code in a build chat, one stage per prompt (P1 plan review,
   P2-P6 one stage each, P7 review and edge cases, P8 README): `chats/01_build_chat.md`.
@@ -214,7 +214,7 @@ Details, evidence and the "Not tested" list: [TESTING.md](TESTING.md) and [defec
 
 | Item | Path |
 |---|---|
-| Planning chat (exported unedited by the student) | `chats/00_planning_chat_task2_and_task1.txt` |
+| Planning chat (exported unedited by the student) | `../chats/task1-task2_planning_chat.txt` |
 | Build chat (exported unedited by the student) | `chats/01_build_chat.md` |
 | Review and re-run chat (exported unedited by the student) | `chats/02_review_and_rerun_chat.md` |
 | Plan (1 page) / full spec | `PLAN.md` / `PLAN_full.md` |
