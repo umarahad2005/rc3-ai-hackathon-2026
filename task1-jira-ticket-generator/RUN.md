@@ -1,12 +1,18 @@
 # How to run Task 1: Brief2Jira
 
+> **First, in every new PowerShell window,** point `$REPO` at your clone of this repo:
+> ```powershell
+> $REPO = "$HOME\rc3-ai-hackathon-2026"   # change if you cloned it elsewhere
+> ```
+
+
 This tool turns a client brief into a breakdown, Jira tickets and open questions. It never assumes anything the brief does not say.
 
 ## 1. One-time setup (PowerShell)
 ```powershell
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task1
+cd $REPO\task1-jira-ticket-generator
 pip install google-genai pytest
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) { New-Item .env -ItemType File | Out-Null }
 notepad .env
 ```
 In `.env`, set `GEMINI_API_KEY=<your key>` and save the file. Get a free key from https://aistudio.google.com → Get API key.
@@ -25,7 +31,7 @@ python main.py briefs\clear.txt --out out\clear     # well-specified gym booking
 python main.py briefs\vague.txt --out out\vague     # vague grocery brief with 8 traps
 python main.py <any brief.txt> --out out\mybrief    # your own brief
 ```
-Optional: `--model gemini-3.5-flash` overrides `GEMINI_MODEL`. The default in `.env.example` is `gemini-flash-lite-latest`.
+Optional: `--model gemini-3.5-flash` overrides `GEMINI_MODEL`. The suggested value is `gemini-flash-lite-latest`.
 The saved demo outputs were made with:
 ```powershell
 $env:GEMINI_THINKING_BUDGET="1024"; python main.py briefs\clear.txt --out out\clear --model gemini-3-flash-preview
