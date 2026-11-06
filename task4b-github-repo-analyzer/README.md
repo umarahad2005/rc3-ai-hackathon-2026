@@ -2,6 +2,12 @@ Track B: GitHub Repository Analyzer CLI
 
 # GitHub Repository Analyzer (RC3 AI Hackathon, Task 4, Track B)
 
+> **First, in every new PowerShell window,** point `$REPO` at your clone of this repo:
+> ```powershell
+> $REPO = "$HOME\rc3-ai-hackathon-2026"   # change if you cloned it elsewhere
+> ```
+
+
 `python analyze.py <github-repo-url>` prints a terminal report with five sections:
 
 1. **Tech Stack**: each item comes with its evidence (languages API, manifest line, or file that is present)
@@ -27,7 +33,7 @@ APIs used: the GitHub REST API, PyPI JSON (`https://pypi.org/pypi/{name}/json`) 
 ## Install (PowerShell)
 
 ```powershell
-cd C:\Users\umara\Downloads\RC3_AI_HACK\task4
+cd $REPO\task4b-github-repo-analyzer
 python -m pip install -r requirements.txt      # or: pip install requests rich
 ```
 
@@ -70,7 +76,7 @@ Copy the token (`github_pat_...` or `ghp_...`). GitHub shows it only once.
 **Option 1: `.env` file (auto-loaded)**
 
 ```powershell
-Copy-Item .env.example .env
+if (-not (Test-Path .env)) { New-Item .env -ItemType File | Out-Null }
 notepad .env          # set: GITHUB_TOKEN=ghp_yourtokenhere
 ```
 
@@ -258,7 +264,6 @@ task4/
   analyzer/deps.py           analyze_deps(bundle)  (PyPI / npm lookups, no token sent)
   analyzer/activity.py       analyze_activity(bundle)
   analyzer/report.py         render(...)  (rich output only)
-  .env.example               template for .env
   requirements.txt           requests, rich
   analyzer/help.py           `python analyze.py help` guide
   tests/test_offline.py      10 offline tests with mocked GitHub responses (no network, no token)

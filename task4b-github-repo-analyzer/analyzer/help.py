@@ -47,7 +47,7 @@ def show_help(console: Console, env_file_exists: bool) -> None:
               else "[yellow]not set[/yellow] (60 requests/hour, about 8 runs)")
     tok = _table("Option", "How")
     tok.add_row("1. .env file (recommended)",
-                "Copy-Item .env.example .env   then put  GITHUB_TOKEN=<your token>  in .env and save")
+                "create a .env file next to analyze.py, then put  GITHUB_TOKEN=<your token>  in .env and save")
     tok.add_row("2. This terminal only", '$env:GITHUB_TOKEN = "<your token>"')
     tok.add_row("3. Permanent", 'setx GITHUB_TOKEN "<your token>"   (open a new terminal after)')
     tok.add_row("Remove for this terminal", "Remove-Item Env:GITHUB_TOKEN")

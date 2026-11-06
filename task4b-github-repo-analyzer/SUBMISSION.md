@@ -6,7 +6,7 @@ RC3 AI Hackathon, 2026-11-05. Individual work.
 
 | # | Deliverable | Where |
 |---|---|---|
-| 1 | Exported chat(s): complete and unedited | `chat_export/` (Claude Code `/export` of the Task 4 conversation) |
+| 1 | Exported chat(s): complete and unedited | `../chats/task4b_chat_export.txt` (Claude Code `/export` of the Task 4 conversation) |
 | 2 | Working tool: source code + README (track, libraries, how to run) | `analyze.py`, `analyzer/`, `README.md`, `requirements.txt` |
 | 3 | Demo evidence: full report for 2 or more public repositories | `demo/expressjs_express.txt`, `demo/psf_requests.txt`, `demo/hello_world.txt`, `demo/unmapped_mit_hackathon.txt` |
 | + | Failure handling evidence | `demo/failures.txt` (live: exit 2, 3, 5), `demo/rate_limit_simulated.txt` (mocked: exit 4), `demo/tests_offline.txt` (10 offline tests, all pass) |
@@ -21,7 +21,7 @@ python analyze.py https://github.com/expressjs/express
 python analyze.py help                   # usage guide
 python -m unittest -v tests.test_offline # offline tests
 ```
-Optional: copy `.env.example` to `.env` and set `GITHUB_TOKEN` (5,000 requests/hour instead of 60).
+Optional: create a `.env` file and set `GITHUB_TOKEN` (5,000 requests/hour instead of 60).
 The token is read only from the environment or `.env`. It is never written in the code or in the submitted files.
 
 ## How the work was done (summary of the chat)
@@ -42,6 +42,6 @@ See `README.md` > "Known limitations". In short: the complexity score is a struc
 
 ## Security note
 A GitHub token was pasted into the AI chat once by mistake while setting up `.env`. The chat export is left unedited, as
-the rules require, so the token text is visible in `chat_export/`. That token was revoked on GitHub at **__:__** and
-replaced, so it no longer works. No token appears in the code, the README, `.env.example` or the demo files, and `.env`
+the rules require, so it was in the export; in this public repo it is replaced with `[REDACTED]`. That token was revoked on GitHub at **__:__** and
+replaced, so it no longer works. No token appears in the code, the README or the demo files, and `.env`
 is not included in this submission.
