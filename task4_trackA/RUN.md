@@ -757,3 +757,29 @@ gh pr list -R umarahad2005/rc3-pr-reviewer-demo --state all *> demo\pr_list.txt
 ```
 
 **If you see `503 UNAVAILABLE`:** Gemini is busy, so the tool blocks safely. Run the `review` again, or set `GEMINI_MODEL=gemini-3.5-flash` in `.env`.
+
+---
+
+## 18. One command: `python start.py` (start once, then just push)
+
+```powershell
+cd C:\Users\umara\Downloads\RC3_AI_HACK\task4_trackA
+python start.py                 # LIVE: status, comment, and merge if the code passes
+python start.py --dry-run       # decide only, change nothing on GitHub
+python start.py --repo owner/name --interval 10
+```
+`start.py` does every setup step and then keeps running until **Ctrl+C**:
+1. **GitHub token:** uses `GITHUB_TOKEN` from `.env` if it can access the repo; otherwise it uses `gh auth token` automatically. No `$env:GITHUB_TOKEN` line is needed.
+2. **Gemini key:** checks that `GEMINI_API_KEY` is set (the key is never printed).
+3. **Tickets:** imports everything in `tickets\inbox\` into `tickets\jira\`.
+4. **Watch:** every push to a branch with a ticket key (for example `feature/RC3-20-x`) opens a PR, reviews it, and then MERGEs or BLOCKs it.
+
+In a second window, just push:
+```powershell
+cd $env:TEMP\demo-live
+git checkout main; git pull
+git checkout -b feature/RC3-20-sir-code
+# add sir's code
+git add -A; git commit -m "RC3-20 sir's code"; git push -u origin HEAD
+```
+No ngrok and no `gh pr create` are needed. Watch polls GitHub every 10 seconds. A new ticket dropped in `tickets\inbox\` is picked up the next time you start `start.py`. Do not run it at the same time as `serve` or `watch`.
