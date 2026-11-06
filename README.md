@@ -4,6 +4,10 @@
 
 **My solutions to the RC3 AI Hackathon, Riphah International University, 5 November 2026**
 
+### 🥇 Winner: 1st Position 🥇
+
+![1st Place](https://img.shields.io/badge/RC3%20AI%20Hackathon%202026-%F0%9F%A5%87%201st%20Place-FFD700?style=for-the-badge)
+
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![Gemini](https://img.shields.io/badge/LLM-Google%20Gemini-4285F4?logo=google&logoColor=white)
 ![GitHub API](https://img.shields.io/badge/GitHub-REST%20API-181717?logo=github)
