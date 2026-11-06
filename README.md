@@ -17,6 +17,23 @@
 
 ---
 
+## 🏆 1st Position: AI Hackathon, Riphah Computing Challenge Cup (RC3) 2026
+
+<table>
+  <tr>
+    <td align="center" width="40%"><img src="assets/award-ceremony.jpeg" alt="Receiving the 1st position trophy and certificate at the RC3 2026 award ceremony" width="100%"></td>
+    <td align="center" width="30%"><img src="assets/winners.jpeg" alt="The winning team with the trophy and certificate of achievement" width="100%"></td>
+    <td align="center" width="30%"><img src="assets/trophy-1st-position.jpeg" alt="The 1st Position trophy: AI Hackathon, Riphah Computing Challenge Cup" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub><b>Award ceremony</b>, Riphah International University</sub></td>
+    <td align="center"><sub><b>The winning team</b> with the trophy and certificate</sub></td>
+    <td align="center"><sub><b>🥇 1st Position trophy</b></sub></td>
+  </tr>
+</table>
+
+---
+
 ## 📦 What's inside
 
 | # | Project | What it does | Stack |
@@ -90,6 +107,6 @@ rc3-ai-hackathon-2026/
 
 <div align="center">
 
-Built with ❤️ and [Claude Code](https://claude.com/claude-code) by [@umarahad2005](https://github.com/umarahad2005)
+Built with ❤️ by [@umarahad2005](https://github.com/umarahad2005)
 
 </div>
