@@ -1,0 +1,10 @@
+{
+  "key": "TASK-005",
+  "fields": {
+    "summary": "View and print class booked member list as staff",
+    "description": "Staff can view the list of members booked into each class and print it.\n\nh3. Acceptance Criteria\n* Staff can view the list of members booked into each class and print it.\n\nh3. Source\n{quote}S11: \"Staff can view the list of members booked into each class and print it.\"{quote}\n\nh3. Dependencies\nNone stated in brief\n\nh3. Open Questions\nNone\n\nh3. Details\nStatus: Ready | Parent: TASK-001 | Priority: Low | Estimate: Not specified | Deadline: 15 March 2027",
+    "labels": [
+      "TASK-005"
+    ]
+  }
+}

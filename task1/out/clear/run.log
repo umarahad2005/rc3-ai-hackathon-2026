@@ -1,0 +1,413 @@
+Brief2Jira  brief=briefs\srs.txt  model=gemini-3-flash-preview  out=out\clear
+
+##############################################################################
+# STAGE 1 INPUT - 45 sentences
+##############################################################################
+  S1: SRS: Sign Up and Login Pages
+  S2: Nov 5, 2026 · @faisal
+  S3: 1.
+  S4: Introduction 1.1 Purpose
+  S5: This document specifies the requirements for the Sign Up and Login pages of the application.
+  S6: It is the reference for design, development and testing of user registration and authentication.
+  S7: 1.2 Scope
+  S8: In scope: account creation with email and password, email verification, login, logout, "remember me", and password reset entry points.
+  S9: Out of scope: social login, multi-factor authentication, and admin user management (listed as future work in section 8).
+  S10: 1.3 Definitions
+  S11: Term	Meaning
+  S12: User	A person creating an account or signing in Session	The authenticated period after a successful login Access token	Short-lived credential sent with each authenticated request Lockout	Temporary block on login after repeated failed attempts
+  S13: 2.
+  S14: Overall description 2.1 User classes
+  S15: •	New visitor: has no account and wants to register.
+  S16: •	Returning user: has a verified account and wants to sign in.
+  S17: 2.2 Operating environment
+  S18: The pages run in current versions of Chrome, Firefox, Safari and Edge, on desktop and mobile screens from 360 px wide.
+  S19: They talk to a backend REST API over HTTPS.
+  S20: 2.3 Assumptions and dependencies
+  S21: •	An email service is available to send verification and reset emails.
+  S22: •	The backend stores passwords only as salted hashes (bcrypt or Argon2).
+  S23: •	Authentication uses tokens issued by the backend; the exact mechanism (JWT or server session) is confirmed in section 8.
+  S24: 2.4 Constraints
+  S25: •	All traffic uses HTTPS.
+  S26: •	The pages must follow the product's existing design system.
+  S27: 3.
+  S28: Sign up page
+  S29: A new visitor can create an account with a name, email and password, then verify the email address before first login.
+  S30: 3.1 Fields and validation
+  S31: Field	Required	Validation rule
+  S32: Full name	Yes	2 to 60 characters; letters, spaces, hyphens and apostrophes Email	Yes	Valid email format; maximum 254 characters; unique, case-insensitive Password	Yes	8 to 64 characters with at least one uppercase letter, one lowercase letter, one digit and one symbol Confirm password	Yes	Must match the password Terms and privacy checkbox	Yes	Must be ticked to submit 3.2 Functional requirements
+  S33: •	SU-1: The system shall display the sign up form with the fields above and a "Sign up" button.
+  S34: •	SU-2: The system shall validate each field on blur and again on submit, showing the error under the field.
+  S35: •	SU-3: The system shall keep the "Sign up" button disabled until all required fields are valid.
+  S36: •	SU-4: The system shall let the user show or hide the password and confirm password values.
+  S37: •	SU-5: The system shall show a password strength indicator while the user types.
+  S38: •	SU-6: On submit, the system shall check that the email is not already registered and reject the request with a clear message if it is.
+  S39: •	SU-7: The system shall store the password only as a salted hash and never return it in any response.
+  S40: •	SU-8: On success, the system shall create the account in an unverified state and send a verification email containing a link valid for 24 hours.
+  S41: •	SU-9: The system shall show a confirmation screen telling the user to check their email, with a "Resend email" action limited to once every 60 seconds.
+  S42: •	SU-10: When the user opens a valid verification link, the system shall mark the account verified and redirect to the login page with a success message.
+  S43: •	SU-11: If the verification link is expired or invalid, the system shall explain this and offer to send a new link.
+  S44: •	SU-12: The page shall include a "Already have an account?
+  S45: Log in" link to the login page.
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+  F1 [goal] The document specifies requirements for Sign Up and Login pages
+      quote: "This document specifies the requirements for the Sign Up and Login pages of the application."  (S5)
+  F2 [feature] Account creation with email and password is in scope
+      quote: "In scope: account creation with email and password"  (S8)
+  F3 [feature] Email verification is in scope
+      quote: "In scope: account creation with email and password, email verification"  (S8)
+  F4 [feature] Login and logout are in scope
+      quote: "In scope: account creation with email and password, email verification, login, logout"  (S8)
+  F5 [feature] Remember me functionality is in scope
+      quote: "In scope: account creation with email and password, email verification, login, logout, "remember me""  (S8)
+  F6 [feature] Password reset entry points are in scope
+      quote: "In scope: account creation with email and password, email verification, login, logout, "remember me", and password reset entry points."  (S8)
+  F7 [feature] Social login is out of scope
+      quote: "Out of scope: social login, multi-factor authentication, and admin user management"  (S9)
+  F8 [feature] Multi-factor authentication is out of scope
+      quote: "Out of scope: social login, multi-factor authentication, and admin user management"  (S9)
+  F9 [feature] Admin user management is out of scope
+      quote: "Out of scope: social login, multi-factor authentication, and admin user management"  (S9)
+  F10 [user] New visitor who wants to register
+      quote: "New visitor: has no account and wants to register."  (S15)
+  F11 [user] Returning user who wants to sign in
+      quote: "Returning user: has a verified account and wants to sign in."  (S16)
+  F12 [constraint] Pages must run in current versions of Chrome, Firefox, Safari and Edge
+      quote: "The pages run in current versions of Chrome, Firefox, Safari and Edge"  (S18)
+  F13 [constraint] Pages must support desktop and mobile screens from 360 px wide
+      quote: "on desktop and mobile screens from 360 px wide."  (S18)
+  F14 [integration] Pages communicate with a backend REST API over HTTPS
+      quote: "They talk to a backend REST API over HTTPS."  (S19)
+  F15 [integration] An email service is required for verification and reset emails
+      quote: "An email service is available to send verification and reset emails."  (S21)
+  F16 [constraint] Backend stores passwords as salted hashes using bcrypt or Argon2
+      quote: "The backend stores passwords only as salted hashes (bcrypt or Argon2)."  (S22)
+  F17 [constraint] Authentication uses tokens issued by the backend
+      quote: "Authentication uses tokens issued by the backend"  (S23)
+  F18 [constraint] All traffic must use HTTPS
+      quote: "All traffic uses HTTPS."  (S25)
+  F19 [constraint] Pages must follow the existing design system
+      quote: "The pages must follow the product's existing design system."  (S26)
+  F20 [feature] New visitors can create accounts with name, email, and password
+      quote: "A new visitor can create an account with a name, email and password"  (S29)
+  F21 [constraint] Full name must be 2 to 60 characters including letters, spaces, hyphens and apostrophes
+      quote: "2 to 60 characters; letters, spaces, hyphens and apostrophes"  (S32)
+  F22 [constraint] Email must be valid format, max 254 characters, unique, and case-insensitive
+      quote: "Valid email format; maximum 254 characters; unique, case-insensitive"  (S32)
+  F23 [constraint] Password must be 8 to 64 characters with uppercase, lowercase, digit and symbol
+      quote: "8 to 64 characters with at least one uppercase letter, one lowercase letter, one digit and one symbol"  (S32)
+  F24 [constraint] Confirm password must match the password
+      quote: "Must match the password"  (S32)
+  F25 [constraint] Terms and privacy checkbox must be ticked to submit
+      quote: "Must be ticked to submit"  (S32)
+  F26 [feature] System displays sign up form with fields and a Sign up button
+      quote: "The system shall display the sign up form with the fields above and a "Sign up" button."  (S33)
+  F27 [feature] System validates fields on blur and submit, showing errors under fields
+      quote: "The system shall validate each field on blur and again on submit, showing the error under the field."  (S34)
+  F28 [feature] Sign up button is disabled until all required fields are valid
+      quote: "The system shall keep the "Sign up" button disabled until all required fields are valid."  (S35)
+  F29 [feature] Users can show or hide password and confirm password values
+      quote: "The system shall let the user show or hide the password and confirm password values."  (S36)
+  F30 [feature] System shows a password strength indicator during typing
+      quote: "The system shall show a password strength indicator while the user types."  (S37)
+  F31 [feature] System rejects already registered emails with a clear message
+      quote: "the system shall check that the email is not already registered and reject the request with a clear message if it is."  (S38)
+  F32 [constraint] Passwords must be stored as salted hashes and never returned in responses
+      quote: "The system shall store the password only as a salted hash and never return it in any response."  (S39)
+  F33 [feature] System creates unverified account and sends verification link valid for 24 hours
+      quote: "the system shall create the account in an unverified state and send a verification email containing a link valid for 24 hours."  (S40)
+  F34 [feature] System shows confirmation screen with resend action limited to every 60 seconds
+      quote: "The system shall show a confirmation screen telling the user to check their email, with a "Resend email" action limited to once every 60 seconds."  (S41)
+  F35 [feature] Valid verification link marks account verified and redirects to login
+      quote: "When the user opens a valid verification link, the system shall mark the account verified and redirect to the login page with a success message."  (S42)
+  F36 [feature] System explains expired or invalid links and offers a new one
+      quote: "If the verification link is expired or invalid, the system shall explain this and offer to send a new link."  (S43)
+  F37 [feature] Sign up page includes a link to the login page
+      quote: "The page shall include a "Already have an account? Log in" link to the login page."  (?)
+Rejected: None
+
+##############################################################################
+# STAGE 3 GAPS (LLM + templates) - verified questions
+##############################################################################
+  [missing]
+  Q1 (missing, llm) What is the target deadline for the completion of the Sign Up and Login pages?
+  Q2 (missing, llm) What is the priority ranking for the features listed in the scope?
+      related facts: F2, F3, F4, F5, F6
+  [vague]
+  Q4 (vague, llm) What is the specific measurable definition of a 'clear message' when an email is already registered?
+      quote: "reject the request with a clear message if it is."
+      related facts: F31
+  [undefined_term]
+  Q3 (undefined_term, llm) Where can the documentation or assets for the product's existing design system be accessed?
+      quote: "The pages must follow the product's existing design system."
+      related facts: F19
+  [scope_gap]
+  Q5 (scope_gap, llm) What are the specific visual levels or calculation rules for the password strength indicator?
+      quote: "The system shall show a password strength indicator while the user types."
+      related facts: F30
+  Q7 (scope_gap, llm) What are the functional requirements and fields for the Login page?
+      quote: "This document specifies the requirements for the Sign Up and Login pages of the application."
+      related facts: F1
+  Q8 (scope_gap, llm) What are the functional requirements for the logout functionality?
+      quote: "In scope: account creation with email and password, email verification, login, logout"
+      related facts: F4
+  Q9 (scope_gap, llm) What are the functional requirements for the 'remember me' feature?
+      quote: "In scope: account creation with email and password, email verification, login, logout, "remember me""
+      related facts: F5
+  Q10 (scope_gap, llm) What are the functional requirements for the password reset entry points?
+      quote: "In scope: account creation with email and password, email verification, login, logout, "remember me", and password reset entry points."
+      related facts: F6
+Templated questions added: 0
+Rejected (1):
+  [gaps] contradiction quotes same sentence/nested: {"id": "Q6", "category": "contradiction", "question": "Should the authentication mechanism use JWT or server sessions?", "quote": "the exact mechanism (JWT or server session) is confirmed in section 8.", "quote_b": "Authentication uses tokens issued by the backend", "related_fact_ids": ["F17"]}
+
+##############################################################################
+# STAGE 4 BREAK DOWN (LLM) - verified epics and tasks
+##############################################################################
+  E1 Sign up page
+    E1.T1 [Story] Display sign up form  facts=F20,F21,F22,F23,F24,F25,F26,F27,F28,F29,F30,F37  AC=11  deps=-  blocked_by=Q1,Q2,Q5
+    E1.T2 [Task] Process account registration  facts=F16,F31,F32,F33  AC=3  deps=E1.T1  blocked_by=Q1,Q2,Q4
+    E1.T3 [Story] Verify email address  facts=F3,F34,F35,F36  AC=3  deps=E1.T2  blocked_by=Q1,Q2
+  E2 Login pages
+    E2.T1 [Story] Sign in returning user  facts=F4,F11,F17  AC=0  deps=-  blocked_by=Q1,Q2,Q11
+    E2.T2 [Story] Logout user  facts=F4  AC=0  deps=E2.T1  blocked_by=Q1,Q2,Q8,Q12
+    E2.T3 [Story] Remember login session  facts=F5  AC=0  deps=E2.T1  blocked_by=Q1,Q2,Q9,Q13
+    E2.T4 [Story] Access password reset  facts=F6  AC=0  deps=-  blocked_by=Q1,Q2,Q10,Q14
+Questions raised by code in Stage 4:
+  Q11 (missing, breakdown) What testable acceptance conditions apply to 'Sign in returning user'?
+  Q12 (missing, breakdown) What testable acceptance conditions apply to 'Logout user'?
+  Q13 (missing, breakdown) What testable acceptance conditions apply to 'Remember login session'?
+  Q14 (missing, breakdown) What testable acceptance conditions apply to 'Access password reset'?
+Rejected (2):
+  [breakdown] question link dropped: question is not about this task (its quote is not one of the task's source/AC quotes): {"task": "Display sign up form", "blocked_by_dropped": ["Q3"]}
+  [breakdown] question link dropped: question is not about this task (its quote is not one of the task's source/AC quotes): {"task": "Sign in returning user", "blocked_by_dropped": ["Q7"]}
+
+##############################################################################
+# STAGE 5+6 TICKETS AND REPORT
+##############################################################################
+==============================================================================
+TICKETS (9)
+==============================================================================
+TASK-001  [Epic]  Sign up page
+  Children: TASK-002, TASK-003, TASK-004
+  Description: A new visitor can create an account with a name, email and password, then verify the email address before first login.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-002, TASK-003, TASK-004
+  Source: S29: "A new visitor can create an account with a name, email and password, then verify the email address before first login."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-003] (undefined_term) Where can the documentation or assets for the product's existing design system be accessed?
+    [Q-006] (scope_gap) What are the functional requirements and fields for the Login page?
+
+TASK-002  [Story]  Display sign up form
+  Parent: TASK-001
+  Description: The system shall display the sign up form with the fields above and a "Sign up" button.
+  Acceptance Criteria:
+    - The system shall display the sign up form with the fields above and a "Sign up" button.   <- "The system shall display the sign up form with the fields above and a "Sign up" button."
+    - Full name must be 2 to 60 characters; letters, spaces, hyphens and apostrophes.   <- "2 to 60 characters; letters, spaces, hyphens and apostrophes"
+    - Email must be valid email format; maximum 254 characters; unique, case-insensitive.   <- "Valid email format; maximum 254 characters; unique, case-insensitive"
+    - Password must be 8 to 64 characters with at least one uppercase letter, one lowercase letter, one digit and one symbol.   <- "8 to 64 characters with at least one uppercase letter, one lowercase letter, one digit and one symbol"
+    - Confirm password must match the password.   <- "Must match the password"
+    - Terms and privacy checkbox must be ticked to submit.   <- "Must be ticked to submit"
+    - The system shall validate each field on blur and again on submit, showing the error under the field.   <- "The system shall validate each field on blur and again on submit, showing the error under the field."
+    - The system shall keep the "Sign up" button disabled until all required fields are valid.   <- "The system shall keep the "Sign up" button disabled until all required fields are valid."
+    - The system shall let the user show or hide the password and confirm password values.   <- "The system shall let the user show or hide the password and confirm password values."
+    - The system shall show a password strength indicator while the user types.   <- "The system shall show a password strength indicator while the user types."
+    - The page shall include a "Already have an account? Log in" link to the login page.   <- "The page shall include a "Already have an account? Log in" link to the login page."
+  Source: S29: "A new visitor can create an account with a name, email and password"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (missing) What is the target deadline for the completion of the Sign Up and Login pages?
+    [Q-002] (missing) What is the priority ranking for the features listed in the scope?
+    [Q-005] (scope_gap) What are the specific visual levels or calculation rules for the password strength indicator?
+
+TASK-003  [Task]  Process account registration
+  Parent: TASK-001
+  Description: On submit, the system shall check that the email is not already registered and reject the request with a clear message if it is.
+  Acceptance Criteria:
+    - The system shall check that the email is not already registered and reject the request with a clear message if it is.   <- "the system shall check that the email is not already registered and reject the request with a clear message if it is."
+    - The system shall store the password only as a salted hash and never return it in any response.   <- "The system shall store the password only as a salted hash and never return it in any response."
+    - The system shall create the account in an unverified state and send a verification email containing a link valid for 24 hours.   <- "the system shall create the account in an unverified state and send a verification email containing a link valid for 24 hours."
+  Source: S22: "The backend stores passwords only as salted hashes (bcrypt or Argon2)."
+  Dependencies: TASK-002
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (missing) What is the target deadline for the completion of the Sign Up and Login pages?
+    [Q-002] (missing) What is the priority ranking for the features listed in the scope?
+    [Q-004] (vague) What is the specific measurable definition of a 'clear message' when an email is already registered?
+
+TASK-004  [Story]  Verify email address
+  Parent: TASK-001
+  Description: When the user opens a valid verification link, the system shall mark the account verified and redirect to the login page with a success message.
+  Acceptance Criteria:
+    - The system shall show a confirmation screen telling the user to check their email, with a "Resend email" action limited to once every 60 seconds.   <- "The system shall show a confirmation screen telling the user to check their email, with a "Resend email" action limited to once every 60 seconds."
+    - When the user opens a valid verification link, the system shall mark the account verified and redirect to the login page with a success message.   <- "When the user opens a valid verification link, the system shall mark the account verified and redirect to the login page with a success message."
+    - If the verification link is expired or invalid, the system shall explain this and offer to send a new link.   <- "If the verification link is expired or invalid, the system shall explain this and offer to send a new link."
+  Source: S8: "In scope: account creation with email and password, email verification"
+  Dependencies: TASK-003
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (missing) What is the target deadline for the completion of the Sign Up and Login pages?
+    [Q-002] (missing) What is the priority ranking for the features listed in the scope?
+
+TASK-005  [Epic]  Login pages
+  Children: TASK-006, TASK-007, TASK-008, TASK-009
+  Description: This document specifies the requirements for the Sign Up and Login pages of the application.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-006, TASK-007, TASK-008, TASK-009
+  Source: S5: "This document specifies the requirements for the Sign Up and Login pages of the application."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-003] (undefined_term) Where can the documentation or assets for the product's existing design system be accessed?
+    [Q-006] (scope_gap) What are the functional requirements and fields for the Login page?
+
+TASK-006  [Story]  Sign in returning user
+  Parent: TASK-005
+  Description: Returning user: has a verified account and wants to sign in.
+  Acceptance Criteria: None stated in brief
+  Source: S8: "In scope: account creation with email and password, email verification, login, logout"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (missing) What is the target deadline for the completion of the Sign Up and Login pages?
+    [Q-002] (missing) What is the priority ranking for the features listed in the scope?
+    [Q-007] (scope_gap) What are the functional requirements for the logout functionality?
+    [Q-010] (missing) What testable acceptance conditions apply to 'Sign in returning user'?
+
+TASK-007  [Story]  Logout user
+  Parent: TASK-005
+  Description: In scope: account creation with email and password, email verification, login, logout
+  Acceptance Criteria: None stated in brief
+  Source: S8: "In scope: account creation with email and password, email verification, login, logout"
+  Dependencies: TASK-006
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (missing) What is the target deadline for the completion of the Sign Up and Login pages?
+    [Q-002] (missing) What is the priority ranking for the features listed in the scope?
+    [Q-007] (scope_gap) What are the functional requirements for the logout functionality?
+    [Q-011] (missing) What testable acceptance conditions apply to 'Logout user'?
+
+TASK-008  [Story]  Remember login session
+  Parent: TASK-005
+  Description: In scope: account creation with email and password, email verification, login, logout, "remember me"
+  Acceptance Criteria: None stated in brief
+  Source: S8: "In scope: account creation with email and password, email verification, login, logout, "remember me""
+  Dependencies: TASK-006
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (missing) What is the target deadline for the completion of the Sign Up and Login pages?
+    [Q-002] (missing) What is the priority ranking for the features listed in the scope?
+    [Q-008] (scope_gap) What are the functional requirements for the 'remember me' feature?
+    [Q-012] (missing) What testable acceptance conditions apply to 'Remember login session'?
+
+TASK-009  [Story]  Access password reset
+  Parent: TASK-005
+  Description: In scope: account creation with email and password, email verification, login, logout, "remember me", and password reset entry points.
+  Acceptance Criteria: None stated in brief
+  Source: S8: "In scope: account creation with email and password, email verification, login, logout, "remember me", and password reset entry points."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (missing) What is the target deadline for the completion of the Sign Up and Login pages?
+    [Q-002] (missing) What is the priority ranking for the features listed in the scope?
+    [Q-009] (scope_gap) What are the functional requirements for the password reset entry points?
+    [Q-013] (missing) What testable acceptance conditions apply to 'Access password reset'?
+
+==============================================================================
+OPEN QUESTIONS BY CATEGORY (13)
+==============================================================================
+[missing] (6)
+  Q-001: What is the target deadline for the completion of the Sign Up and Login pages?
+      linked tickets: TASK-002, TASK-003, TASK-004, TASK-006, TASK-007, TASK-008, TASK-009
+  Q-002: What is the priority ranking for the features listed in the scope?
+      linked tickets: TASK-002, TASK-003, TASK-004, TASK-006, TASK-007, TASK-008, TASK-009
+  Q-010: What testable acceptance conditions apply to 'Sign in returning user'?
+      linked tickets: TASK-006
+  Q-011: What testable acceptance conditions apply to 'Logout user'?
+      linked tickets: TASK-007
+  Q-012: What testable acceptance conditions apply to 'Remember login session'?
+      linked tickets: TASK-008
+  Q-013: What testable acceptance conditions apply to 'Access password reset'?
+      linked tickets: TASK-009
+
+[vague] (1)
+  Q-004: What is the specific measurable definition of a 'clear message' when an email is already registered?
+      quote: "reject the request with a clear message if it is."
+      linked tickets: TASK-003
+
+[undefined_term] (1)
+  Q-003: Where can the documentation or assets for the product's existing design system be accessed?
+      quote: "The pages must follow the product's existing design system."
+      linked tickets: TASK-001, TASK-005
+
+[scope_gap] (5)
+  Q-005: What are the specific visual levels or calculation rules for the password strength indicator?
+      quote: "The system shall show a password strength indicator while the user types."
+      linked tickets: TASK-002
+  Q-006: What are the functional requirements and fields for the Login page?
+      quote: "This document specifies the requirements for the Sign Up and Login pages of the application."
+      linked tickets: TASK-001, TASK-005
+  Q-007: What are the functional requirements for the logout functionality?
+      quote: "In scope: account creation with email and password, email verification, login, logout"
+      linked tickets: TASK-006, TASK-007
+  Q-008: What are the functional requirements for the 'remember me' feature?
+      quote: "In scope: account creation with email and password, email verification, login, logout, "remember me""
+      linked tickets: TASK-008
+  Q-009: What are the functional requirements for the password reset entry points?
+      quote: "In scope: account creation with email and password, email verification, login, logout, "remember me", and password reset entry points."
+      linked tickets: TASK-009
+
+General questions (not linked to a specific task, attached to every epic): Q-003, Q-006
+
+==============================================================================
+REJECTED ITEMS (3)
+==============================================================================
+  [gaps] contradiction quotes same sentence/nested: {"id": "Q6", "category": "contradiction", "question": "Should the authentication mechanism use JWT or server sessions?", "quote": "the exact mechanism (JWT or server session) is confirmed in section 8.", "quote_b": "Authentication uses tokens issued by the backend", "related_fact_ids": ["F17"]}
+  [breakdown] question link dropped: question is not about this task (its quote is not one of the task's source/AC quotes): {"task": "Display sign up form", "blocked_by_dropped": ["Q3"]}
+  [breakdown] question link dropped: question is not about this task (its quote is not one of the task's source/AC quotes): {"task": "Sign in returning user", "blocked_by_dropped": ["Q7"]}
+
+==============================================================================
+LINT WARNINGS (1)
+==============================================================================
+  WARNING unsourced word 'process' in title of TASK-003
+
+==============================================================================
+COUNTS
+==============================================================================
+  Facts: 37
+  Questions: 13 (missing: 6, vague: 1, undefined_term: 1, scope_gap: 5)
+  Tickets: 9 (Ready: 0, Needs clarification: 9)
+  Rejected items: 3
+  Lint warnings: 1
+
+Wrote out\clear\tickets.json, out\clear\tickets_jira.csv, out\clear\run.log

@@ -1,0 +1,708 @@
+{
+  "brief_file": "briefs/srs.txt",
+  "model": "gemini-3-flash-preview",
+  "generated_at": "2026-11-05T16:15:06+05:00",
+  "tickets": [
+    {
+      "ticket_id": "TASK-001",
+      "title": "Sign up page",
+      "type": "Epic",
+      "parent": null,
+      "children": [
+        "TASK-002",
+        "TASK-003",
+        "TASK-004"
+      ],
+      "description": "A new visitor can create an account with a name, email and password, then verify the email address before first login.",
+      "acceptance_criteria": [],
+      "source_reference": "S29: \"A new visitor can create an account with a name, email and password, then verify the email address before first login.\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-003",
+          "category": "undefined_term",
+          "question": "Where can the documentation or assets for the product's existing design system be accessed?",
+          "quote": "The pages must follow the product's existing design system.",
+          "quote_b": null
+        },
+        {
+          "id": "Q-006",
+          "category": "scope_gap",
+          "question": "What are the functional requirements and fields for the Login page?",
+          "quote": "This document specifies the requirements for the Sign Up and Login pages of the application.",
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-002",
+      "title": "Display sign up form",
+      "type": "Story",
+      "parent": "TASK-001",
+      "children": [],
+      "description": "The system shall display the sign up form with the fields above and a \"Sign up\" button.",
+      "acceptance_criteria": [
+        {
+          "text": "The system shall display the sign up form with the fields above and a \"Sign up\" button.",
+          "quote": "The system shall display the sign up form with the fields above and a \"Sign up\" button."
+        },
+        {
+          "text": "Full name must be 2 to 60 characters; letters, spaces, hyphens and apostrophes.",
+          "quote": "2 to 60 characters; letters, spaces, hyphens and apostrophes"
+        },
+        {
+          "text": "Email must be valid email format; maximum 254 characters; unique, case-insensitive.",
+          "quote": "Valid email format; maximum 254 characters; unique, case-insensitive"
+        },
+        {
+          "text": "Password must be 8 to 64 characters with at least one uppercase letter, one lowercase letter, one digit and one symbol.",
+          "quote": "8 to 64 characters with at least one uppercase letter, one lowercase letter, one digit and one symbol"
+        },
+        {
+          "text": "Confirm password must match the password.",
+          "quote": "Must match the password"
+        },
+        {
+          "text": "Terms and privacy checkbox must be ticked to submit.",
+          "quote": "Must be ticked to submit"
+        },
+        {
+          "text": "The system shall validate each field on blur and again on submit, showing the error under the field.",
+          "quote": "The system shall validate each field on blur and again on submit, showing the error under the field."
+        },
+        {
+          "text": "The system shall keep the \"Sign up\" button disabled until all required fields are valid.",
+          "quote": "The system shall keep the \"Sign up\" button disabled until all required fields are valid."
+        },
+        {
+          "text": "The system shall let the user show or hide the password and confirm password values.",
+          "quote": "The system shall let the user show or hide the password and confirm password values."
+        },
+        {
+          "text": "The system shall show a password strength indicator while the user types.",
+          "quote": "The system shall show a password strength indicator while the user types."
+        },
+        {
+          "text": "The page shall include a \"Already have an account? Log in\" link to the login page.",
+          "quote": "The page shall include a \"Already have an account? Log in\" link to the login page."
+        }
+      ],
+      "source_reference": "S29: \"A new visitor can create an account with a name, email and password\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-001",
+          "category": "missing",
+          "question": "What is the target deadline for the completion of the Sign Up and Login pages?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-002",
+          "category": "missing",
+          "question": "What is the priority ranking for the features listed in the scope?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-005",
+          "category": "scope_gap",
+          "question": "What are the specific visual levels or calculation rules for the password strength indicator?",
+          "quote": "The system shall show a password strength indicator while the user types.",
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-003",
+      "title": "Process account registration",
+      "type": "Task",
+      "parent": "TASK-001",
+      "children": [],
+      "description": "On submit, the system shall check that the email is not already registered and reject the request with a clear message if it is.",
+      "acceptance_criteria": [
+        {
+          "text": "The system shall check that the email is not already registered and reject the request with a clear message if it is.",
+          "quote": "the system shall check that the email is not already registered and reject the request with a clear message if it is."
+        },
+        {
+          "text": "The system shall store the password only as a salted hash and never return it in any response.",
+          "quote": "The system shall store the password only as a salted hash and never return it in any response."
+        },
+        {
+          "text": "The system shall create the account in an unverified state and send a verification email containing a link valid for 24 hours.",
+          "quote": "the system shall create the account in an unverified state and send a verification email containing a link valid for 24 hours."
+        }
+      ],
+      "source_reference": "S22: \"The backend stores passwords only as salted hashes (bcrypt or Argon2).\"",
+      "dependencies": [
+        "TASK-002"
+      ],
+      "open_questions": [
+        {
+          "id": "Q-001",
+          "category": "missing",
+          "question": "What is the target deadline for the completion of the Sign Up and Login pages?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-002",
+          "category": "missing",
+          "question": "What is the priority ranking for the features listed in the scope?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-004",
+          "category": "vague",
+          "question": "What is the specific measurable definition of a 'clear message' when an email is already registered?",
+          "quote": "reject the request with a clear message if it is.",
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-004",
+      "title": "Verify email address",
+      "type": "Story",
+      "parent": "TASK-001",
+      "children": [],
+      "description": "When the user opens a valid verification link, the system shall mark the account verified and redirect to the login page with a success message.",
+      "acceptance_criteria": [
+        {
+          "text": "The system shall show a confirmation screen telling the user to check their email, with a \"Resend email\" action limited to once every 60 seconds.",
+          "quote": "The system shall show a confirmation screen telling the user to check their email, with a \"Resend email\" action limited to once every 60 seconds."
+        },
+        {
+          "text": "When the user opens a valid verification link, the system shall mark the account verified and redirect to the login page with a success message.",
+          "quote": "When the user opens a valid verification link, the system shall mark the account verified and redirect to the login page with a success message."
+        },
+        {
+          "text": "If the verification link is expired or invalid, the system shall explain this and offer to send a new link.",
+          "quote": "If the verification link is expired or invalid, the system shall explain this and offer to send a new link."
+        }
+      ],
+      "source_reference": "S8: \"In scope: account creation with email and password, email verification\"",
+      "dependencies": [
+        "TASK-003"
+      ],
+      "open_questions": [
+        {
+          "id": "Q-001",
+          "category": "missing",
+          "question": "What is the target deadline for the completion of the Sign Up and Login pages?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-002",
+          "category": "missing",
+          "question": "What is the priority ranking for the features listed in the scope?",
+          "quote": null,
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-005",
+      "title": "Login pages",
+      "type": "Epic",
+      "parent": null,
+      "children": [
+        "TASK-006",
+        "TASK-007",
+        "TASK-008",
+        "TASK-009"
+      ],
+      "description": "This document specifies the requirements for the Sign Up and Login pages of the application.",
+      "acceptance_criteria": [],
+      "source_reference": "S5: \"This document specifies the requirements for the Sign Up and Login pages of the application.\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-003",
+          "category": "undefined_term",
+          "question": "Where can the documentation or assets for the product's existing design system be accessed?",
+          "quote": "The pages must follow the product's existing design system.",
+          "quote_b": null
+        },
+        {
+          "id": "Q-006",
+          "category": "scope_gap",
+          "question": "What are the functional requirements and fields for the Login page?",
+          "quote": "This document specifies the requirements for the Sign Up and Login pages of the application.",
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-006",
+      "title": "Sign in returning user",
+      "type": "Story",
+      "parent": "TASK-005",
+      "children": [],
+      "description": "Returning user: has a verified account and wants to sign in.",
+      "acceptance_criteria": [],
+      "source_reference": "S8: \"In scope: account creation with email and password, email verification, login, logout\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-001",
+          "category": "missing",
+          "question": "What is the target deadline for the completion of the Sign Up and Login pages?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-002",
+          "category": "missing",
+          "question": "What is the priority ranking for the features listed in the scope?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-007",
+          "category": "scope_gap",
+          "question": "What are the functional requirements for the logout functionality?",
+          "quote": "In scope: account creation with email and password, email verification, login, logout",
+          "quote_b": null
+        },
+        {
+          "id": "Q-010",
+          "category": "missing",
+          "question": "What testable acceptance conditions apply to 'Sign in returning user'?",
+          "quote": null,
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-007",
+      "title": "Logout user",
+      "type": "Story",
+      "parent": "TASK-005",
+      "children": [],
+      "description": "In scope: account creation with email and password, email verification, login, logout",
+      "acceptance_criteria": [],
+      "source_reference": "S8: \"In scope: account creation with email and password, email verification, login, logout\"",
+      "dependencies": [
+        "TASK-006"
+      ],
+      "open_questions": [
+        {
+          "id": "Q-001",
+          "category": "missing",
+          "question": "What is the target deadline for the completion of the Sign Up and Login pages?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-002",
+          "category": "missing",
+          "question": "What is the priority ranking for the features listed in the scope?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-007",
+          "category": "scope_gap",
+          "question": "What are the functional requirements for the logout functionality?",
+          "quote": "In scope: account creation with email and password, email verification, login, logout",
+          "quote_b": null
+        },
+        {
+          "id": "Q-011",
+          "category": "missing",
+          "question": "What testable acceptance conditions apply to 'Logout user'?",
+          "quote": null,
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-008",
+      "title": "Remember login session",
+      "type": "Story",
+      "parent": "TASK-005",
+      "children": [],
+      "description": "In scope: account creation with email and password, email verification, login, logout, \"remember me\"",
+      "acceptance_criteria": [],
+      "source_reference": "S8: \"In scope: account creation with email and password, email verification, login, logout, \"remember me\"\"",
+      "dependencies": [
+        "TASK-006"
+      ],
+      "open_questions": [
+        {
+          "id": "Q-001",
+          "category": "missing",
+          "question": "What is the target deadline for the completion of the Sign Up and Login pages?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-002",
+          "category": "missing",
+          "question": "What is the priority ranking for the features listed in the scope?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-008",
+          "category": "scope_gap",
+          "question": "What are the functional requirements for the 'remember me' feature?",
+          "quote": "In scope: account creation with email and password, email verification, login, logout, \"remember me\"",
+          "quote_b": null
+        },
+        {
+          "id": "Q-012",
+          "category": "missing",
+          "question": "What testable acceptance conditions apply to 'Remember login session'?",
+          "quote": null,
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-009",
+      "title": "Access password reset",
+      "type": "Story",
+      "parent": "TASK-005",
+      "children": [],
+      "description": "In scope: account creation with email and password, email verification, login, logout, \"remember me\", and password reset entry points.",
+      "acceptance_criteria": [],
+      "source_reference": "S8: \"In scope: account creation with email and password, email verification, login, logout, \"remember me\", and password reset entry points.\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-001",
+          "category": "missing",
+          "question": "What is the target deadline for the completion of the Sign Up and Login pages?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-002",
+          "category": "missing",
+          "question": "What is the priority ranking for the features listed in the scope?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-009",
+          "category": "scope_gap",
+          "question": "What are the functional requirements for the password reset entry points?",
+          "quote": "In scope: account creation with email and password, email verification, login, logout, \"remember me\", and password reset entry points.",
+          "quote_b": null
+        },
+        {
+          "id": "Q-013",
+          "category": "missing",
+          "question": "What testable acceptance conditions apply to 'Access password reset'?",
+          "quote": null,
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    }
+  ],
+  "general_questions": [
+    {
+      "id": "Q-003",
+      "category": "undefined_term",
+      "question": "Where can the documentation or assets for the product's existing design system be accessed?",
+      "quote": "The pages must follow the product's existing design system.",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F19"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001",
+        "TASK-005"
+      ]
+    },
+    {
+      "id": "Q-006",
+      "category": "scope_gap",
+      "question": "What are the functional requirements and fields for the Login page?",
+      "quote": "This document specifies the requirements for the Sign Up and Login pages of the application.",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F1"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001",
+        "TASK-005"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-001",
+      "category": "missing",
+      "question": "What is the target deadline for the completion of the Sign Up and Login pages?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-006",
+        "TASK-007",
+        "TASK-008",
+        "TASK-009"
+      ]
+    },
+    {
+      "id": "Q-002",
+      "category": "missing",
+      "question": "What is the priority ranking for the features listed in the scope?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-006",
+        "TASK-007",
+        "TASK-008",
+        "TASK-009"
+      ]
+    },
+    {
+      "id": "Q-003",
+      "category": "undefined_term",
+      "question": "Where can the documentation or assets for the product's existing design system be accessed?",
+      "quote": "The pages must follow the product's existing design system.",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F19"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001",
+        "TASK-005"
+      ]
+    },
+    {
+      "id": "Q-004",
+      "category": "vague",
+      "question": "What is the specific measurable definition of a 'clear message' when an email is already registered?",
+      "quote": "reject the request with a clear message if it is.",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F31"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-003"
+      ]
+    },
+    {
+      "id": "Q-005",
+      "category": "scope_gap",
+      "question": "What are the specific visual levels or calculation rules for the password strength indicator?",
+      "quote": "The system shall show a password strength indicator while the user types.",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F30"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-002"
+      ]
+    },
+    {
+      "id": "Q-006",
+      "category": "scope_gap",
+      "question": "What are the functional requirements and fields for the Login page?",
+      "quote": "This document specifies the requirements for the Sign Up and Login pages of the application.",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F1"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001",
+        "TASK-005"
+      ]
+    },
+    {
+      "id": "Q-007",
+      "category": "scope_gap",
+      "question": "What are the functional requirements for the logout functionality?",
+      "quote": "In scope: account creation with email and password, email verification, login, logout",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F4"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-006",
+        "TASK-007"
+      ]
+    },
+    {
+      "id": "Q-008",
+      "category": "scope_gap",
+      "question": "What are the functional requirements for the 'remember me' feature?",
+      "quote": "In scope: account creation with email and password, email verification, login, logout, \"remember me\"",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F5"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-008"
+      ]
+    },
+    {
+      "id": "Q-009",
+      "category": "scope_gap",
+      "question": "What are the functional requirements for the password reset entry points?",
+      "quote": "In scope: account creation with email and password, email verification, login, logout, \"remember me\", and password reset entry points.",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F6"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-009"
+      ]
+    },
+    {
+      "id": "Q-010",
+      "category": "missing",
+      "question": "What testable acceptance conditions apply to 'Sign in returning user'?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [],
+      "source": "breakdown",
+      "linked_tickets": [
+        "TASK-006"
+      ]
+    },
+    {
+      "id": "Q-011",
+      "category": "missing",
+      "question": "What testable acceptance conditions apply to 'Logout user'?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [],
+      "source": "breakdown",
+      "linked_tickets": [
+        "TASK-007"
+      ]
+    },
+    {
+      "id": "Q-012",
+      "category": "missing",
+      "question": "What testable acceptance conditions apply to 'Remember login session'?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [],
+      "source": "breakdown",
+      "linked_tickets": [
+        "TASK-008"
+      ]
+    },
+    {
+      "id": "Q-013",
+      "category": "missing",
+      "question": "What testable acceptance conditions apply to 'Access password reset'?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [],
+      "source": "breakdown",
+      "linked_tickets": [
+        "TASK-009"
+      ]
+    }
+  ],
+  "rejected": [
+    {
+      "stage": "gaps",
+      "item": {
+        "id": "Q6",
+        "category": "contradiction",
+        "question": "Should the authentication mechanism use JWT or server sessions?",
+        "quote": "the exact mechanism (JWT or server session) is confirmed in section 8.",
+        "quote_b": "Authentication uses tokens issued by the backend",
+        "related_fact_ids": [
+          "F17"
+        ]
+      },
+      "reason": "contradiction quotes same sentence/nested"
+    },
+    {
+      "stage": "breakdown",
+      "item": {
+        "task": "Display sign up form",
+        "blocked_by_dropped": [
+          "Q3"
+        ]
+      },
+      "reason": "question link dropped: question is not about this task (its quote is not one of the task's source/AC quotes)"
+    },
+    {
+      "stage": "breakdown",
+      "item": {
+        "task": "Sign in returning user",
+        "blocked_by_dropped": [
+          "Q7"
+        ]
+      },
+      "reason": "question link dropped: question is not about this task (its quote is not one of the task's source/AC quotes)"
+    }
+  ],
+  "lint_warnings": [
+    "WARNING unsourced word 'process' in title of TASK-003"
+  ]
+}

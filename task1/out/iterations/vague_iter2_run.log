@@ -1,0 +1,355 @@
+Brief2Jira  brief=briefs/vague.txt  model=gemini-2.5-flash  out=out/vague
+
+##############################################################################
+# STAGE 1 INPUT - 12 sentences
+##############################################################################
+  S1: Hi team,
+  S2: We are a family-run grocery business and want to finally go digital.
+  S3: Customers will download our new app from the App Store and Google Play to order groceries.
+  S4: The app must be fast, modern and secure.
+  S5: Customers browse products, add them to a basket and pay online.
+  S6: Orders should sync with our ORMS so the warehouse sees them straight away.
+  S7: We would also like the loyalty scheme to work like last time.
+  S8: Delivery slots are important to us.
+  S9: Admins should get the usual reports every week.
+  S10: For budget reasons we want web only for the first version.
+  S11: We need this live as soon as possible.
+  S12: Thanks, Bilal
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+  F1 [goal] The business wants to go digital.
+      quote: "want to finally go digital"  (S2)
+  F2 [user] Customers
+      quote: "Customers"  (S3)
+  F3 [feature] Customers will download the new app.
+      quote: "will download our new app"  (S3)
+  F4 [constraint] The app will be available from the App Store.
+      quote: "from the App Store"  (S3)
+  F5 [constraint] The app will be available from Google Play.
+      quote: "and Google Play"  (S3)
+  F6 [feature] Customers will order groceries.
+      quote: "to order groceries"  (S3)
+  F7 [constraint] The app must be fast, modern and secure.
+      quote: "The app must be fast, modern and secure."  (S4)
+  F8 [feature] Customers browse products, add them to a basket and pay online.
+      quote: "Customers browse products, add them to a basket and pay online."  (S5)
+  F9 [integration] Orders should sync with ORMS.
+      quote: "Orders should sync with our ORMS"  (S6)
+  F10 [goal] The warehouse sees orders straight away.
+      quote: "the warehouse sees them straight away"  (S6)
+  F11 [feature] The loyalty scheme should work like last time.
+      quote: "the loyalty scheme to work like last time"  (S7)
+  F12 [feature] Delivery slots are important.
+      quote: "Delivery slots are important to us."  (S8)
+  F14 [feature] Admins should get the usual reports every week.
+      quote: "should get the usual reports every week."  (S9)
+  F15 [constraint] For budget reasons, the first version should be web only.
+      quote: "For budget reasons we want web only for the first version."  (S10)
+  F16 [constraint] The project needs to be live as soon as possible.
+      quote: "We need this live as soon as possible."  (S11)
+Rejected (1):
+  [understand] quote not in brief: {"id": "F13", "category": "user", "text": "Admins", "quote": "Admins"}
+
+##############################################################################
+# STAGE 3 GAPS (LLM + templates) - verified questions
+##############################################################################
+  Q1 (contradiction, llm) Which statement applies to the first version: that customers will download an app from the App Store and Google Play, or that the first version will be web only?
+      quote: "Customers will download our new app from the App Store and Google Play"
+      quote_b: "For budget reasons we want web only for the first version."
+      related facts: F3, F4, F5, F15
+  Q2 (vague, llm) What is the measurable target for "fast"?
+      quote: "The app must be fast, modern and secure."
+      related facts: F7
+  Q3 (vague, llm) What defines "modern" for the app?
+      quote: "The app must be fast, modern and secure."
+      related facts: F7
+  Q4 (vague, llm) What level of security is required for the app?
+      quote: "The app must be fast, modern and secure."
+      related facts: F7
+  Q5 (scope_gap, llm) What online payment methods should be supported?
+      quote: "pay online"
+      related facts: F8
+  Q6 (undefined_term, llm) What is ORMS, and what interface or API does it expose for syncing orders?
+      quote: "Orders should sync with our ORMS"
+      related facts: F9
+  Q7 (vague, llm) What is the maximum acceptable delay for the warehouse to see orders after they are placed?
+      quote: "the warehouse sees them straight away"
+      related facts: F10
+  Q8 (undefined_term, llm) What are the specific rules and functionalities of the loyalty scheme that worked "like last time"?
+      quote: "the loyalty scheme to work like last time"
+      related facts: F11
+  Q9 (scope_gap, llm) What are the specific rules and functionalities required for delivery slots?
+      quote: "Delivery slots are important to us."
+      related facts: F12
+  Q10 (undefined_term, llm) What are "the usual reports" that admins should receive?
+      quote: "should get the usual reports every week."
+      related facts: F14
+  Q11 (vague, llm) What is the target deadline for the project to go live?
+      quote: "We need this live as soon as possible."
+      related facts: F16
+  Q12 (missing, llm) What are the priorities for the features mentioned in the brief?
+      quote: "Delivery slots are important to us."
+      related facts: F12
+Templated questions added: 0
+Rejected: None
+
+##############################################################################
+# STAGE 4 BREAK DOWN (LLM) - verified epics and tasks
+##############################################################################
+  E1 Implement Customer Online Ordering (Web Platform)
+    E1.T1 [Story] Enable customers to browse products  facts=F8  AC=1  deps=-  blocked_by=Q1,Q2,Q3,Q4,Q11,Q12
+    E1.T2 [Story] Enable customers to add products to a basket  facts=F8  AC=1  deps=-  blocked_by=Q1,Q2,Q3,Q4,Q11,Q12
+    E1.T3 [Story] Process online payments  facts=F8  AC=1  deps=-  blocked_by=Q1,Q2,Q3,Q4,Q5,Q11,Q12
+    E1.T4 [Story] Implement loyalty scheme functionality  facts=F11  AC=1  deps=-  blocked_by=Q1,Q2,Q3,Q4,Q8,Q11,Q12
+    E1.T5 [Story] Implement delivery slot selection  facts=F12  AC=0  deps=-  blocked_by=Q1,Q2,Q3,Q4,Q9,Q11,Q12,Q13
+  E2 Implement Order Management and Reporting
+    E2.T1 [Task] Integrate order syncing with ORMS  facts=F9,F10  AC=1  deps=-  blocked_by=Q6,Q7,Q11,Q12
+    E2.T2 [Task] Generate weekly reports for admins  facts=F14  AC=0  deps=-  blocked_by=Q10,Q11,Q12,Q14
+Questions raised by code in Stage 4:
+  Q13 (missing, breakdown) What testable acceptance conditions apply to 'Implement delivery slot selection'?
+  Q14 (missing, breakdown) What testable acceptance conditions apply to 'Generate weekly reports for admins'?
+Rejected: None
+
+##############################################################################
+# STAGE 5+6 TICKETS AND REPORT
+##############################################################################
+==============================================================================
+TICKETS (9)
+==============================================================================
+TASK-001  [Epic]  Implement Customer Online Ordering (Web Platform)
+  Children: TASK-002, TASK-003, TASK-004, TASK-005, TASK-006
+  Description: Enable customers to browse products, add them to a basket, and complete online payments via a web-only platform, incorporating loyalty and delivery slot selection.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-002, TASK-003, TASK-004, TASK-005, TASK-006
+  Source: S5: "Customers browse products, add them to a basket and pay online."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions: None
+
+TASK-002  [Story]  Enable customers to browse products
+  Parent: TASK-001
+  Description: Allow customers to view available products in the online store.
+  Acceptance Criteria:
+    - Customers should be able to browse products.   <- "Customers browse products"
+  Source: S5: "Customers browse products, add them to a basket and pay online."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) Which statement applies to the first version: that customers will download an app from the App Store and Google Play, or that the first version will be web only?
+    [Q-002] (vague) What is the measurable target for "fast"?
+    [Q-003] (vague) What defines "modern" for the app?
+    [Q-004] (vague) What level of security is required for the app?
+    [Q-005] (scope_gap) What online payment methods should be supported?
+    [Q-011] (vague) What is the target deadline for the project to go live?
+    [Q-012] (missing) What are the priorities for the features mentioned in the brief?
+
+TASK-003  [Story]  Enable customers to add products to a basket
+  Parent: TASK-001
+  Description: Allow customers to select products and add them to a shopping basket for purchase.
+  Acceptance Criteria:
+    - Customers should be able to add products to a basket.   <- "add them to a basket"
+  Source: S5: "Customers browse products, add them to a basket and pay online."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) Which statement applies to the first version: that customers will download an app from the App Store and Google Play, or that the first version will be web only?
+    [Q-002] (vague) What is the measurable target for "fast"?
+    [Q-003] (vague) What defines "modern" for the app?
+    [Q-004] (vague) What level of security is required for the app?
+    [Q-005] (scope_gap) What online payment methods should be supported?
+    [Q-011] (vague) What is the target deadline for the project to go live?
+    [Q-012] (missing) What are the priorities for the features mentioned in the brief?
+
+TASK-004  [Story]  Process online payments
+  Parent: TASK-001
+  Description: Implement functionality for customers to complete their purchase by paying online.
+  Acceptance Criteria:
+    - Customers should be able to pay online.   <- "pay online"
+  Source: S5: "Customers browse products, add them to a basket and pay online."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) Which statement applies to the first version: that customers will download an app from the App Store and Google Play, or that the first version will be web only?
+    [Q-002] (vague) What is the measurable target for "fast"?
+    [Q-003] (vague) What defines "modern" for the app?
+    [Q-004] (vague) What level of security is required for the app?
+    [Q-005] (scope_gap) What online payment methods should be supported?
+    [Q-011] (vague) What is the target deadline for the project to go live?
+    [Q-012] (missing) What are the priorities for the features mentioned in the brief?
+
+TASK-005  [Story]  Implement loyalty scheme functionality
+  Parent: TASK-001
+  Description: Integrate the existing loyalty scheme into the online ordering process.
+  Acceptance Criteria:
+    - The loyalty scheme should function as it did previously.   <- "the loyalty scheme to work like last time"
+  Source: S7: "the loyalty scheme to work like last time"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) Which statement applies to the first version: that customers will download an app from the App Store and Google Play, or that the first version will be web only?
+    [Q-002] (vague) What is the measurable target for "fast"?
+    [Q-003] (vague) What defines "modern" for the app?
+    [Q-004] (vague) What level of security is required for the app?
+    [Q-008] (undefined_term) What are the specific rules and functionalities of the loyalty scheme that worked "like last time"?
+    [Q-011] (vague) What is the target deadline for the project to go live?
+    [Q-012] (missing) What are the priorities for the features mentioned in the brief?
+
+TASK-006  [Story]  Implement delivery slot selection
+  Parent: TASK-001
+  Description: Provide functionality for customers to select delivery slots for their orders.
+  Acceptance Criteria: None stated in brief
+  Source: S8: "Delivery slots are important to us."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) Which statement applies to the first version: that customers will download an app from the App Store and Google Play, or that the first version will be web only?
+    [Q-002] (vague) What is the measurable target for "fast"?
+    [Q-003] (vague) What defines "modern" for the app?
+    [Q-004] (vague) What level of security is required for the app?
+    [Q-009] (scope_gap) What are the specific rules and functionalities required for delivery slots?
+    [Q-011] (vague) What is the target deadline for the project to go live?
+    [Q-012] (missing) What are the priorities for the features mentioned in the brief?
+    [Q-013] (missing) What testable acceptance conditions apply to 'Implement delivery slot selection'?
+
+TASK-007  [Epic]  Implement Order Management and Reporting
+  Children: TASK-008, TASK-009
+  Description: Ensure orders are synced with the ORMS for warehouse visibility and provide weekly reports for admins.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-008, TASK-009
+  Source: S6: "Orders should sync with our ORMS so the warehouse sees them straight away."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions: None
+
+TASK-008  [Task]  Integrate order syncing with ORMS
+  Parent: TASK-007
+  Description: Develop the integration to send new customer orders to the ORMS.
+  Acceptance Criteria:
+    - Orders should synchronize with the ORMS.   <- "Orders should sync with our ORMS"
+  Source: S6: "Orders should sync with our ORMS"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-006] (undefined_term) What is ORMS, and what interface or API does it expose for syncing orders?
+    [Q-007] (vague) What is the maximum acceptable delay for the warehouse to see orders after they are placed?
+    [Q-011] (vague) What is the target deadline for the project to go live?
+    [Q-012] (missing) What are the priorities for the features mentioned in the brief?
+
+TASK-009  [Task]  Generate weekly reports for admins
+  Parent: TASK-007
+  Description: Create a system to produce and deliver regular reports to administrators.
+  Acceptance Criteria: None stated in brief
+  Source: S9: "should get the usual reports every week."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-010] (undefined_term) What are "the usual reports" that admins should receive?
+    [Q-011] (vague) What is the target deadline for the project to go live?
+    [Q-012] (missing) What are the priorities for the features mentioned in the brief?
+    [Q-014] (missing) What testable acceptance conditions apply to 'Generate weekly reports for admins'?
+
+==============================================================================
+OPEN QUESTIONS BY CATEGORY (14)
+==============================================================================
+[missing] (3)
+  Q-012: What are the priorities for the features mentioned in the brief?
+      quote: "Delivery slots are important to us."
+      linked tickets: TASK-002, TASK-003, TASK-004, TASK-005, TASK-006, TASK-008, TASK-009
+  Q-013: What testable acceptance conditions apply to 'Implement delivery slot selection'?
+      linked tickets: TASK-006
+  Q-014: What testable acceptance conditions apply to 'Generate weekly reports for admins'?
+      linked tickets: TASK-009
+
+[vague] (5)
+  Q-002: What is the measurable target for "fast"?
+      quote: "The app must be fast, modern and secure."
+      linked tickets: TASK-002, TASK-003, TASK-004, TASK-005, TASK-006
+  Q-003: What defines "modern" for the app?
+      quote: "The app must be fast, modern and secure."
+      linked tickets: TASK-002, TASK-003, TASK-004, TASK-005, TASK-006
+  Q-004: What level of security is required for the app?
+      quote: "The app must be fast, modern and secure."
+      linked tickets: TASK-002, TASK-003, TASK-004, TASK-005, TASK-006
+  Q-007: What is the maximum acceptable delay for the warehouse to see orders after they are placed?
+      quote: "the warehouse sees them straight away"
+      linked tickets: TASK-008
+  Q-011: What is the target deadline for the project to go live?
+      quote: "We need this live as soon as possible."
+      linked tickets: TASK-002, TASK-003, TASK-004, TASK-005, TASK-006, TASK-008, TASK-009
+
+[contradiction] (1)
+  Q-001: Which statement applies to the first version: that customers will download an app from the App Store and Google Play, or that the first version will be web only?
+      quote A: "Customers will download our new app from the App Store and Google Play"
+      quote B: "For budget reasons we want web only for the first version."
+      linked tickets: TASK-002, TASK-003, TASK-004, TASK-005, TASK-006
+
+[undefined_term] (3)
+  Q-006: What is ORMS, and what interface or API does it expose for syncing orders?
+      quote: "Orders should sync with our ORMS"
+      linked tickets: TASK-008
+  Q-008: What are the specific rules and functionalities of the loyalty scheme that worked "like last time"?
+      quote: "the loyalty scheme to work like last time"
+      linked tickets: TASK-005
+  Q-010: What are "the usual reports" that admins should receive?
+      quote: "should get the usual reports every week."
+      linked tickets: TASK-009
+
+[scope_gap] (2)
+  Q-005: What online payment methods should be supported?
+      quote: "pay online"
+      linked tickets: TASK-002, TASK-003, TASK-004
+  Q-009: What are the specific rules and functionalities required for delivery slots?
+      quote: "Delivery slots are important to us."
+      linked tickets: TASK-006
+
+General questions (not linked to a specific task, attached to every epic): None
+
+==============================================================================
+REJECTED ITEMS (1)
+==============================================================================
+  [understand] quote not in brief: {"id": "F13", "category": "user", "text": "Admins", "quote": "Admins"}
+
+==============================================================================
+LINT WARNINGS (3)
+==============================================================================
+  WARNING unsourced word 'function' in AC of TASK-005
+  WARNING unsourced word 'previously' in AC of TASK-005
+  WARNING unsourced word 'synchronize' in AC of TASK-008
+
+==============================================================================
+COUNTS
+==============================================================================
+  Facts: 15
+  Questions: 14 (missing: 3, vague: 5, contradiction: 1, undefined_term: 3, scope_gap: 2)
+  Tickets: 9 (Ready: 0, Needs clarification: 9)
+  Rejected items: 1
+  Lint warnings: 3
+
+Wrote out/vague\tickets.json, out/vague\tickets_jira.csv, out/vague\run.log

@@ -1,0 +1,245 @@
+{
+  "brief_file": "tests/edge/short.txt",
+  "model": "gemini-3-flash-preview",
+  "generated_at": "2026-11-05T13:28:41+05:00",
+  "tickets": [
+    {
+      "ticket_id": "TASK-001",
+      "title": "Build an app",
+      "type": "Epic",
+      "parent": null,
+      "children": [
+        "TASK-002"
+      ],
+      "description": "Build an app.",
+      "acceptance_criteria": [],
+      "source_reference": "S1: \"Build an app\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-001",
+          "category": "missing",
+          "question": "Who are the target users for this application?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-002",
+          "category": "missing",
+          "question": "Which platforms should the application be built for?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-005",
+          "category": "missing",
+          "question": "Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?",
+          "quote": null,
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-002",
+      "title": "Build an app",
+      "type": "Story",
+      "parent": "TASK-001",
+      "children": [],
+      "description": "Build an app as requested.",
+      "acceptance_criteria": [],
+      "source_reference": "S1: \"Build an app\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-003",
+          "category": "missing",
+          "question": "What is the specific deadline for this project?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-004",
+          "category": "scope_gap",
+          "question": "What are the core features and functionalities required for the application?",
+          "quote": "Build an app",
+          "quote_b": null
+        },
+        {
+          "id": "Q-006",
+          "category": "missing",
+          "question": "Which features have the highest priority for the first release?",
+          "quote": null,
+          "quote_b": null
+        },
+        {
+          "id": "Q-007",
+          "category": "missing",
+          "question": "What testable acceptance conditions apply to 'Build an app'?",
+          "quote": null,
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    }
+  ],
+  "general_questions": [
+    {
+      "id": "Q-001",
+      "category": "missing",
+      "question": "Who are the target users for this application?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [
+        "F1"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001"
+      ]
+    },
+    {
+      "id": "Q-002",
+      "category": "missing",
+      "question": "Which platforms should the application be built for?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [
+        "F1"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001"
+      ]
+    },
+    {
+      "id": "Q-005",
+      "category": "missing",
+      "question": "Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [],
+      "source": "template",
+      "linked_tickets": [
+        "TASK-001"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-001",
+      "category": "missing",
+      "question": "Who are the target users for this application?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [
+        "F1"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001"
+      ]
+    },
+    {
+      "id": "Q-002",
+      "category": "missing",
+      "question": "Which platforms should the application be built for?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [
+        "F1"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001"
+      ]
+    },
+    {
+      "id": "Q-003",
+      "category": "missing",
+      "question": "What is the specific deadline for this project?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [
+        "F1"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-002"
+      ]
+    },
+    {
+      "id": "Q-004",
+      "category": "scope_gap",
+      "question": "What are the core features and functionalities required for the application?",
+      "quote": "Build an app",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F1"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-002"
+      ]
+    },
+    {
+      "id": "Q-005",
+      "category": "missing",
+      "question": "Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [],
+      "source": "template",
+      "linked_tickets": [
+        "TASK-001"
+      ]
+    },
+    {
+      "id": "Q-006",
+      "category": "missing",
+      "question": "Which features have the highest priority for the first release?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [],
+      "source": "template",
+      "linked_tickets": [
+        "TASK-002"
+      ]
+    },
+    {
+      "id": "Q-007",
+      "category": "missing",
+      "question": "What testable acceptance conditions apply to 'Build an app'?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [],
+      "source": "breakdown",
+      "linked_tickets": [
+        "TASK-002"
+      ]
+    }
+  ],
+  "rejected": [
+    {
+      "stage": "breakdown",
+      "item": {
+        "task": "Build an app",
+        "blocked_by_dropped": [
+          "Q1",
+          "Q2",
+          "Q5"
+        ]
+      },
+      "reason": "question link dropped: question is not about this task (its quote is not one of the task's source/AC quotes)"
+    }
+  ],
+  "lint_warnings": [
+    "WARNING unsourced word 'requested' in description of TASK-002"
+  ]
+}

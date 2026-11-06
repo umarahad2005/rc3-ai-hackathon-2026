@@ -1,0 +1,38 @@
+"Summary","Issue Type","Description","Priority","Labels"
+"Build an app","Epic","Build an app.
+
+h3. Acceptance Criteria
+Not applicable (epic) - see child tickets TASK-002
+
+h3. Source
+{quote}S1: ""Build an app""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-001] Who are the target users for this application?
+* [Q-002] Which platforms should the application be built for?
+* [Q-005] Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+h3. Details
+Status: Needs clarification | Parent: None | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-001"
+"Build an app","Story","Build an app as requested.
+
+h3. Acceptance Criteria
+None stated in brief
+
+h3. Source
+{quote}S1: ""Build an app""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-003] What is the specific deadline for this project?
+* [Q-004] What are the core features and functionalities required for the application?
+* [Q-006] Which features have the highest priority for the first release?
+* [Q-007] What testable acceptance conditions apply to 'Build an app'?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-001 | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-002"

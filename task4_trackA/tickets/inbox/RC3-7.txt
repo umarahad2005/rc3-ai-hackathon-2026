@@ -1,0 +1,8 @@
+Key: RC3-7
+Summary: Cancel a booking
+
+Members can cancel a booking before the class starts.
+
+Acceptance Criteria:
+- Members can cancel a booking up to 2 hours before the class starts.
+- Cancelling frees the place for another member.

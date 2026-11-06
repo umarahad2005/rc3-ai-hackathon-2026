@@ -1,0 +1,362 @@
+Brief2Jira  brief=briefs/clear.txt  model=gemini-2.5-flash  out=out/clear
+
+##############################################################################
+# STAGE 1 INPUT - 16 sentences
+##############################################################################
+  S1: FitLane Gym - Class Booking Web App
+  S2: FitLane Gym runs group fitness classes at one branch.
+  S3: We need a web application that works in desktop and mobile browsers.
+  S4: It has two user groups: members and front-desk staff.
+  S5: Staff create classes with a name, instructor, start time and capacity.
+  S6: Members can book a class up to 7 days before it starts.
+  S7: Members can only book classes that staff have already created.
+  S8: When a class reaches its capacity, booking closes and members see the message "Class full".
+  S9: Members can cancel a booking up to 2 hours before the class starts.
+  S10: Cancelling frees the place for another member.
+  S11: Staff can view the list of members booked into each class and print it.
+  S12: Members receive a booking confirmation after they book.
+  S13: Booking and cancellation are high priority.
+  S14: The printable list is low priority.
+  S15: The app must launch on 15 March 2027.
+  S16: Members identify themselves with their membership number.
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+  F1 [constraint] The application must be a web application.
+      quote: "We need a web application"  (S3)
+  F2 [constraint] The web application must work in desktop and mobile browsers.
+      quote: "works in desktop and mobile browsers."  (S3)
+  F3 [user] The application has two user groups: members and front-desk staff.
+      quote: "It has two user groups: members and front-desk staff."  (S4)
+  F4 [feature] Staff can create classes.
+      quote: "Staff create classes"  (S5)
+  F5 [feature] Classes are created with a name, instructor, start time and capacity.
+      quote: "classes with a name, instructor, start time and capacity."  (S5)
+  F6 [feature] Members can book a class.
+      quote: "Members can book a class"  (S6)
+  F7 [constraint] Members can book a class up to 7 days before it starts.
+      quote: "book a class up to 7 days before it starts."  (S6)
+  F8 [constraint] Members can only book classes that staff have already created.
+      quote: "Members can only book classes that staff have already created."  (S7)
+  F9 [feature] Booking closes when a class reaches its capacity.
+      quote: "When a class reaches its capacity, booking closes"  (S8)
+  F10 [feature] Members see the message "Class full" when a class reaches its capacity.
+      quote: "members see the message "Class full"."  (S8)
+  F11 [feature] Members can cancel a booking.
+      quote: "Members can cancel a booking"  (S9)
+  F12 [constraint] Members can cancel a booking up to 2 hours before the class starts.
+      quote: "cancel a booking up to 2 hours before the class starts."  (S9)
+  F13 [feature] Cancelling a booking frees the place for another member.
+      quote: "Cancelling frees the place for another member."  (S10)
+  F14 [feature] Staff can view the list of members booked into each class.
+      quote: "Staff can view the list of members booked into each class"  (S11)
+  F15 [feature] Staff can print the list of members booked into each class.
+      quote: "and print it."  (S11)
+  F16 [feature] Members receive a booking confirmation after they book.
+      quote: "Members receive a booking confirmation after they book."  (S12)
+  F17 [priority] Booking is high priority.
+      quote: "Booking and cancellation are high priority."  (S13)
+  F18 [priority] Cancellation is high priority.
+      quote: "Booking and cancellation are high priority."  (S13)
+  F19 [priority] The printable list is low priority.
+      quote: "The printable list is low priority."  (S14)
+  F20 [deadline] The app must launch on 15 March 2027.
+      quote: "The app must launch on 15 March 2027."  (S15)
+  F21 [constraint] Members identify themselves with their membership number.
+      quote: "Members identify themselves with their membership number."  (S16)
+Rejected: None
+
+##############################################################################
+# STAGE 3 GAPS (LLM + templates) - verified questions
+##############################################################################
+  Q1 (scope_gap, llm) How do staff access the web application?
+      quote: "Staff create classes"
+      related facts: F3, F4
+  Q2 (scope_gap, llm) How do members access the web application?
+      quote: "Members can book a class"
+      related facts: F3, F6, F21
+  Q3 (scope_gap, llm) How are front-desk staff users managed within the application?
+      quote: "It has two user groups: members and front-desk staff."
+      related facts: F3
+  Q4 (scope_gap, llm) How are member accounts created and managed?
+      quote: "Members identify themselves with their membership number."
+      related facts: F3, F21
+  Q5 (scope_gap, llm) What are the rules or constraints for a class name?
+      quote: "classes with a name, instructor, start time and capacity."
+      related facts: F5
+  Q6 (scope_gap, llm) How are instructors managed or selected when creating a class?
+      quote: "classes with a name, instructor, start time and capacity."
+      related facts: F5
+  Q7 (scope_gap, llm) What are the minimum and maximum values for class capacity?
+      quote: "classes with a name, instructor, start time and capacity."
+      related facts: F5
+  Q8 (scope_gap, llm) What happens if a member attempts to book a class more than 7 days before it starts?
+      quote: "book a class up to 7 days before it starts."
+      related facts: F6, F7
+  Q9 (scope_gap, llm) What happens if a member attempts to cancel a booking less than 2 hours before the class starts?
+      quote: "cancel a booking up to 2 hours before the class starts."
+      related facts: F11, F12
+  Q10 (scope_gap, llm) What information about members should be included in the list that staff can view and print?
+      quote: "Staff can view the list of members booked into each class and print it."
+      related facts: F14, F15
+  Q11 (scope_gap, llm) How do members receive the booking confirmation?
+      quote: "Members receive a booking confirmation after they book."
+      related facts: F16
+  Q12 (scope_gap, llm) What information should be included in the booking confirmation?
+      quote: "Members receive a booking confirmation after they book."
+      related facts: F16
+  Q13 (missing, llm) What are the priorities for the other features mentioned in the brief?
+      quote: "Booking and cancellation are high priority. The printable list is low priority."
+      related facts: F17, F18, F19
+  Q14 (missing, template) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+Templated questions added: 1
+Rejected: None
+
+##############################################################################
+# STAGE 4 BREAK DOWN (LLM) - verified epics and tasks
+##############################################################################
+  E1 Staff Class Management
+    E1.T1 [Story] Create classes with details  facts=F4,F5  AC=2  deps=-  blocked_by=Q5,Q6,Q7
+  E2 Member Class Booking and Cancellation
+    E2.T1 [Task] Implement member identification by membership number  facts=F21  AC=1  deps=-  blocked_by=Q2,Q4
+    E2.T2 [Story] Allow members to book a class  facts=F6,F7,F8,F9,F10  AC=5  deps=E1.T1  blocked_by=Q8
+    E2.T3 [Task] Send booking confirmation to members  facts=F16  AC=1  deps=E2.T2  blocked_by=Q11,Q12
+    E2.T4 [Story] Allow members to cancel a booking  facts=F11,F12,F13  AC=3  deps=-  blocked_by=Q9
+  E3 Staff Reporting
+    E3.T1 [Story] Allow staff to view booked members list  facts=F14  AC=1  deps=-  blocked_by=Q10
+    E3.T2 [Story] Allow staff to print booked members list  facts=F15  AC=1  deps=E3.T1  blocked_by=Q10
+Rejected: None
+
+##############################################################################
+# STAGE 5+6 TICKETS AND REPORT
+##############################################################################
+==============================================================================
+TICKETS (10)
+==============================================================================
+TASK-001  [Epic]  Staff Class Management
+  Children: TASK-002
+  Description: Enable front-desk staff to create and manage fitness classes.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-002
+  Source: S5: "Staff create classes"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-003] (scope_gap) How are front-desk staff users managed within the application?
+    [Q-013] (missing) What are the priorities for the other features mentioned in the brief?
+    [Q-014] (missing) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+TASK-002  [Story]  Create classes with details
+  Parent: TASK-001
+  Description: Staff need to create classes, specifying their name, instructor, start time, and capacity.
+  Acceptance Criteria:
+    - Staff must be able to create classes.   <- "Staff create classes"
+    - Classes must be created with a name, instructor, start time and capacity.   <- "classes with a name, instructor, start time and capacity."
+  Source: S5: "Staff create classes"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (scope_gap) How do staff access the web application?
+    [Q-005] (scope_gap) What are the rules or constraints for a class name?
+    [Q-006] (scope_gap) How are instructors managed or selected when creating a class?
+    [Q-007] (scope_gap) What are the minimum and maximum values for class capacity?
+
+TASK-003  [Epic]  Member Class Booking and Cancellation
+  Children: TASK-004, TASK-005, TASK-006, TASK-007
+  Description: Enable members to book and cancel fitness classes, including identification and confirmations.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-004, TASK-005, TASK-006, TASK-007
+  Source: S6: "Members can book a class"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-003] (scope_gap) How are front-desk staff users managed within the application?
+    [Q-013] (missing) What are the priorities for the other features mentioned in the brief?
+    [Q-014] (missing) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+TASK-004  [Task]  Implement member identification by membership number
+  Parent: TASK-003
+  Description: Members need to identify themselves using their membership number to access booking and cancellation functionalities.
+  Acceptance Criteria:
+    - Members must identify themselves with their membership number.   <- "Members identify themselves with their membership number."
+  Source: S16: "Members identify themselves with their membership number."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-002] (scope_gap) How do members access the web application?
+    [Q-004] (scope_gap) How are member accounts created and managed?
+
+TASK-005  [Story]  Allow members to book a class
+  Parent: TASK-003
+  Description: Members need to be able to book a class, adhering to specified timeframes and capacity limits.
+  Acceptance Criteria:
+    - Members must be able to book a class.   <- "Members can book a class"
+    - Members must be able to book a class up to 7 days before it starts.   <- "book a class up to 7 days before it starts."
+    - Members can only book classes that staff have already created.   <- "Members can only book classes that staff have already created."
+    - When a class reaches its capacity, booking closes.   <- "When a class reaches its capacity, booking closes"
+    - Members must see the message "Class full" when a class reaches its capacity.   <- "members see the message "Class full"."
+  Source: S6: "Members can book a class"
+  Dependencies: TASK-002
+  Priority: high
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-002] (scope_gap) How do members access the web application?
+    [Q-008] (scope_gap) What happens if a member attempts to book a class more than 7 days before it starts?
+
+TASK-006  [Task]  Send booking confirmation to members
+  Parent: TASK-003
+  Description: After a member books a class, they must receive a booking confirmation.
+  Acceptance Criteria:
+    - Members must receive a booking confirmation after they book.   <- "Members receive a booking confirmation after they book."
+  Source: S12: "Members receive a booking confirmation after they book."
+  Dependencies: TASK-005
+  Priority: high
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-011] (scope_gap) How do members receive the booking confirmation?
+    [Q-012] (scope_gap) What information should be included in the booking confirmation?
+
+TASK-007  [Story]  Allow members to cancel a booking
+  Parent: TASK-003
+  Description: Members need to be able to cancel their class bookings, freeing up the spot for others.
+  Acceptance Criteria:
+    - Members must be able to cancel a booking.   <- "Members can cancel a booking"
+    - Members must be able to cancel a booking up to 2 hours before the class starts.   <- "cancel a booking up to 2 hours before the class starts."
+    - Cancelling a booking must free the place for another member.   <- "Cancelling frees the place for another member."
+  Source: S9: "Members can cancel a booking"
+  Dependencies: None stated in brief
+  Priority: high
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-009] (scope_gap) What happens if a member attempts to cancel a booking less than 2 hours before the class starts?
+
+TASK-008  [Epic]  Staff Reporting
+  Children: TASK-009, TASK-010
+  Description: Enable front-desk staff to view and print lists of members booked into classes.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-009, TASK-010
+  Source: S11: "Staff can view the list of members booked into each class and print it."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-003] (scope_gap) How are front-desk staff users managed within the application?
+    [Q-013] (missing) What are the priorities for the other features mentioned in the brief?
+    [Q-014] (missing) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+TASK-009  [Story]  Allow staff to view booked members list
+  Parent: TASK-008
+  Description: Staff need to view the list of members booked into each class.
+  Acceptance Criteria:
+    - Staff must be able to view the list of members booked into each class.   <- "Staff can view the list of members booked into each class"
+  Source: S11: "Staff can view the list of members booked into each class"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-010] (scope_gap) What information about members should be included in the list that staff can view and print?
+
+TASK-010  [Story]  Allow staff to print booked members list
+  Parent: TASK-008
+  Description: Staff need to be able to print the list of members booked into each class.
+  Acceptance Criteria:
+    - Staff must be able to print the list of members booked into each class.   <- "and print it."
+  Source: S11: "and print it."
+  Dependencies: TASK-009
+  Priority: low
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-010] (scope_gap) What information about members should be included in the list that staff can view and print?
+
+==============================================================================
+OPEN QUESTIONS BY CATEGORY (14)
+==============================================================================
+[missing] (2)
+  Q-013: What are the priorities for the other features mentioned in the brief?
+      quote: "Booking and cancellation are high priority. The printable list is low priority."
+      linked tickets: TASK-001, TASK-003, TASK-008
+  Q-014: Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+      linked tickets: TASK-001, TASK-003, TASK-008
+
+[scope_gap] (12)
+  Q-001: How do staff access the web application?
+      quote: "Staff create classes"
+      linked tickets: TASK-002
+  Q-002: How do members access the web application?
+      quote: "Members can book a class"
+      linked tickets: TASK-004, TASK-005
+  Q-003: How are front-desk staff users managed within the application?
+      quote: "It has two user groups: members and front-desk staff."
+      linked tickets: TASK-001, TASK-003, TASK-008
+  Q-004: How are member accounts created and managed?
+      quote: "Members identify themselves with their membership number."
+      linked tickets: TASK-004
+  Q-005: What are the rules or constraints for a class name?
+      quote: "classes with a name, instructor, start time and capacity."
+      linked tickets: TASK-002
+  Q-006: How are instructors managed or selected when creating a class?
+      quote: "classes with a name, instructor, start time and capacity."
+      linked tickets: TASK-002
+  Q-007: What are the minimum and maximum values for class capacity?
+      quote: "classes with a name, instructor, start time and capacity."
+      linked tickets: TASK-002
+  Q-008: What happens if a member attempts to book a class more than 7 days before it starts?
+      quote: "book a class up to 7 days before it starts."
+      linked tickets: TASK-005
+  Q-009: What happens if a member attempts to cancel a booking less than 2 hours before the class starts?
+      quote: "cancel a booking up to 2 hours before the class starts."
+      linked tickets: TASK-007
+  Q-010: What information about members should be included in the list that staff can view and print?
+      quote: "Staff can view the list of members booked into each class and print it."
+      linked tickets: TASK-009, TASK-010
+  Q-011: How do members receive the booking confirmation?
+      quote: "Members receive a booking confirmation after they book."
+      linked tickets: TASK-006
+  Q-012: What information should be included in the booking confirmation?
+      quote: "Members receive a booking confirmation after they book."
+      linked tickets: TASK-006
+
+General questions (not linked to a specific task, attached to every epic): Q-003, Q-013, Q-014
+
+==============================================================================
+REJECTED ITEMS (0)
+==============================================================================
+  None
+
+==============================================================================
+LINT WARNINGS (0)
+==============================================================================
+  None
+
+==============================================================================
+COUNTS
+==============================================================================
+  Facts: 21
+  Questions: 14 (missing: 2, scope_gap: 12)
+  Tickets: 10 (Ready: 0, Needs clarification: 10)
+  Rejected items: 0
+  Lint warnings: 0
+
+Wrote out/clear\tickets.json, out/clear\tickets_jira.csv, out/clear\run.log

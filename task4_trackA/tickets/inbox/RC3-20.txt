@@ -1,0 +1,6 @@
+﻿Key: RC3-21
+Summary: <sir's ticket title>
+
+Acceptance Criteria:
+- <criterion 1 from sir's ticket>
+- <criterion 2 from sir's ticket>

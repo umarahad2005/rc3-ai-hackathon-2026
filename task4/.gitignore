@@ -1,0 +1,12 @@
+# Secrets: never commit your real token
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Never commit env files (real or example)
+.env.*
+.env.example

@@ -1,0 +1,10 @@
+{
+  "key": "RC3-8",
+  "fields": {
+    "summary": "Book a class in advance",
+    "description": "Members book classes ahead of time.\n\nh3. Acceptance Criteria\n* Members can book a class up to 7 days before it starts.\n* Booking more than 7 days before the class starts is refused.",
+    "labels": [
+      "RC3-8"
+    ]
+  }
+}

@@ -1,0 +1,318 @@
+Brief2Jira  brief=briefs/vague.txt  model=gemini-3-flash-preview  out=out/vague
+
+##############################################################################
+# STAGE 1 INPUT - 13 sentences
+##############################################################################
+  S1: Hi team,
+  S2: We are a family-run grocery business and want to finally go digital.
+  S3: Customers will download our new app from the App Store and Google Play to order groceries.
+  S4: The app must be fast, modern and secure.
+  S5: Customers browse products, add them to a basket and pay online.
+  S6: Orders should sync with our ORMS so the warehouse sees them straight away.
+  S7: We would also like the loyalty scheme to work like last time.
+  S8: Delivery slots are important to us.
+  S9: Admins should get the usual reports every week.
+  S10: For budget reasons we want web only for the first version.
+  S11: We need this live as soon as possible.
+  S12: Thanks,
+  S13: Bilal
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+  F1 [user] Family-run grocery business
+      quote: "We are a family-run grocery business"  (S2)
+  F2 [goal] Go digital
+      quote: "want to finally go digital"  (S2)
+  F3 [user] Customers
+      quote: "Customers will download our new app"  (S3)
+  F4 [constraint] App Store and Google Play
+      quote: "from the App Store and Google Play"  (S3)
+  F5 [feature] Order groceries
+      quote: "to order groceries"  (S3)
+  F6 [constraint] Fast, modern and secure
+      quote: "The app must be fast, modern and secure"  (S4)
+  F7 [feature] Browse products, add to basket and pay online
+      quote: "Customers browse products, add them to a basket and pay online"  (S5)
+  F8 [integration] Sync with ORMS
+      quote: "Orders should sync with our ORMS"  (S6)
+  F9 [user] Warehouse
+      quote: "so the warehouse sees them straight away"  (S6)
+  F10 [feature] Loyalty scheme like last time
+      quote: "loyalty scheme to work like last time"  (S7)
+  F11 [feature] Delivery slots
+      quote: "Delivery slots are important to us"  (S8)
+  F12 [user] Admins
+      quote: "Admins should get the usual reports"  (S9)
+  F13 [feature] Usual reports every week
+      quote: "Admins should get the usual reports every week"  (S9)
+  F14 [constraint] Web only for the first version
+      quote: "we want web only for the first version"  (S10)
+  F15 [constraint] Live as soon as possible
+      quote: "We need this live as soon as possible"  (S11)
+Rejected: None
+
+##############################################################################
+# STAGE 3 GAPS (LLM + templates) - verified questions
+##############################################################################
+  [missing]
+  Q10 (missing, llm) Which payment provider or gateway should be used to pay online?
+      quote: "Customers browse products, add them to a basket and pay online"
+      related facts: F7
+  Q11 (missing, template) Which features have the highest priority for the first release?
+  [vague]
+  Q2 (vague, llm) What is the specific target measurement for the app to be considered fast?
+      quote: "The app must be fast, modern and secure"
+      related facts: F6
+  Q3 (vague, llm) How do you define a modern app for this project?
+      quote: "The app must be fast, modern and secure"
+      related facts: F6
+  Q4 (vague, llm) What specific security standards or protocols must the app meet to be considered secure?
+      quote: "The app must be fast, modern and secure"
+      related facts: F6
+  Q8 (vague, llm) Which specific reports are included in the usual reports and what data must each contain?
+      quote: "Admins should get the usual reports every week"
+      related facts: F12, F13
+  Q9 (vague, llm) What is the specific target date for the live launch?
+      quote: "We need this live as soon as possible"
+      related facts: F15
+  [contradiction]
+  Q1 (contradiction, llm) Should the first version be a web application or a mobile app for the App Store and Google Play?
+      quote: "Customers will download our new app from the App Store and Google Play"
+      quote_b: "we want web only for the first version"
+      related facts: F3, F4, F14
+  [undefined_term]
+  Q5 (undefined_term, llm) What is the ORMS and what interface or API does it provide for syncing orders?
+      quote: "Orders should sync with our ORMS"
+      related facts: F8
+  Q6 (undefined_term, llm) How did the loyalty scheme work last time?
+      quote: "loyalty scheme to work like last time"
+      related facts: F10
+  [scope_gap]
+  Q7 (scope_gap, llm) What are the rules and constraints for selecting and booking delivery slots?
+      quote: "Delivery slots are important to us"
+      related facts: F11
+Templated questions added: 1
+Rejected: None
+
+##############################################################################
+# STAGE 4 BREAK DOWN (LLM) - verified epics and tasks
+##############################################################################
+  E1 Order groceries
+    E1.T1 [Story] Browse products and pay online  facts=F7  AC=1  deps=-  blocked_by=Q1,Q10,Q11,Q9
+    E1.T2 [Story] Select delivery slots  facts=F11  AC=1  deps=-  blocked_by=Q7,Q11,Q9
+    E1.T3 [Story] Apply loyalty scheme  facts=F10  AC=1  deps=-  blocked_by=Q6,Q11,Q9
+  E2 Sync with ORMS
+    E2.T1 [Task] Sync orders with ORMS  facts=F8,F9  AC=2  deps=-  blocked_by=Q5,Q11,Q9
+  E3 Admins usual reports
+    E3.T1 [Story] Receive usual reports every week  facts=F12,F13  AC=1  deps=-  blocked_by=Q8,Q11,Q9
+Rejected: None
+
+##############################################################################
+# STAGE 5+6 TICKETS AND REPORT
+##############################################################################
+==============================================================================
+TICKETS (8)
+==============================================================================
+TASK-001  [Epic]  Order groceries
+  Children: TASK-002, TASK-003, TASK-004
+  Description: Enable customers to order groceries through a digital platform.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-002, TASK-003, TASK-004
+  Source: S3: "to order groceries"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-002] (vague) What is the specific target measurement for the app to be considered fast?
+    [Q-003] (vague) How do you define a modern app for this project?
+    [Q-004] (vague) What specific security standards or protocols must the app meet to be considered secure?
+
+TASK-002  [Story]  Browse products and pay online
+  Parent: TASK-001
+  Description: Customers browse products, add them to a basket and pay online.
+  Acceptance Criteria:
+    - Customers browse products, add them to a basket and pay online.   <- "Customers browse products, add them to a basket and pay online"
+  Source: S5: "Customers browse products, add them to a basket and pay online"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) Should the first version be a web application or a mobile app for the App Store and Google Play?
+    [Q-009] (vague) What is the specific target date for the live launch?
+    [Q-010] (missing) Which payment provider or gateway should be used to pay online?
+    [Q-011] (missing) Which features have the highest priority for the first release?
+
+TASK-003  [Story]  Select delivery slots
+  Parent: TASK-001
+  Description: Provide delivery slots as they are important to the business.
+  Acceptance Criteria:
+    - Delivery slots are important to us.   <- "Delivery slots are important to us"
+  Source: S8: "Delivery slots are important to us"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-007] (scope_gap) What are the rules and constraints for selecting and booking delivery slots?
+    [Q-009] (vague) What is the specific target date for the live launch?
+    [Q-011] (missing) Which features have the highest priority for the first release?
+
+TASK-004  [Story]  Apply loyalty scheme
+  Parent: TASK-001
+  Description: Implement the loyalty scheme to work like last time.
+  Acceptance Criteria:
+    - The loyalty scheme to work like last time.   <- "loyalty scheme to work like last time"
+  Source: S7: "loyalty scheme to work like last time"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-006] (undefined_term) How did the loyalty scheme work last time?
+    [Q-009] (vague) What is the specific target date for the live launch?
+    [Q-011] (missing) Which features have the highest priority for the first release?
+
+TASK-005  [Epic]  Sync with ORMS
+  Children: TASK-006
+  Description: Integrate orders with the ORMS for warehouse visibility.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-006
+  Source: S6: "Orders should sync with our ORMS"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-002] (vague) What is the specific target measurement for the app to be considered fast?
+    [Q-003] (vague) How do you define a modern app for this project?
+    [Q-004] (vague) What specific security standards or protocols must the app meet to be considered secure?
+
+TASK-006  [Task]  Sync orders with ORMS
+  Parent: TASK-005
+  Description: Orders should sync with our ORMS so the warehouse sees them straight away.
+  Acceptance Criteria:
+    - Orders should sync with our ORMS.   <- "Orders should sync with our ORMS"
+    - The warehouse sees the orders straight away.   <- "so the warehouse sees them straight away"
+  Source: S6: "Orders should sync with our ORMS"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-005] (undefined_term) What is the ORMS and what interface or API does it provide for syncing orders?
+    [Q-009] (vague) What is the specific target date for the live launch?
+    [Q-011] (missing) Which features have the highest priority for the first release?
+
+TASK-007  [Epic]  Admins usual reports
+  Children: TASK-008
+  Description: Provide weekly reports for administrators.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-008
+  Source: S9: "Admins should get the usual reports"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-002] (vague) What is the specific target measurement for the app to be considered fast?
+    [Q-003] (vague) How do you define a modern app for this project?
+    [Q-004] (vague) What specific security standards or protocols must the app meet to be considered secure?
+
+TASK-008  [Story]  Receive usual reports every week
+  Parent: TASK-007
+  Description: Admins should get the usual reports every week.
+  Acceptance Criteria:
+    - Admins should get the usual reports every week.   <- "Admins should get the usual reports every week"
+  Source: S9: "Admins should get the usual reports every week"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-008] (vague) Which specific reports are included in the usual reports and what data must each contain?
+    [Q-009] (vague) What is the specific target date for the live launch?
+    [Q-011] (missing) Which features have the highest priority for the first release?
+
+==============================================================================
+OPEN QUESTIONS BY CATEGORY (11)
+==============================================================================
+[missing] (2)
+  Q-010: Which payment provider or gateway should be used to pay online?
+      quote: "Customers browse products, add them to a basket and pay online"
+      linked tickets: TASK-002
+  Q-011: Which features have the highest priority for the first release?
+      linked tickets: TASK-002, TASK-003, TASK-004, TASK-006, TASK-008
+
+[vague] (5)
+  Q-002: What is the specific target measurement for the app to be considered fast?
+      quote: "The app must be fast, modern and secure"
+      linked tickets: TASK-001, TASK-005, TASK-007
+  Q-003: How do you define a modern app for this project?
+      quote: "The app must be fast, modern and secure"
+      linked tickets: TASK-001, TASK-005, TASK-007
+  Q-004: What specific security standards or protocols must the app meet to be considered secure?
+      quote: "The app must be fast, modern and secure"
+      linked tickets: TASK-001, TASK-005, TASK-007
+  Q-008: Which specific reports are included in the usual reports and what data must each contain?
+      quote: "Admins should get the usual reports every week"
+      linked tickets: TASK-008
+  Q-009: What is the specific target date for the live launch?
+      quote: "We need this live as soon as possible"
+      linked tickets: TASK-002, TASK-003, TASK-004, TASK-006, TASK-008
+
+[contradiction] (1)
+  Q-001: Should the first version be a web application or a mobile app for the App Store and Google Play?
+      quote A: "Customers will download our new app from the App Store and Google Play"
+      quote B: "we want web only for the first version"
+      linked tickets: TASK-002
+
+[undefined_term] (2)
+  Q-005: What is the ORMS and what interface or API does it provide for syncing orders?
+      quote: "Orders should sync with our ORMS"
+      linked tickets: TASK-006
+  Q-006: How did the loyalty scheme work last time?
+      quote: "loyalty scheme to work like last time"
+      linked tickets: TASK-004
+
+[scope_gap] (1)
+  Q-007: What are the rules and constraints for selecting and booking delivery slots?
+      quote: "Delivery slots are important to us"
+      linked tickets: TASK-003
+
+General questions (not linked to a specific task, attached to every epic): Q-002, Q-003, Q-004
+
+==============================================================================
+REJECTED ITEMS (0)
+==============================================================================
+  None
+
+==============================================================================
+LINT WARNINGS (8)
+==============================================================================
+  WARNING unsourced word 'platform' in description of TASK-001
+  WARNING unsourced word 'select' in title of TASK-003
+  WARNING unsourced word 'apply' in title of TASK-004
+  WARNING unsourced word 'integrate' in description of TASK-005
+  WARNING unsourced word 'visibility' in description of TASK-005
+  WARNING unsourced word 'weekly' in description of TASK-007
+  WARNING unsourced word 'administrators' in description of TASK-007
+  WARNING unsourced word 'receive' in title of TASK-008
+
+==============================================================================
+COUNTS
+==============================================================================
+  Facts: 15
+  Questions: 11 (missing: 2, vague: 5, contradiction: 1, undefined_term: 2, scope_gap: 1)
+  Tickets: 8 (Ready: 0, Needs clarification: 8)
+  Rejected items: 0
+  Lint warnings: 8
+
+Wrote out/vague\tickets.json, out/vague\tickets_jira.csv, out/vague\run.log
