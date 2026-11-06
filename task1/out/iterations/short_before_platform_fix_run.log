@@ -1,0 +1,115 @@
+Brief2Jira  brief=tests/edge/short.txt  model=gemini-2.5-flash  out=out/edge_short
+
+##############################################################################
+# STAGE 1 INPUT - 1 sentences
+##############################################################################
+  S1: Build an app.
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+  F1 [feature] Build an app
+      quote: "Build an app."  (S1)
+Rejected: None
+
+##############################################################################
+# STAGE 3 GAPS (LLM + templates) - verified questions
+##############################################################################
+  Q1 (scope_gap, llm) What specific functionality should the app provide?
+      quote: "Build an app."
+      related facts: F1
+  Q2 (missing, llm) Who are the target users for the app?
+  Q4 (missing, llm) Are there any existing systems or services the app needs to integrate with?
+  Q5 (missing, llm) What is the deadline for building the app?
+  Q6 (missing, llm) What are the priorities for the app's features?
+Templated questions added: 0
+Rejected (1):
+  [gaps] 'missing' question about a topic the brief states: {"id": "Q3", "category": "missing", "question": "What platform or platforms should the app run on?", "quote": null, "quote_b": null, "related_fact_ids": []}
+
+##############################################################################
+# STAGE 4 BREAK DOWN (LLM) - verified epics and tasks
+##############################################################################
+  E1 App Development
+    E1.T1 [Story] Build core application  facts=F1  AC=0  deps=-  blocked_by=Q1,Q2,Q4,Q5,Q6,Q7
+Questions raised by code in Stage 4:
+  Q7 (missing, breakdown) What testable acceptance conditions apply to 'Build core application'?
+Rejected: None
+
+##############################################################################
+# STAGE 5+6 TICKETS AND REPORT
+##############################################################################
+==============================================================================
+TICKETS (2)
+==============================================================================
+TASK-001  [Epic]  App Development
+  Children: TASK-002
+  Description: Overall development of the application as requested by the brief.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-002
+  Source: S1: "Build an app."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions: None
+
+TASK-002  [Story]  Build core application
+  Parent: TASK-001
+  Description: Build the fundamental structure of the application.
+  Acceptance Criteria: None stated in brief
+  Source: S1: "Build an app."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (scope_gap) What specific functionality should the app provide?
+    [Q-002] (missing) Who are the target users for the app?
+    [Q-003] (missing) Are there any existing systems or services the app needs to integrate with?
+    [Q-004] (missing) What is the deadline for building the app?
+    [Q-005] (missing) What are the priorities for the app's features?
+    [Q-006] (missing) What testable acceptance conditions apply to 'Build core application'?
+
+==============================================================================
+OPEN QUESTIONS BY CATEGORY (6)
+==============================================================================
+[missing] (5)
+  Q-002: Who are the target users for the app?
+      linked tickets: TASK-002
+  Q-003: Are there any existing systems or services the app needs to integrate with?
+      linked tickets: TASK-002
+  Q-004: What is the deadline for building the app?
+      linked tickets: TASK-002
+  Q-005: What are the priorities for the app's features?
+      linked tickets: TASK-002
+  Q-006: What testable acceptance conditions apply to 'Build core application'?
+      linked tickets: TASK-002
+
+[scope_gap] (1)
+  Q-001: What specific functionality should the app provide?
+      quote: "Build an app."
+      linked tickets: TASK-002
+
+General questions (not linked to a specific task, attached to every epic): None
+
+==============================================================================
+REJECTED ITEMS (1)
+==============================================================================
+  [gaps] 'missing' question about a topic the brief states: {"id": "Q3", "category": "missing", "question": "What platform or platforms should the app run on?", "quote": null, "quote_b": null, "related_fact_ids": []}
+
+==============================================================================
+LINT WARNINGS (0)
+==============================================================================
+  None
+
+==============================================================================
+COUNTS
+==============================================================================
+  Facts: 1
+  Questions: 6 (missing: 5, scope_gap: 1)
+  Tickets: 2 (Ready: 0, Needs clarification: 2)
+  Rejected items: 1
+  Lint warnings: 0
+
+Wrote out/edge_short\tickets.json, out/edge_short\tickets_jira.csv, out/edge_short\run.log

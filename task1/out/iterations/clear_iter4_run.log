@@ -1,0 +1,347 @@
+Brief2Jira  brief=briefs/clear.txt  model=gemini-2.5-flash  out=out/clear
+
+##############################################################################
+# STAGE 1 INPUT - 16 sentences
+##############################################################################
+  S1: FitLane Gym - Class Booking Web App
+  S2: FitLane Gym runs group fitness classes at one branch.
+  S3: We need a web application that works in desktop and mobile browsers.
+  S4: It has two user groups: members and front-desk staff.
+  S5: Staff create classes with a name, instructor, start time and capacity.
+  S6: Members can book a class up to 7 days before it starts.
+  S7: Members can only book classes that staff have already created.
+  S8: When a class reaches its capacity, booking closes and members see the message "Class full".
+  S9: Members can cancel a booking up to 2 hours before the class starts.
+  S10: Cancelling frees the place for another member.
+  S11: Staff can view the list of members booked into each class and print it.
+  S12: Members receive a booking confirmation after they book.
+  S13: Booking and cancellation are high priority.
+  S14: The printable list is low priority.
+  S15: The app must launch on 15 March 2027.
+  S16: Members identify themselves with their membership number.
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+  F1 [constraint] The application must be a web application.
+      quote: "We need a web application"  (S3)
+  F2 [constraint] The web application must work in desktop and mobile browsers.
+      quote: "works in desktop and mobile browsers."  (S3)
+  F3 [user] The application has two user groups: members and front-desk staff.
+      quote: "It has two user groups: members and front-desk staff."  (S4)
+  F4 [feature] Staff can create classes.
+      quote: "Staff create classes"  (S5)
+  F5 [feature] Classes are created with a name, instructor, start time and capacity.
+      quote: "classes with a name, instructor, start time and capacity."  (S5)
+  F6 [feature] Members can book a class.
+      quote: "Members can book a class"  (S6)
+  F7 [constraint] Members can book a class up to 7 days before it starts.
+      quote: "book a class up to 7 days before it starts."  (S6)
+  F8 [constraint] Members can only book classes that staff have already created.
+      quote: "Members can only book classes that staff have already created."  (S7)
+  F9 [feature] Booking closes when a class reaches its capacity.
+      quote: "When a class reaches its capacity, booking closes"  (S8)
+  F10 [feature] Members see the message "Class full" when a class reaches its capacity.
+      quote: "members see the message "Class full"."  (S8)
+  F11 [feature] Members can cancel a booking.
+      quote: "Members can cancel a booking"  (S9)
+  F12 [constraint] Members can cancel a booking up to 2 hours before the class starts.
+      quote: "cancel a booking up to 2 hours before the class starts."  (S9)
+  F13 [feature] Cancelling a booking frees the place for another member.
+      quote: "Cancelling frees the place for another member."  (S10)
+  F14 [feature] Staff can view the list of members booked into each class.
+      quote: "Staff can view the list of members booked into each class"  (S11)
+  F15 [feature] Staff can print the list of members booked into each class.
+      quote: "and print it."  (S11)
+  F16 [feature] Members receive a booking confirmation after they book.
+      quote: "Members receive a booking confirmation after they book."  (S12)
+  F17 [priority] Booking is high priority.
+      quote: "Booking and cancellation are high priority."  (S13)
+  F18 [priority] Cancellation is high priority.
+      quote: "Booking and cancellation are high priority."  (S13)
+  F19 [priority] The printable list is low priority.
+      quote: "The printable list is low priority."  (S14)
+  F20 [deadline] The app must launch on 15 March 2027.
+      quote: "The app must launch on 15 March 2027."  (S15)
+  F21 [constraint] Members identify themselves with their membership number.
+      quote: "Members identify themselves with their membership number."  (S16)
+Rejected: None
+
+##############################################################################
+# STAGE 3 GAPS (LLM + templates) - verified questions
+##############################################################################
+  Q2 (scope_gap, llm) How do members find classes to book?
+      quote: "Members can book a class"
+      related facts: F6
+  Q3 (scope_gap, llm) What interaction is available to members when a class is full?
+      quote: "members see the message "Class full"."
+      related facts: F9, F10
+  Q4 (scope_gap, llm) What happens if a member attempts to cancel a booking less than 2 hours before the class starts?
+      quote: "cancel a booking up to 2 hours before the class starts."
+      related facts: F11, F12
+  Q5 (scope_gap, llm) Through what channel do members receive a booking confirmation?
+      quote: "Members receive a booking confirmation after they book."
+      related facts: F16
+  Q6 (scope_gap, llm) How do staff view the classes they have created?
+      quote: "Staff create classes"
+      related facts: F4, F5
+  Q7 (scope_gap, llm) Can staff edit or delete classes after they have been created?
+      quote: "Staff create classes with a name, instructor, start time and capacity."
+      related facts: F4, F5
+  Q8 (scope_gap, llm) How do members view their own current or past bookings?
+      quote: "Members can book a class"
+      related facts: F6, F11
+  Q9 (scope_gap, llm) How is a member's membership number validated?
+      quote: "Members identify themselves with their membership number."
+      related facts: F21
+  Q10 (missing, template) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+Templated questions added: 1
+Rejected (1):
+  [gaps] 'missing' question about a topic the brief states: {"id": "Q1", "category": "missing", "question": "How do front-desk staff identify themselves to the web application?", "quote": null, "quote_b": null, "related_fact_ids": ["F3", "F4", "F14"]}
+
+##############################################################################
+# STAGE 4 BREAK DOWN (LLM) - verified epics and tasks
+##############################################################################
+  E1 Class Management for Staff
+    E1.T1 [Story] Create classes  facts=F4,F5  AC=1  deps=-  blocked_by=Q6,Q7
+  E2 Member Class Interaction
+    E2.T1 [Story] Authenticate members  facts=F21  AC=1  deps=-  blocked_by=Q9
+    E2.T2 [Story] Book a class  facts=F6,F7,F8  AC=2  deps=E1.T1  blocked_by=Q2
+    E2.T3 [Task] Close booking when capacity reached  facts=F9  AC=1  deps=E2.T2  blocked_by=-
+    E2.T4 [Story] Display "Class full" message  facts=F10  AC=1  deps=E2.T3  blocked_by=Q3
+    E2.T5 [Story] Cancel a booking  facts=F11,F12,F13  AC=2  deps=E2.T2  blocked_by=Q4,Q8
+    E2.T6 [Story] Send booking confirmation  facts=F16  AC=1  deps=E2.T2  blocked_by=Q5
+  E3 Staff Reporting
+    E3.T1 [Story] View booked members list  facts=F14  AC=1  deps=E1.T1, E2.T2  blocked_by=-
+    E3.T2 [Story] Print booked members list  facts=F15  AC=1  deps=E3.T1  blocked_by=-
+Rejected: None
+
+##############################################################################
+# STAGE 5+6 TICKETS AND REPORT
+##############################################################################
+==============================================================================
+TICKETS (12)
+==============================================================================
+TASK-001  [Epic]  Class Management for Staff
+  Children: TASK-002
+  Description: Staff-facing features for creating and managing fitness classes.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-002
+  Source: S5: "Staff create classes with a name, instructor, start time and capacity."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-009] (missing) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+TASK-002  [Story]  Create classes
+  Parent: TASK-001
+  Description: Staff need to create classes, defining their key attributes.
+  Acceptance Criteria:
+    - Staff must be able to create classes with a name, instructor, start time and capacity.   <- "classes with a name, instructor, start time and capacity."
+  Source: S5: "Staff create classes"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-005] (scope_gap) How do staff view the classes they have created?
+    [Q-006] (scope_gap) Can staff edit or delete classes after they have been created?
+
+TASK-003  [Epic]  Member Class Interaction
+  Children: TASK-004, TASK-005, TASK-006, TASK-007, TASK-008, TASK-009
+  Description: Member-facing features for identifying, booking, cancelling classes, and receiving confirmations.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-004, TASK-005, TASK-006, TASK-007, TASK-008, TASK-009
+  Source: S6: "Members can book a class up to 7 days before it starts."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-009] (missing) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+TASK-004  [Story]  Authenticate members
+  Parent: TASK-003
+  Description: Members need to identify themselves using their membership number to access booking functionalities.
+  Acceptance Criteria:
+    - Members must identify themselves with their membership number.   <- "Members identify themselves with their membership number."
+  Source: S16: "Members identify themselves with their membership number."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-008] (scope_gap) How is a member's membership number validated?
+
+TASK-005  [Story]  Book a class
+  Parent: TASK-003
+  Description: Members can book available classes, subject to specific time constraints and class availability.
+  Acceptance Criteria:
+    - Members must be able to book a class up to 7 days before it starts.   <- "book a class up to 7 days before it starts."
+    - Members can only book classes that staff have already created.   <- "Members can only book classes that staff have already created."
+  Source: S6: "Members can book a class"
+  Dependencies: TASK-002
+  Priority: high
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (scope_gap) How do members find classes to book?
+    [Q-007] (scope_gap) How do members view their own current or past bookings?
+
+TASK-006  [Task]  Close booking when capacity reached
+  Parent: TASK-003
+  Description: The system must automatically close booking for a class once its capacity is met.
+  Acceptance Criteria:
+    - When a class reaches its capacity, booking closes.   <- "When a class reaches its capacity, booking closes"
+  Source: S8: "When a class reaches its capacity, booking closes"
+  Dependencies: TASK-005
+  Priority: high
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-002] (scope_gap) What interaction is available to members when a class is full?
+
+TASK-007  [Story]  Display "Class full" message
+  Parent: TASK-003
+  Description: Members need to be informed when a class they try to book has reached its capacity.
+  Acceptance Criteria:
+    - Members must see the message "Class full" when a class reaches its capacity.   <- "members see the message "Class full"."
+  Source: S8: "members see the message "Class full"."
+  Dependencies: TASK-006
+  Priority: high
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-002] (scope_gap) What interaction is available to members when a class is full?
+
+TASK-008  [Story]  Cancel a booking
+  Parent: TASK-003
+  Description: Members can cancel their class bookings, freeing up the spot for others.
+  Acceptance Criteria:
+    - Members must be able to cancel a booking up to 2 hours before the class starts.   <- "cancel a booking up to 2 hours before the class starts."
+    - Cancelling a booking must free the place for another member.   <- "Cancelling frees the place for another member."
+  Source: S9: "Members can cancel a booking"
+  Dependencies: TASK-005
+  Priority: high
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-003] (scope_gap) What happens if a member attempts to cancel a booking less than 2 hours before the class starts?
+    [Q-007] (scope_gap) How do members view their own current or past bookings?
+
+TASK-009  [Story]  Send booking confirmation
+  Parent: TASK-003
+  Description: Members receive a confirmation after successfully booking a class.
+  Acceptance Criteria:
+    - Members must receive a booking confirmation after they book.   <- "Members receive a booking confirmation after they book."
+  Source: S12: "Members receive a booking confirmation after they book."
+  Dependencies: TASK-005
+  Priority: high
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-004] (scope_gap) Through what channel do members receive a booking confirmation?
+
+TASK-010  [Epic]  Staff Reporting
+  Children: TASK-011, TASK-012
+  Description: Staff-facing features for viewing and printing lists of members booked into classes.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-011, TASK-012
+  Source: S11: "Staff can view the list of members booked into each class and print it."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-009] (missing) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+TASK-011  [Story]  View booked members list
+  Parent: TASK-010
+  Description: Staff need to view which members are booked into each class.
+  Acceptance Criteria:
+    - Staff must be able to view the list of members booked into each class.   <- "Staff can view the list of members booked into each class"
+  Source: S11: "Staff can view the list of members booked into each class"
+  Dependencies: TASK-002, TASK-005
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Ready
+  Open Questions: None
+
+TASK-012  [Story]  Print booked members list
+  Parent: TASK-010
+  Description: Staff need to print the list of members booked into each class.
+  Acceptance Criteria:
+    - Staff must be able to print the list of members booked into each class.   <- "and print it."
+  Source: S11: "and print it."
+  Dependencies: TASK-011
+  Priority: low
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Ready
+  Open Questions: None
+
+==============================================================================
+OPEN QUESTIONS BY CATEGORY (9)
+==============================================================================
+[missing] (1)
+  Q-009: Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+      linked tickets: TASK-001, TASK-003, TASK-010
+
+[scope_gap] (8)
+  Q-001: How do members find classes to book?
+      quote: "Members can book a class"
+      linked tickets: TASK-005
+  Q-002: What interaction is available to members when a class is full?
+      quote: "members see the message "Class full"."
+      linked tickets: TASK-006, TASK-007
+  Q-003: What happens if a member attempts to cancel a booking less than 2 hours before the class starts?
+      quote: "cancel a booking up to 2 hours before the class starts."
+      linked tickets: TASK-008
+  Q-004: Through what channel do members receive a booking confirmation?
+      quote: "Members receive a booking confirmation after they book."
+      linked tickets: TASK-009
+  Q-005: How do staff view the classes they have created?
+      quote: "Staff create classes"
+      linked tickets: TASK-002
+  Q-006: Can staff edit or delete classes after they have been created?
+      quote: "Staff create classes with a name, instructor, start time and capacity."
+      linked tickets: TASK-002
+  Q-007: How do members view their own current or past bookings?
+      quote: "Members can book a class"
+      linked tickets: TASK-005, TASK-008
+  Q-008: How is a member's membership number validated?
+      quote: "Members identify themselves with their membership number."
+      linked tickets: TASK-004
+
+General questions (not linked to a specific task, attached to every epic): Q-009
+
+==============================================================================
+REJECTED ITEMS (1)
+==============================================================================
+  [gaps] 'missing' question about a topic the brief states: {"id": "Q1", "category": "missing", "question": "How do front-desk staff identify themselves to the web application?", "quote": null, "quote_b": null, "related_fact_ids": ["F3", "F4", "F14"]}
+
+==============================================================================
+LINT WARNINGS (0)
+==============================================================================
+  None
+
+==============================================================================
+COUNTS
+==============================================================================
+  Facts: 21
+  Questions: 9 (missing: 1, scope_gap: 8)
+  Tickets: 12 (Ready: 2, Needs clarification: 10)
+  Rejected items: 1
+  Lint warnings: 0
+
+Wrote out/clear\tickets.json, out/clear\tickets_jira.csv, out/clear\run.log

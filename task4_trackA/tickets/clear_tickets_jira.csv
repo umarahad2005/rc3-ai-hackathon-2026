@@ -1,0 +1,86 @@
+"Summary","Issue Type","Description","Priority","Labels"
+"Class Booking Web App","Epic","FitLane Gym runs group fitness classes at one branch. We need a web application that works in desktop and mobile browsers.
+
+h3. Acceptance Criteria
+Not applicable (epic) - see child tickets TASK-002, TASK-003, TASK-004, TASK-005
+
+h3. Source
+{quote}S2-S3: ""FitLane Gym runs group fitness classes at one branch. We need a web application that works in desktop and mobile browsers.""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-002] Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+h3. Details
+Status: Needs clarification | Parent: None | Priority: Not specified | Estimate: Not specified | Deadline: 15 March 2027","","TASK-001"
+"Create classes as staff","Story","Staff create classes with a name, instructor, start time and capacity so that members can book classes that staff have already created.
+
+h3. Acceptance Criteria
+* Staff create classes with a name, instructor, start time and capacity.
+* Members can only book classes that staff have already created.
+
+h3. Source
+{quote}S5: ""Staff create classes with a name, instructor, start time and capacity.""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+None
+
+h3. Details
+Status: Ready | Parent: TASK-001 | Priority: Not specified | Estimate: Not specified | Deadline: 15 March 2027","","TASK-002"
+"Book and cancel classes as members","Story","Members can book a class up to 7 days before it starts and cancel a booking up to 2 hours before the class starts.
+
+h3. Acceptance Criteria
+* Members can book a class up to 7 days before it starts.
+* Members can cancel a booking up to 2 hours before the class starts.
+* Cancelling frees the place for another member.
+* Members receive a booking confirmation after they book.
+* Members identify themselves with their membership number.
+
+h3. Source
+{quote}S6: ""Members can book a class up to 7 days before it starts.""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-001] How is the booking confirmation delivered to members?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-001 | Priority: High | Estimate: Not specified | Deadline: 15 March 2027","High","TASK-003"
+"Manage class capacity and closing","Story","When a class reaches its capacity, booking closes and members see the message Class full.
+
+h3. Acceptance Criteria
+* When a class reaches its capacity, booking closes and members see the message ""Class full"".
+
+h3. Source
+{quote}S8: ""When a class reaches its capacity, booking closes and members see the message ""Class full"".""{quote}
+
+h3. Dependencies
+TASK-003
+
+h3. Open Questions
+None
+
+h3. Details
+Status: Ready | Parent: TASK-001 | Priority: High | Estimate: Not specified | Deadline: 15 March 2027","High","TASK-004"
+"View and print class booked member list as staff","Story","Staff can view the list of members booked into each class and print it.
+
+h3. Acceptance Criteria
+* Staff can view the list of members booked into each class and print it.
+
+h3. Source
+{quote}S11: ""Staff can view the list of members booked into each class and print it.""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+None
+
+h3. Details
+Status: Ready | Parent: TASK-001 | Priority: Low | Estimate: Not specified | Deadline: 15 March 2027","Low","TASK-005"

@@ -1,0 +1,2260 @@
+ ▐▛███▛█   Claude Code v2.1.318
+▝▜██████▀  Opus 5.5 · Claude Team
+ ▝▝   ▝▝   ~\Downloads\RC3_AI_HACK\task1
+
+
+❯ hi claude , use the claude in chrome if you find the data not in the repo as  
+  we have to perform this task , you taks is forst of all review whole repo and 
+  then suggest me how we start our work , i think first we do the task 2 and 3  
+  and then 1 and 4 , secondly , guide me indetials what we have to do           
+
+● I'll start by reviewing the repo.
+
+  Read 1 file, ran 3 shell commands (ctrl+o to expand)
+
+● The handbook is clear. Next I'll look at the notebooks, the scripts and the
+  data files.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● The full Task 2 corpus, docs.csv, isn't in the local folder, and some files
+  here are marked PRIVATE answer keys. I'm looking for docs.csv in your Google
+  Drive next, since the setup notebook saved it there.
+
+  Called plugin:claude-for-nonprofits:google-drive (ctrl+o to expand)
+
+● The Drive connector isn't authorised, so I'll check Drive through Chrome as
+  you suggested.
+
+  Called claude-in-chrome 5 times (ctrl+o to expand)
+
+● The organiser shared a folder with you, and it has a second handbook,
+  RC3_AI_Hackathon_2026.docx, that may be newer. I'll open the folder.
+
+  Called claude-in-chrome 2 times (ctrl+o to expand)
+
+● The Drive folder holds newer notebooks, Task 2.ipynb and Task_3.ipynb from
+  today at 10:43, which probably include the official timer cell. Next I'll
+  check lsh_task for docs.csv.
+
+  Called claude-in-chrome 2 times (ctrl+o to expand)
+
+● docs.csv (459 MB) is in the Drive lsh_task folder, so the data is complete.
+  Now I'll read the two new notebooks, since they define the timer cell you're
+  not allowed to edit.
+
+  Called claude-in-chrome 5 times (ctrl+o to expand)
+
+● The Drive copy of Task 2.ipynb matches your local Task 1.ipynb apart from the
+  name, and it has no timer cell. Next I'm checking whether
+  RC3_AI_Hackathon_2026.docx is a newer handbook.
+
+  Called claude-in-chrome 3 times (ctrl+o to expand)
+
+● It's a schedule, not a new handbook. I'll read it for deadlines.
+
+  Called claude-in-chrome (ctrl+o to expand)
+
+● The hackathon is today, 5 Nov 2026, from 8:00 AM to 5:00 PM, so time matters.
+  I'll read the detailed schedule for the submission cutoff.
+
+  Called claude-in-chrome (ctrl+o to expand)
+
+❯ check i add the doc.csv in the repo                                           
+
+  Called claude-in-chrome 2 times, ran 2 shell commands, wrote 1 memory (ctrl+o to expand)
+
+● Yes, docs.csv is in place at lsh_task/docs.csv. I loaded it the way the
+  handbook says: 112,571 rows with columns id,text, all ids unique (d000000 to
+  d112570). That matches the handbook, so all the data for Tasks 2 and 3 is
+  here.
+
+  What I found in the repo and your Drive
+
+  ┌──────────────────────────────┬──────────────────────────────────────────┐
+  │             Item             │                What it is                │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ RC3_AI_Hackathon.docx        │ The handbook with all 4 tasks. This is   │
+  │                              │ your spec.                               │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ lsh_task/                    │ Task 2 data: docs.csv, dev_docs.csv and  │
+  │                              │ dev_ground_truth.csv (341 true pairs)    │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │                              │ Task 3 data: transactions.txt (500,000   │
+  │ arm_task/                    │ baskets), the dev set (50,000 baskets),  │
+  │                              │ the dev answer keys and params.json      │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │                              │ Only the organiser's data-generation     │
+  │ Task 1.ipynb, Task_2.ipynb   │ notebooks, despite the names. They       │
+  │                              │ contain none of your work and no timer   │
+  │                              │ cell.                                    │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ build_dataset.py,            │ The organiser's scripts that generated   │
+  │ build_transactions.py        │ the data and answer keys                 │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ RC3_AI_Hackathon_2026.docx   │ The schedule: today, with the main round │
+  │ (Drive)                      │  from 10:00 AM to 2:00 PM. That is about │
+  │                              │  4 hours for all four tasks.             │
+  └──────────────────────────────┴──────────────────────────────────────────┘
+
+  ⚠️ Fix these before you start (they could cost you marks)
+
+  1. Some of these files are the private answer keys for the full data. The
+     handbook says "do not read any answer file", and breaking a rule can mean
+     zero for that part. Move these out of the project folder now:
+     - lsh_task/ground_truth_pairs.csv
+     - lsh_task/family_pairs_all.csv
+     - arm_task/frequent_itemsets.csv
+     - arm_task/rules.csv
+
+     I can move them for you if you want.
+  2. Don't copy from the build_*.py scripts. They contain the organiser's exact
+     solution methods, and the core method must be your own.
+  3. The "provided timer cell" isn't anywhere yet. It's not in the local
+     notebooks or in Drive. Ask the organisers for it. Until then, put the
+     full-data call in one final cell that you can swap for their timer.
+  4. Task 3 handbook wording: "n … (1,500 for the full dataset, 150 for the dev
+     set)" is really the minimum count. The real n is 500,000 and 50,000, and
+     ceil(0.003 × 500,000) = 1,500.
+
+  Order: 2 → 3 → 1 → 4
+
+  Your order works. Tasks 2 and 3 are algorithm work you can check against the
+  dev answer keys. Tasks 1 and 4 are marked mainly on your exported AI chat.
+  Suggested time budget:
+
+  ┌─────────────┬────────────────────────────────────────┬───────┐
+  │    Time     │                  Task                  │ Marks │
+  ├─────────────┼────────────────────────────────────────┼───────┤
+  │ 10:00–11:10 │ Task 2 (near-duplicate documents)      │ 20    │
+  ├─────────────┼────────────────────────────────────────┼───────┤
+  │ 11:10–12:00 │ Task 3 (association rules)             │ 20    │
+  ├─────────────┼────────────────────────────────────────┼───────┤
+  │ 12:00–12:45 │ Task 1 (brief → tickets)               │ 20    │
+  ├─────────────┼────────────────────────────────────────┼───────┤
+  │ 12:45–1:50  │ Task 4 (developer tool)                │ 40    │
+  ├─────────────┼────────────────────────────────────────┼───────┤
+  │ 1:50–2:00   │ Re-run notebooks, export chats, submit │       │
+  └─────────────┴────────────────────────────────────────┴───────┘
+
+  Task 4 is worth double. If time is tight, cut Task 1 down, not Task 4.
+
+  ---
+
+  Task 2: Near-duplicate detection (Colab, NumPy only, under 15 minutes)
+
+  Method: MinHash plus LSH banding, then an exact Jaccard check on every 
+  candidate pair. This gives the "probability a pair is examined" plot the
+  handbook asks for. The exact check means you report no false pairs.
+
+  1. Shingles: split with t.split() and build 5-word sequences. A document with
+     fewer than 5 words gets exactly one shingle: its whole word list. Hash each
+     shingle to a 64-bit integer and store each document as a sorted,
+     de-duplicated NumPy array. Keep case and punctuation exactly as they are.
+  2. MinHash signatures: use k = 100 hash functions of the form (a*x + b) mod p,
+     vectorised per document, giving one row of minimums per document.
+  3. LSH banding: use b = 20 bands of r = 5 rows. The chance a pair is examined
+     is 1 − (1 − J⁵)²⁰, which is about 0.9997 at J = 0.8 and about 0.5 at J =
+     0.5. Hash each band and group documents into buckets; pairs within a bucket
+     become candidates.
+  4. Size filter: if J ≥ 0.8, the smaller shingle set must be at least 0.8 × the
+     larger one. This removes many candidates cheaply.
+  5. Exact check: compute the true Jaccard with np.intersect1d, keep pairs with
+     J ≥ 0.8, and order each pair so id1 < id2.
+
+  Traps to handle:
+  - Shared boilerplate makes huge buckets. Cap the bucket size or handle large
+    buckets separately, and measure the effect.
+  - Groups of three identical documents must produce all 3 pairs.
+  - Very short documents are covered by the single-shingle rule above.
+
+  Deliverables:
+  - submission.csv with columns id1,id2.
+  - Dev results: precision, recall and F1, plus 3 missed and 3 wrong pairs with
+    their Jaccard values and why they went wrong.
+  - Scaling test at n = 5k, 10k, 20k, 40k and 80k, with a log-log plot and the
+    slope from np.polyfit.
+  - Brute force timed on 500 to 4,000 documents, on the same plot.
+  - Time spent in each stage at n = 40k.
+  - The S-curve plot with the 0.8 line, plus the measured dev behaviour.
+  - Written answers to the 5 complexity questions.
+
+  Task 3: Association rule mining (exact match required)
+
+  The data is easy for this kind of task: about 2,000 items, baskets of about 11
+  items on average, and itemsets up to size 9.
+
+  Method: Eclat-style search using bitsets. Each item gets a 500,000-bit vector
+  (about 62 KB). The count of an itemset is popcount(AND of its item vectors).
+
+  1. Read the transactions and count single items. Use min_count = 
+     ceil(3*n/1000) in integer arithmetic to avoid float errors.
+  2. Keep the frequent single items and build one bit vector per item with
+     np.packbits.
+  3. Search depth-first. Extend an itemset only with larger item ids so nothing
+     is generated twice. Intersect bitsets, count with np.bitwise_count (or a
+     lookup table), and prune anything below min_count. Record how many
+     candidates were examined and how many were frequent at each size, because
+     the handbook asks for that table.
+  4. Rules: for each frequent itemset I, try every non-empty proper subset A as
+     the antecedent. Every subset of a frequent itemset is frequent, so its
+     count is already known. Test confidence with integers, 5*count(I) >= 
+     3*count(A), to avoid float problems at exactly 0.6.
+  5. Output: items sorted ascending and joined with spaces; confidence written
+     as f"{c:.6f}". Check the exact rounding against dev_rules.csv.
+  6. Check against the dev keys: count missing, extra and wrong entries for
+     itemsets, counts, rules and confidences. The goal is all zeros.
+  7. Scaling: run 4 sizes (62.5k, 125k, 250k, 500k) and 3 or more support levels
+     (0.002, 0.003, 0.004, 0.005), with plots and the complexity of each stage.
+
+  Task 1: Client brief → Jira tickets (marked on your chat)
+
+  Start a new chat for this task and export it complete at the end. Plan the
+  stages first and paste that plan as your first message. The handbook
+  explicitly rewards this.
+
+  Tool: Python, the Anthropic API (key read from the ANTHROPIC_API_KEY
+  environment variable, never pasted anywhere), and either Streamlit or a
+  command-line interface.
+
+  Stages, one prompt each, each with a JSON output schema:
+  1. Extract: goals, features, users, constraints, integrations and deadlines,
+     each with an exact quote from the brief.
+  2. Code check: confirm in code that every quote really appears in the brief,
+     and drop or flag any that don't. This is strong proof that the tool never
+     assumes.
+  3. Gaps: missing information, vague words, contradictions (quote both sides),
+     undefined terms and scope gaps, each written as a client question.
+  4. Breakdown: epics and tasks with acceptance criteria and a source reference.
+  5. Tickets, made by code rather than the LLM: IDs like TASK-001, priority,
+     estimate and deadline set to "Not specified" unless stated, a "Needs
+     clarification" flag, and CSV and JSON export.
+
+  Demo: use one clear brief and one deliberately vague or contradictory brief.
+  In the chat, show yourself catching at least one invented detail and fixing
+  it.
+
+  Task 4: Pick Track B, the GitHub Repository Analyzer (40 marks)
+
+  I recommend Track B over Track A. Track A needs a live webhook endpoint, a
+  Jira account, tokens and real merges, and that is too risky to set up in about
+  an hour. Track B uses only the public GitHub API, with an optional
+  GITHUB_TOKEN.
+
+  Stages, one per prompt, testing each before moving on:
+  1. Parse the URL and handle errors: invalid URL, repository not found (404),
+     rate limit (403 with the reset time).
+  2. Tech stack: from the languages endpoint and the config files present, such
+     as package.json, requirements.txt or a Dockerfile, showing the evidence for
+     each.
+  3. File structure: from the git tree endpoint, top-level folders with file
+     counts and types.
+  4. Complexity score: use a defined formula, for example file count, lines of
+     code, nesting depth and the share of large files, and explain it in the
+     report.
+  5. Dependency health: parse the manifests and check them against the PyPI or
+     npm registry for outdated or unpinned versions. Say so clearly when no
+     manifest is found.
+  6. Activity chart: commits per week and top contributors, drawn in the
+     terminal with rich or simple bars.
+
+  Demo: full reports for two different public repositories, and "Track B" stated
+  at the top of the README.
+
+  ---
+
+  Next step: I'll start Task 2 with a task2_lsh.ipynb that loads the dev data,
+  builds shingles and MinHash, and measures dev precision and recall before
+  tuning b and r. Do you want me to move the four answer-key files out of the
+  folder first?
+
+✻ Brewed for 1m 35s · done 11:18 AM
+
+❯ ok great my frind is working on tnhe task 3 and i have to start work on task2 
+  tell me the use fo collab is good or the use fo kaggle is good their as they  
+  provide the py ocde for the data set , guide me the each step how i do as we  
+  have limited time and more tasks                                              
+
+● First, the platform question.
+
+  Use Google Colab, not Kaggle. The handbook requires Colab's free CPU runtime,
+  and the instructor re-runs every notebook on a fresh Colab CPU runtime; that
+  run is the timing that gets marked. Your data is also already in the shared
+  Drive folder. Kaggle only adds a risk: different paths, different CPU speed,
+  and a timing that doesn't match the marked run.
+
+  About teaming up on Task 3: the handbook says "Individual work… you may not
+  share code", but the schedule says teams of up to 2 members. Those conflict,
+  so ask an organiser which rule applies before you split tasks with your
+  friend.
+
+  Time is short, so I'll build the Task 2 pipeline now and test it on the dev
+  set and the full data on your machine. You will then paste it into Colab.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Write(~\Downloads\RC3_AI_HACK\task2\lsh_core.py)
+  ⎿  Wrote 151 lines to ~\Downloads\RC3_AI_HACK\task2\lsh_core.py
+       1 """Task 2 core: shingles -> MinHash -> LSH banding -> exact Jacc
+         ard verification.
+       2 
+       3 Only the standard library and NumPy are used.
+       4 """
+       5 import time
+       6 import numpy as np
+       7 
+       8 K_SHINGLE = 5
+       9 NUM_BANDS = 20      # b
+     … +142 lines (ctrl+o to expand)
+
+● Now a test on the dev set, scored against dev_ground_truth.csv:
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Precision 1.0 and recall 1.0 on the dev set, with all 341 pairs found and no
+  wrong ones. I'll fix the small overflow warning, then time a run on the full
+  112,571 documents.
+
+● Update(~\Downloads\RC3_AI_HACK\task2\lsh_core.py)
+  ⎿  Added 1 line, removed 1 line
+      55              h = np.unique(g[s: s + L - K_SHINGLE + 1])   # gram
+          s fully inside doc i
+      56          else:
+      57              # fewer than 5 words: one shingle = the whole word 
+          sequence
+      58 -            v = np.uint64(L) * short_salt                      
+      58 +            v = np.uint64((int(L) * 0x9E3779B97F4A7C15) & MASK6
+         +4)                                                             
+      59              for j in range(L):
+      60                  v ^= _rotl(tw[s + j: s + j + 1], (7 * j + 3) % 
+          64)[0]
+      61              h = np.array([v ^ short_salt], dtype=np.uint64)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The full corpus run took 111 seconds on your laptop and found 7,298 pairs;
+  Colab should take around 4 minutes. Next I'll build the full Colab notebook.
+
+  Ran 1 shell command (ctrl+o to expand)
+● Stop Task
+  ⎿  cd "C:/Users/umara/Downloads/RC3_AI_HACK/task2" && cat > /tmp/bf.py
+     2>/dev/null; python - <<'EOF'
+     import pandas as pd, time… · stopped
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Brute force scales quadratically, so 500 documents take about 2 seconds and
+  4,000 would exceed 2 minutes. I'll benchmark n = 500, 1,000, 2,000 and 3,000
+  instead, which the handbook allows, and then move to the notebook.
+
+● Write(~\Downloads\RC3_AI_HACK\task2\make_notebook.py)
+  ⎿  Wrote 268 lines to ~\Downloads\RC3_AI_HACK\task2\make_notebook.py
+       1 """Builds Task2_NearDuplicates.ipynb from lsh_core.py plus repor
+         t cells."""
+       2 import json, pathlib
+       3 
+       4 here = pathlib.Path(__file__).parent
+       5 core = (here / "lsh_core.py").read_text(encoding="utf-8")
+       6 cells = []
+       7 
+       8 
+       9 def md(s):
+     … +259 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Next I'll smoke-test the notebook cells locally on the dev set (the scaling
+  run is shortened for speed):
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Every cell runs cleanly: dev-set scores are all 1.0000, the scaling slope is
+  about 1.05 (linear, versus roughly 2.10 for brute force, which would take
+  about 67 hours), and the S-curve matches theory. I'm swapping out a "≈"
+  character the Windows console can't print.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Use Colab. The handbook requires it, and the marked timing comes from the
+  instructor's Colab re-run, so Kaggle only adds risk.
+
+  The Task 2 notebook is built and tested locally:
+  C:\Users\umara\Downloads\RC3_AI_HACK\task2\Task2_NearDuplicates.ipynb. It
+  contains all five deliverables, and every cell ran on your laptop except the
+  final full run. I ran that stage separately: the method took 111 seconds and
+  found 7,298 pairs.
+
+  What it does (MinHash + LSH + exact check)
+
+  1. Shingles: each run of 5 words becomes a 64-bit number. A document with
+     fewer than 5 words gets one shingle for the whole text.
+  2. MinHash: 100 hash functions give each document a short signature.
+  3. LSH bands: 20 bands of 5 values. Two documents that match on any whole band
+     become a candidate pair.
+  4. Exact check: the true Jaccard is computed for every candidate pair, so the
+     method never reports a false pair.
+
+  Measured results:
+
+  ┌───────────┬─────────────────────────────────────────────────────────────┐
+  │   Check   │                           Result                            │
+  ├───────────┼─────────────────────────────────────────────────────────────┤
+  │ Dev set   │ All 341 true pairs found, none missed, none wrong:          │
+  │           │ precision, recall and F1 are all 1.0                        │
+  ├───────────┼─────────────────────────────────────────────────────────────┤
+  │ Full      │ 111 seconds on your laptop (expect about 3–5 minutes on     │
+  │ corpus    │ Colab; the limit is 15)                                     │
+  ├───────────┼─────────────────────────────────────────────────────────────┤
+  │           │ Runtime grows roughly linearly with the number of           │
+  │ Scaling   │ documents; brute force grows quadratically and would take   │
+  │           │ about 67 hours on the full corpus                           │
+  ├───────────┼─────────────────────────────────────────────────────────────┤
+  │ Slowest   │ Shingling and MinHash; finding candidates and checking them │
+  │ stages    │  take under 2 seconds                                       │
+  └───────────┴─────────────────────────────────────────────────────────────┘
+
+  Steps in Colab (about 20 minutes)
+
+  1. Add the shared folder to your Drive. In Drive, open Shared with me,
+     right-click RC3 AI Hackathon, then Organize → Add shortcut → My Drive. The
+     notebook expects /content/drive/MyDrive/RC3 AI Hackathon/lsh_task.
+  2. Upload the notebook. Go to colab.research.google.com, choose File → Upload 
+     notebook, and pick Task2_NearDuplicates.ipynb.
+  3. Set the runtime to CPU. Runtime → Change runtime type → CPU, with no GPU or
+     high-RAM option.
+  4. Run everything. Runtime → Restart session and run all, then approve the
+     Drive access popup. The full run takes about 15–20 minutes on Colab, mostly
+     the scaling and brute-force experiments.
+  5. Replace the last cell with the official timer cell. Ask the organisers for
+     it, because it isn't in any file. It should call find_similar_pairs(ids, 
+     texts, 0.8) on the full data.
+  6. Fill in section 6 (written analysis). Put in your Colab numbers: the slope,
+     the per-stage times at n = 40,000, and the brute-force crossover. Use only
+     numbers you actually get on Colab, never my laptop numbers.
+  7. Download the outputs. Get submission.csv from the Colab file panel, and
+     save the notebook with all outputs visible (File → Download .ipynb).
+
+  Questions a judge might ask
+
+  - Why b = 20 and r = 5? A pair at J = 0.8 is checked with 99.96% probability.
+    A pair at J = 0.3 is checked only about 5% of the time, so few wasted
+    comparisons.
+  - How is shared boilerplate handled? Unrelated articles with the same header
+    rarely match on a whole band, because all 5 values must agree. The few that
+    do are dropped by the exact check. The largest bucket on the full corpus
+    held only 68 documents.
+  - Why are there no wrong pairs? Every candidate's exact Jaccard is computed
+    before it is reported. The dev near-misses at 0.7992 and 0.7990 were
+    correctly rejected.
+
+  Two cautions:
+  - Explain the method in your own words. Tasks 2 and 3 are marked on "a
+    well-chosen method of your own", so make sure you can explain each step when
+    you present.
+  - Don't cite the 7,298 figure as proof. It equals the full-corpus pair count
+    in the organiser's stats.json, but report only your dev-set scores as
+    evidence of correctness.
+
+  The Task 2 working files (lsh_core.py, the test scripts, make_notebook.py) are
+  in the same task2 folder. Want me to start Task 1 next?
+
+✻ Cooked for 8m 59s · done 11:32 AM
+
+※ recap: We're finishing the RC3 hackathon, and Task 2 is built and gets perfect dev-set scores. Next, upload task2/Task2_NearDuplicates.ipynb to Colab, set the runtime to CPU, choose Restart session and run all, then fill in the analysis with your Colab timings. (disable recaps in /config)
+
+❯ [Image #1] see on the colab the are fetching the data from drive , now tell   
+  me what is actully we have to do on this task explain me in detial , and then 
+  tell me how we perfrom this task as we have to us ecolab and only use the     
+  data provied by the orgnizers                                                 
+  ⎿  [Image #1]
+
+● First: stop that cell now
+
+  What's running in your screenshot is the organiser's data generator, not the
+  task. That cell downloads about 100,000 Wikipedia articles, builds the dataset
+  from scratch and writes it to MyDrive/RC3 AI Hackathon/lsh_task. Click the ■
+  stop button on the cell, or use Runtime → Interrupt execution. Reasons:
+
+  1. You don't need it. The organisers already ran it, and the finished data is
+     in the shared folder: docs.csv, dev_docs.csv and dev_ground_truth.csv. The
+     handbook says "the notebook already has the data available."
+  2. It could create a second, different copy of the data, or try to write into
+     the organiser's folder. You must use the organiser's files, not a
+     regenerated copy.
+  3. It also writes the private answer keys (ground_truth_pairs.csv,
+     family_pairs_all.csv). You must never read or use these.
+  4. It wastes 10–15 minutes of your time.
+
+  The "Cannot save changes" label at the top means this is the organiser's
+  notebook, opened read-only. Close it; your own notebook is separate.
+
+  ---
+
+  What Task 2 actually asks
+
+  The problem: you have 112,571 text documents, mostly Wikipedia articles. Some
+  are copies of others: exact copies, lightly edited copies, copies with
+  sentences removed or reordered. You must find every pair of documents that are
+  at least 80% similar.
+
+  How "similar" is defined (this is fixed by the handbook):
+
+  1. Shingles: split the text on spaces and take every run of 5 consecutive
+     words.
+     - Example text: the cat sat on the mat today
+     - Shingles: the cat sat on the, cat sat on the mat, sat on the mat today
+     - A document with fewer than 5 words gets exactly one shingle: its whole
+       text.
+     - Upper/lower case and punctuation are kept exactly as written.
+  2. Jaccard similarity: J = (shingles the two documents share) ÷ (all distinct
+     shingles in either document).
+     - J = 1.0 means identical; J = 0 means nothing in common.
+  3. Output: every pair with J ≥ 0.8, written as (id1, id2) with id1 < id2.
+
+  Why it's hard: checking every pair means about 6.3 billion comparisons, which
+  would take days (my measurement: roughly 67 hours). It must finish in under 15
+  minutes on Colab's free CPU, using only NumPy, SciPy, pandas and matplotlib.
+
+  The traps built into the data:
+  - Shared boilerplate: thousands of unrelated articles share the same header
+    and footer. They look similar but are not duplicates.
+  - Pairs just below 0.8, such as 0.799. These must not be reported.
+  - Groups of 3 identical documents, which give 3 pairs.
+  - Very short documents (fewer than 5 words).
+
+  How you're marked (20 marks): precision and recall on the hidden answer key
+  must both be ≥ 0.9, plus the quality of your reports.
+
+  What you submit:
+  1. The notebook, with find_similar_pairs run on the full data and its runtime
+     shown.
+  2. submission.csv, with columns id1,id2.
+  3. A dev-set report: precision, recall and F1, plus examples of missed or
+     wrong pairs.
+  4. Complexity: timings at n = 5k, 10k, 20k, 40k and 80k, a log-log plot with
+     its slope, a brute-force comparison on small sizes, and written answers.
+  5. Parameter justification: the S-curve plot of "probability a pair is checked
+     vs. true J", with the 0.8 line marked.
+
+  All five are already in the notebook I built:
+  C:\Users\umara\Downloads\RC3_AI_HACK\task2\Task2_NearDuplicates.ipynb.
+
+  ---
+
+  Steps in Colab
+
+  Step 1: make the shared data visible to Colab (1 minute).
+  - Open drive.google.com and go to Shared with me.
+  - Right-click RC3 AI Hackathon → Organize → Add shortcut → choose My Drive →
+    Add.
+  - This only adds a link; it doesn't copy anything. Colab can then reach the
+    files at /content/drive/MyDrive/RC3 AI Hackathon/lsh_task/.
+
+  Step 2: open my notebook in Colab.
+  - In Colab, choose File → Upload notebook and pick Task2_NearDuplicates.ipynb
+    from the task2 folder.
+
+  Step 3: set the runtime to CPU.
+  - Runtime → Change runtime type → CPU, then Save. No GPU or TPU.
+
+  Step 4: run everything.
+  - Runtime → Run all, then approve the Google Drive permission popup.
+  - The first cell should print (112571, 2) (5059, 2) (341, 3). That confirms
+    you're reading the organiser's three files.
+  - If you get "file not found", Step 1 didn't work. Check the folder name in
+    the left Files panel under drive/MyDrive/ and adjust DATA_DIR to match.
+
+  Step 5: check the outputs as they appear (about 15–20 minutes in total).
+
+  ┌────────────────┬────────────────────────────────────────────────────────┐
+  │    Section     │                  What you should see                   │
+  ├────────────────┼────────────────────────────────────────────────────────┤
+  │ 3. Dev         │ precision, recall and F1 = 1.0000; 0 missed, 0 wrong   │
+  │ correctness    │                                                        │
+  ├────────────────┼────────────────────────────────────────────────────────┤
+  │ Near-misses    │ pairs at about 0.799 correctly rejected, which shows   │
+  │ table          │ the method handles the threshold trap                  │
+  ├────────────────┼────────────────────────────────────────────────────────┤
+  │ 4. S-curve     │ black dots (measured) sitting on the blue curve        │
+  │ plot           │ (theory)                                               │
+  ├────────────────┼────────────────────────────────────────────────────────┤
+  │ 5. Scaling     │ slope about 1.0 for this method, about 2.0 for brute   │
+  │                │ force                                                  │
+  ├────────────────┼────────────────────────────────────────────────────────┤
+  │ 7. Full run    │ runtime in seconds (expected 3–5 minutes) and          │
+  │                │ submission.csv written                                 │
+  └────────────────┴────────────────────────────────────────────────────────┘
+
+  Step 6: finish the report.
+  - Write your Colab numbers into section 6 (written analysis): the slope, the
+    stage times at n = 40,000 and the brute-force estimate. Use only numbers
+    from your Colab run.
+  - Ask an organiser for the official timer cell and paste it as the last cell.
+  - Do a final Runtime → Restart session and run all, then File → Download 
+    .ipynb.
+  - Download submission.csv from the 📁 Files panel on the left.
+
+  Once Step 4 is running, send me a screenshot if anything errors and I'll fix
+  it.
+
+✻ Churned for 25s · done 11:38 AM
+
+❯ now  while runing the cell on colab , explain me , what is the problen , how  
+  we solve them , what techinical solution , model and toher stuff we are using 
+  , and on last explain me each cell with detials code base viva and            
+  conceptual base both                                                          
+
+● Here is the full explanation while your cells run, in three parts: the
+  problem, the solution, and a walkthrough of every cell with likely viva
+  questions.
+
+  ---
+
+  Part 1: The problem
+
+  Input: 112,571 documents, each with an id and a text.
+  Output: every pair of documents whose Jaccard similarity is ≥ 0.8.
+
+  What "similar" means here
+
+  1. Shingling. A document is turned into a set of 5-word phrases (word
+     5-grams).
+     - "the cat sat on the mat" gives {"the cat sat on the", "cat sat on the 
+       mat"}.
+     - A document with fewer than 5 words has one shingle: its whole text.
+     - Case and punctuation are kept as written, so "The" and "the" are
+       different words.
+  2. Jaccard similarity.
+     - J(A,B) = |A ∩ B| / |A ∪ B|, that is, shared shingles divided by all
+       distinct shingles.
+     - Example: A has 100 shingles and B has 100 shingles; they share 90.
+     - J = 90 / (100 + 100 − 90) = 90 / 110 = 0.818, so this pair is a
+       near-duplicate.
+
+  Why it's hard
+
+  - Too many pairs to check. Comparing every pair means n(n−1)/2 ≈ 6.3 billion
+    comparisons. Each one is a set intersection of about 600 shingles. My
+    measurement puts this at about 67 hours, and the limit is 15 minutes.
+  - Libraries are restricted. Only NumPy, SciPy, pandas and matplotlib are
+    allowed; no datasketch, faiss or sklearn.
+  - The data contains deliberate traps: shared boilerplate, pairs just below
+    0.8, triple duplicates and very short documents.
+
+  ---
+
+  Part 2: The solution
+
+  There is no ML model
+
+  This is not machine learning. Nothing is trained and no neural network is
+  involved. It is a randomised hashing algorithm called MinHash with 
+  Locality-Sensitive Hashing (LSH), followed by an exact check. In the viva,
+  call it an algorithm or method, not a model.
+
+  The core idea
+
+  Brute force asks, for every pair, "how similar are they?" That is O(n²).
+
+  LSH turns this around: give each document a few short fingerprints, chosen so
+  that similar documents very probably share a fingerprint and dissimilar ones
+  almost never do. Then you only compare documents that share a fingerprint.
+  That is roughly O(n).
+
+  Pipeline (4 stages)
+
+  texts ──► [1] Shingling ──► [2] MinHash ──► [3] LSH banding ──► [4] Exact 
+  verify ──► pairs
+            words → 64-bit     100 numbers     20 bands × 5 rows    true Jaccard
+  ≥ 0.8
+            hashes per doc     per doc         → candidate pairs
+
+  Stage 1: Shingling and hashing.
+  - Each 5-word shingle becomes one 64-bit integer.
+  - Integers are much faster to compare than strings and use less memory.
+  - Each document becomes a sorted, unique NumPy array of these integers, which
+    is its shingle set.
+
+  Stage 2: MinHash. This is the key mathematical fact.
+  - Take a random hash function h and apply it to every shingle of a document.
+    Keep the minimum value.
+  - For two documents A and B: P[min h(A) = min h(B)] = J(A,B).
+  - Why: consider all shingles in A ∪ B. The one with the smallest hash is
+    equally likely to be any of them. The two minimums are equal only if that
+    smallest shingle lies in A ∩ B. The probability of that is |A∩B| / |A∪B| =
+    J.
+  - With 100 different hash functions, each document gets a signature of 100
+    numbers. The fraction of positions where two signatures agree estimates J.
+  - Each document is now 100 numbers instead of hundreds or thousands of
+    shingles.
+
+  Stage 3: LSH banding.
+  - Split the 100 numbers into b = 20 bands of r = 5 numbers each.
+  - Within each band, documents whose 5 numbers are all identical go into the
+    same bucket. Any two documents in the same bucket become a candidate pair.
+  - For a pair with similarity J:
+    - P(one band matches fully) = J⁵
+    - P(no band matches) = (1 − J⁵)²⁰
+    - P(examined) = 1 − (1 − J⁵)²⁰. This is the S-curve.
+
+  ┌───────┬─────────────┬───────────────────────────────────────────────────┐
+  │ True  │ P(examined) │                      Meaning                      │
+  │   J   │             │                                                   │
+  ├───────┼─────────────┼───────────────────────────────────────────────────┤
+  │ 0.3   │ 0.047       │ unrelated pairs are almost never checked          │
+  ├───────┼─────────────┼───────────────────────────────────────────────────┤
+  │ 0.5   │ 0.47        │                                                   │
+  ├───────┼─────────────┼───────────────────────────────────────────────────┤
+  │ 0.7   │ 0.975       │                                                   │
+  ├───────┼─────────────┼───────────────────────────────────────────────────┤
+  │ 0.8   │ 0.9996      │ true pairs are almost never missed (a 0.04% miss  │
+  │       │             │ chance)                                           │
+  └───────┴─────────────┴───────────────────────────────────────────────────┘
+
+  - The steep part of the curve sits at about (1/b)^(1/r) = (1/20)^(1/5) ≈ 0.55.
+    That is safely below 0.8, which favours recall.
+
+  Stage 4: Exact verification.
+  - Size filter. For every candidate pair, check min(|A|,|B|) / max(|A|,|B|). If
+    that ratio is below 0.8, skip the pair: J can never exceed that ratio,
+    because the intersection is at most the smaller set and the union is at
+    least the larger set.
+  - Exact Jaccard. For the rest, compute the true Jaccard on the shingle arrays
+    and keep pairs with J ≥ 0.8.
+  - Why precision is perfect. Stage 4 means no false pairs are reported; recall
+    is the only thing that depends on probability.
+
+  How each trap is handled
+
+  Trap: Shared boilerplate
+  How it's handled: Unrelated articles sharing a header have J ≈ 0.2–0.4, so
+    P(examined) is only about 1–10%. The few that slip through are rejected
+    exactly. The largest bucket on the full corpus held only 68 documents, so
+    there is no blow-up.
+  ────────────────────────────────────────
+  Trap: Pairs just below 0.8
+  How it's handled: They do become candidates, but the exact check rejects them.
+
+    The dev run showed 0.7992 and 0.7990 rejected.
+  ────────────────────────────────────────
+  Trap: Triple duplicates
+  How it's handled: All three land in the same bucket, so all 3 pairs are
+    generated.
+  ────────────────────────────────────────
+  Trap: Short documents
+  How it's handled: Special case: one shingle for the whole word sequence, so
+    identical short texts match and different ones don't.
+  ────────────────────────────────────────
+  Trap: Hash collisions
+  How it's handled: 64-bit hashes give a collision chance of about 2⁻⁶⁴ per
+  pair,
+    which is negligible.
+
+  Technology used
+
+  - Python + NumPy: almost all the heavy work is vectorised NumPy over arrays of
+    about 75 million integers, with no Python loop per shingle.
+  - pandas: reading the CSV files and writing submission.csv.
+  - matplotlib: the S-curve and log-log plots.
+  - Python's dict: mapping each word to an integer id.
+  - No forbidden libraries.
+
+  ---
+
+  Part 3: Cell by cell
+
+  Cell 1 (Markdown): Plan
+
+  States the goal, the 4 stages and the libraries. This earns the "problem
+  understanding and planning" marks (15%).
+
+  Cell 2: Setup and data loading
+
+  drive.mount('/content/drive')
+  DATA_DIR = ".../RC3 AI Hackathon/lsh_task"
+  docs = pd.read_csv(f"{DATA_DIR}/docs.csv", dtype=str, keep_default_na=False)
+  - Mounts Google Drive and reads the organiser's 3 files.
+  - dtype=str: ids such as d000123 stay strings, so leading zeros and string
+    ordering stay correct.
+  - keep_default_na=False: without this, pandas turns texts like "NA", "null" or
+    "" into NaN. Those short documents would be lost or crash .split().
+  - Viva — "Why these two options?" So very short texts and ids are read exactly
+    as written. The handbook requires it.
+
+  Cell 3: Core method (the most important cell)
+
+  _rotl(x, k): 64-bit rotate-left
+
+  (x << k) | (x >> (64-k)) shifts the bits left and wraps the overflow around to
+  the right. It is used to make word position matter in a shingle hash.
+
+  build_shingles(texts), step by step
+
+  1. Word to id:
+  ids = [vocab.setdefault(w, len(vocab)) for w in t.split()]
+     Each distinct word gets a number: the first new word is 0, the next is 1,
+     and so on. This is the only Python loop over words, and it is the slowest
+     stage.
+  2. Random value per word:
+  table = rng.integers(0, 2**63, ...)*2 + 1
+     Each word id gets a random odd 64-bit number. tw = table[allw] then holds
+     one random number per word position in the whole corpus.
+  3. 5-gram hash, vectorised:
+  g = tw[i] ^ rotl(tw[i+1],13) ^ rotl(tw[i+2],26) ^ rotl(tw[i+3],39) ^
+  rotl(tw[i+4],52)
+     - This is computed for every window at once over the concatenated corpus.
+     - Why rotate? Without rotation, XOR ignores order, so "a b c d e" and "e d
+       c b a" would get the same hash. The rotation amount depends on the
+       position, so order matters.
+     - Why XOR of random values? This is tabulation hashing: fast, and well
+       spread out.
+  4. Document boundaries:
+  g[s : s+L-4]
+     Only windows that start and end inside document i are taken. Windows
+     crossing into the next document are skipped.
+  5. np.unique: sorts and removes duplicates. This turns a list into a
+     mathematical set, which matters because Jaccard is defined on sets. A
+     phrase repeated twice counts once.
+  6. Short documents (fewer than 5 words): one hash computed from all the words
+     plus the length. This follows the rule "exactly one shingle: the whole word
+     sequence".
+  7. Output:
+     - H: all documents' hash arrays joined into one array (about 75 million
+       values on the full data).
+     - offsets: document i owns H[offsets[i]:offsets[i+1]].
+     - This layout is called CSR. It is the same compressed-row format scipy
+       uses for sparse matrices. One big array with offsets is much faster than
+       112,000 separate Python lists.
+
+  minhash(H, offsets, k=100)
+
+  v = H * a[j] + b[j]                            # random hash function j, 
+  applied to ALL shingles at once
+  sig[:, j] = np.minimum.reduceat(v, starts)     # minimum per document segment
+  - Hash family: a·x + b mod 2⁶⁴. The mod 2⁶⁴ happens for free because uint64
+    arithmetic wraps on overflow. a is odd, so the mapping is a permutation of
+    all 64-bit values.
+  - np.minimum.reduceat: computes the minimum of each document's segment in one
+    C-level call. There is no Python loop over documents.
+  - Repeated k = 100 times. Output: a 112,571 × 100 signature matrix of about 90
+    MB.
+
+  lsh_candidates(sig, bands=20, rows=5)
+
+  1. Bucket key:
+  key = (block * mult).sum(axis=1)
+     Combines a band's 5 values into one 64-bit key. Two documents get the same
+     key exactly when all 5 values match (ignoring negligible collisions).
+  2. Group equal keys:
+  order = np.argsort(key)
+  brk = np.flatnonzero(np.diff(ks)) + 1
+     After sorting, equal keys sit next to each other, so each bucket is a
+     contiguous run. np.diff finds where the key changes, which marks the bucket
+     boundaries.
+  3. Make pairs:
+  np.triu_indices(size, 1)
+     For buckets with 2 or more documents, this generates all pairs within the
+     bucket. Buckets are processed in groups of the same size so the step is
+     vectorised.
+  4. Remove duplicates across bands:
+  code = i*n + j
+     Each pair is encoded as one integer, and np.unique removes duplicates. The
+     same pair may match in several bands but is checked only once.
+  5. Also returned: biggest, the largest bucket. This is evidence for the
+     boilerplate question.
+
+  verify(pairs, H, offsets, 0.8)
+
+  1. Size filter, vectorised over all candidates:
+  ok = min(si,sj) >= 0.8 * max(si,sj)
+  2. Exact Jaccard on the remaining pairs:
+  inter = len(np.intersect1d(a, b, assume_unique=True))
+  jac = inter / (len(a) + len(b) - inter)
+     This uses |A∪B| = |A| + |B| − |A∩B|. assume_unique=True skips
+     re-deduplication because the arrays are already unique.
+
+  find_similar_pairs(ids, texts, threshold)
+
+  - This is the function the handbook requires.
+  - It runs the 4 stages, times each one, and turns row numbers back into ids
+    ordered as (smaller, larger).
+  - It returns a set, so there are no duplicates.
+
+  Cell 4: Reference exact Jaccard and brute force
+
+  - shingle_set and exact_jaccard: a deliberately simple implementation using
+    real strings (' '.join(w[i:i+5])), straight from the definition, with no
+    hashing.
+  - Why have it? It is an independent checker. If my hashing had a bug, the two
+    would disagree. This earns marks for "testing, review and robustness".
+  - brute_force_pairs: a double loop over every pair, O(n²). Used only on small
+    n for the complexity comparison.
+  - Sanity prints:
+    - identical texts give 1.0
+    - "a b c" vs "a b c d" gives 0.0, because both are short documents with one
+      different shingle each
+    - empty vs empty gives 1.0
+
+  Cell 5: Dev-set correctness
+
+  - Runs the method on the 5,059 dev documents and compares the result with the
+    341 true pairs.
+  - Precision = TP / found, the share of what I reported that is correct.
+  - Recall = TP / true, the share of true pairs I found.
+  - F1 = their harmonic mean.
+  - Result: all three are 1.0; 0 missed, 0 wrong.
+  - Missed and wrong pairs would be listed with their exact Jaccard, as the
+    handbook requires.
+
+  Cell 6: Near-miss analysis
+
+  - Lists candidate pairs that LSH examined but exact verification rejected.
+  - Top results: 0.7992, 0.7990, 0.7986. These are the planted "just below
+    threshold" traps.
+  - What it proves: 222 of 563 candidates were false alarms, and all were
+    removed. Without Stage 4, precision would be about 0.6.
+
+  Cell 7: S-curve plot (parameter justification)
+
+  - Theory: curves of 1 − (1 − Jʳ)ᵇ for three (b, r) choices, with the 0.8 line
+    marked.
+  - Measured: to observe the behaviour on real data, I need pairs at every J
+    level.
+    - I collect them with a very loose LSH (b=50, r=2, which catches almost
+      everything above J ≈ 0.2).
+    - I compute their exact J and check whether my chosen (20, 5) scheme
+      examined them.
+    - The fraction examined per J bin gives the black dots.
+  - Result: the dots follow the theory curve, about 0.5 at J ≈ 0.5 and 1.0 above
+    0.72. The theory is confirmed on real data.
+
+  Cell 8 (Markdown): Parameter table
+
+  - k = 100: cost is linear in k, and 100 gives a sharp enough curve.
+  - b = 20, r = 5: 99.96% recall at 0.8, while few low-J pairs are examined.
+  - Alternatives: 25/4 and 16/6 also scored 1.0 on dev. 20/5 is the middle
+    ground between missed pairs (16/6) and extra candidates (25/4).
+
+  Cell 9: Scaling experiment
+
+  - Times the full method on the first 5k, 10k, 20k, 40k and 80k documents, 2
+    runs each, reporting the median.
+  - Also saves the time per stage at n = 40,000. That answers "which stage is
+    the bottleneck?"
+
+  Cell 10: Brute force
+
+  - Times brute force on 500, 1,000, 2,000 and 3,000 documents.
+  - Also checks that my method returns exactly the same pairs, which is another
+    independent correctness check.
+
+  Cell 11: Log-log plot and slope
+
+  - np.polyfit(log n, log t, 1) fits a straight line; its slope is the growth 
+    exponent.
+  - Why log-log? If t = c·nᵖ, then log t = log c + p·log n, which is a straight
+    line with slope p.
+  - Measured on my laptop: this method about 1.05 (linear), brute force about
+    2.10 (quadratic).
+  - Extrapolation: brute force would need about 67 hours at the full size, and
+    passes 15 minutes somewhere around n ≈ 6,000–7,000. Read the exact value
+    from the cell's output.
+
+  Cell 12 (Markdown): Written analysis
+
+  Answers the handbook's 5 questions:
+  1. Per-stage complexity:
+     - shingling: O(nL log L)
+     - MinHash: O(k·nL)
+     - LSH: O(b·n log n + C)
+     - verification: O(C·L)
+  2. Bottleneck: shingling and MinHash take about 99% of the time.
+  3. Slope vs theory: about 1 for both.
+  4. Boilerplate: P ≈ J⁵ keeps such pairs out; the largest bucket is 68.
+  5. Brute force: O(n²L).
+
+  Replace my laptop numbers with your Colab numbers.
+
+  Cell 13: Full run and submission
+
+  - Runs on all 112,571 documents and records the runtime.
+  - Writes submission.csv after checking with assertions that id1 < id2 and that
+    there are no duplicate rows.
+  - Swap in the organiser's timer cell here.
+
+  ---
+
+  Quick viva questions
+
+  ┌───────────────────────┬─────────────────────────────────────────────────┐
+  │       Question        │                     Answer                      │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │ Why not compare all   │ 6.3 billion pairs at O(L) each would take about │
+  │ pairs?                │  67 hours. The limit is 15 minutes.             │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │ What does MinHash     │ Jaccard similarity: the probability that two    │
+  │ estimate?             │ minimums are equal is exactly J.                │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │ Why bands instead of  │ Comparing signatures is still O(n²). Bands give │
+  │ comparing signatures  │  hash buckets, so only colliding pairs are      │
+  │ directly?             │ compared.                                       │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │ Where is the S-curve  │ About (1/b)^(1/r) = (1/20)^(1/5) ≈ 0.55. I set  │
+  │ threshold?            │ it below 0.8 on purpose so true pairs aren't    │
+  │                       │ missed.                                         │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │ Can the method report │ Practically no. Every candidate is checked      │
+  │  a wrong pair?        │ exactly; only a 64-bit hash collision (about    │
+  │                       │ 2⁻⁶⁴) could cause an error.                     │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │ Can it miss a pair?   │ Yes, with probability (1 − 0.8⁵)²⁰ ≈ 0.04% at J │
+  │                       │  = 0.8, and less for higher J.                  │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │                       │ Its string hashing is randomised per process    │
+  │ Why not Python's      │ (PYTHONHASHSEED), so results wouldn't be        │
+  │ built-in hash()?      │ reproducible. I use a seeded NumPy random       │
+  │                       │ generator.                                      │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │                       │ About 0.6 GB for H, plus a 0.6 GB temporary     │
+  │ Peak memory?          │ during MinHash and about 90 MB for signatures.  │
+  │                       │ Well under 12 GB.                               │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │                       │ Unrelated articles share a header, but J stays  │
+  │ What happens with     │ low (about 0.2–0.4), so P(examined) is only     │
+  │ boilerplate?          │ about 1–10%. Bucket sizes stay small (maximum   │
+  │                       │ 68).                                            │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │ What does the         │ About 1 means time doubles when n doubles       │
+  │ measured slope mean?  │ (linear). Brute force is about 2: doubling n    │
+  │                       │ gives 4× the time.                              │
+  ├───────────────────────┼─────────────────────────────────────────────────┤
+  │                       │ Python loops run at about 10⁷ operations per    │
+  │ Why vectorise with    │ second, NumPy at about 10⁹. Numba and Cython    │
+  │ NumPy?                │ are banned, so NumPy is the only way to get C   │
+  │                       │ speed.                                          │
+  └───────────────────────┴─────────────────────────────────────────────────┘
+
+  If a Colab cell shows an error or a different number from what I've described,
+  paste it here and I'll explain it.
+
+✻ Cogitated for 1m 15s · done 11:47 AM
+
+※ recap: We're working through the four RC3 hackathon tasks, and Task 2's notebook is built and scored perfectly on the dev set. Next, upload it to Colab with a CPU runtime and click Run all once your Drive shortcut is in place. (disable recaps in /config)
+
+❯ check i add the new inpyb file is the are fine ?                              
+
+  Ran 3 shell commands (ctrl+o to expand)
+
+● The notebook runs cleanly on Colab, so only the written analysis cell is left;
+  I'll fill it in with your Colab numbers in a copy with a clean filename.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Yes, the notebook is fine. Every cell ran on Colab with no errors, and all the
+  results are on target:
+
+  ┌──────────────────┬───────────────────────────────────┬─────────────────┐
+  │      Check       │           Colab result            │     Target      │
+  ├──────────────────┼───────────────────────────────────┼─────────────────┤
+  │                  │                                   │ ✅ the          │
+  │ Data loaded      │ (112571, 2), (5059, 2), (341, 3)  │ organiser's     │
+  │                  │                                   │ files           │
+  ├──────────────────┼───────────────────────────────────┼─────────────────┤
+  │ Dev precision,   │ 1.0000, 1.0000, 1.0000 (0 missed, │ ≥ 0.9 ✅        │
+  │ recall, F1       │  0 wrong)                         │                 │
+  ├──────────────────┼───────────────────────────────────┼─────────────────┤
+  │ Full-corpus      │ 101.7 s, 7,298 pairs              │ < 15 min ✅     │
+  │ runtime          │                                   │                 │
+  ├──────────────────┼───────────────────────────────────┼─────────────────┤
+  │ Slope of your    │ 1.040 (linear)                    │ about 1 ✅      │
+  │ method           │                                   │                 │
+  ├──────────────────┼───────────────────────────────────┼─────────────────┤
+  │ Brute-force      │ 2.014 (quadratic); 38.7 hours at  │                 │
+  │ slope            │ full size; reaches 15 min at n ≈  │ ✅              │
+  │                  │ 9,200                             │                 │
+  ├──────────────────┼───────────────────────────────────┼─────────────────┤
+  │ Brute force vs   │ same pairs at every size tested   │ ✅              │
+  │ your method      │ (500–3,000)                       │                 │
+  ├──────────────────┼───────────────────────────────────┼─────────────────┤
+  │ Slowest stage at │ shingling 22.9 s (65%), MinHash   │ ✅              │
+  │  n = 40,000      │ 12.1 s (34%)                      │                 │
+  ├──────────────────┼───────────────────────────────────┼─────────────────┤
+  │ S-curve          │ measured dots follow the theory   │ ✅              │
+  │                  │ curve                             │                 │
+  ├──────────────────┼───────────────────────────────────┼─────────────────┤
+  │ Runtime type     │ CPU                               │ ✅              │
+  └──────────────────┴───────────────────────────────────┴─────────────────┘
+
+  What I fixed
+
+  The written-analysis section (section 6) was still my template with
+  placeholders. I filled in your Colab numbers: the stage table, the slope
+  explanation, the brute-force crossover, and a largest bucket of 23 at n =
+  40,000. The 68 in the template was a laptop figure and isn't shown in your
+  outputs, so I removed it.
+
+  I saved this as a new file,
+  C:\Users\umara\Downloads\RC3_AI_HACK\task2\Task2_NearDuplicates_final.ipynb.
+  The new name also drops the stray space before .ipynb. Only that one text cell
+  changed; your code and outputs are untouched.
+
+  Still to do before you submit
+
+  1. Re-run from scratch. Your run wasn't from a fresh session: it said "Drive
+     already mounted", and the run counter started at 3, not 1. The handbook
+     requires a clean run. Upload Task2_NearDuplicates_final.ipynb to Colab,
+     then Runtime → Restart session and run all.
+  2. Recheck the numbers. Timings will shift slightly on the re-run. If they
+     change, update the numbers in section 6 to match, so the report stays
+     honest.
+  3. Add the timer cell. The last cell is still a placeholder. Get the official
+     timer cell from the organisers and put it at the end.
+  4. Download submission.csv. It's only in Colab right now, not in your folder.
+     Get it from the 📁 Files panel, plus the notebook (File → Download .ipynb).
+  5. Clean up the folder. Delete or ignore Task2_NearDuplicates final .ipynb
+     (with the space) and the original Task2_NearDuplicates.ipynb, so you only
+     submit one notebook.
+
+  Task 2 is essentially done. Shall we start Task 1 now? Remember to use a fresh
+  chat for it, because that chat export is what gets marked.
+
+✻ Churned for 52s · done 12:02 PM
+
+❯ tell me the full corpus runtime and the dev percison is i thik wrong ,        
+
+● I'll check both numbers independently, using the plain string-based definition
+  of Jaccard with no hashing, so the check doesn't rely on my method's own
+  code.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Both numbers are correct. I re-checked them with the simplest possible method:
+  plain string shingles taken straight from the handbook definition, with none
+  of my hashing code involved.
+
+  Dev precision = 1.0000 (correct)
+
+  ┌────────────────────────────────────┬────────────────────────────────────┐
+  │               Check                │               Result               │
+  ├────────────────────────────────────┼────────────────────────────────────┤
+  │ Pairs my method reported           │ 341                                │
+  ├────────────────────────────────────┼────────────────────────────────────┤
+  │ Reported pairs with exact J below  │ 0 (the lowest is 0.8042)           │
+  │ 0.8                                │                                    │
+  ├────────────────────────────────────┼────────────────────────────────────┤
+  │ Answer-key pairs found             │ 341 of 341                         │
+  ├────────────────────────────────────┼────────────────────────────────────┤
+  │ Extra pairs not in the key         │ 0                                  │
+  ├────────────────────────────────────┼────────────────────────────────────┤
+  │ My Jaccard vs. the answer key's    │ identical, apart from rounding     │
+  │ Jaccard                            │ (0.00005)                          │
+  └────────────────────────────────────┴────────────────────────────────────┘
+
+  Precision = correct pairs reported ÷ pairs reported = 341 / 341 = 1.0000.
+  Recall = true pairs found ÷ true pairs = 341 / 341 = 1.0000.
+
+  Why a perfect score is believable, not a bug: LSH only proposes candidate
+  pairs; it decides nothing on its own. Every candidate then gets its exact
+  Jaccard computed, and only pairs with J ≥ 0.8 are kept. A wrong pair is
+  therefore essentially impossible; only a 64-bit hash collision could cause
+  one, with odds of about 1 in 10¹⁹. The proof is in the dev run: LSH proposed
+  563 pairs, and the exact check threw out 222, including near-misses at 0.7992
+  and 0.7990. Without that step, precision would have been about 0.61.
+
+  I also checked the full corpus. I computed the exact Jaccard for all 7,298 
+  pairs in submission.csv, and every one is ≥ 0.8. So precision on the full 
+  corpus is also 1.0, verified without touching any answer file. Recall on the
+  full corpus can't be checked without the hidden key. The theory gives a miss
+  chance of only about 0.04% even for a pair at exactly J = 0.8.
+
+  Full corpus runtime = 101.7 s on Colab (correct)
+
+  That number is the time for the find_similar_pairs(...) call only, on all
+  112,571 documents:
+
+  ┌────────────────────────────────┬────────────────────────────────────────┐
+  │              What              │                  Time                  │
+  ├────────────────────────────────┼────────────────────────────────────────┤
+  │ find_similar_pairs on Colab    │ 101.7 s ≈ 1 min 42 s                   │
+  │ (your run)                     │                                        │
+  ├────────────────────────────────┼────────────────────────────────────────┤
+  │ Same call on your laptop, just │ 59.8 s (shingling 35.1 s, MinHash 24.1 │
+  │  now                           │  s, LSH 0.3 s, verification 0.3 s)     │
+  ├────────────────────────────────┼────────────────────────────────────────┤
+  │ Same call on your laptop,      │ 111 s (the laptop was busier then)     │
+  │ earlier                        │                                        │
+  ├────────────────────────────────┼────────────────────────────────────────┤
+  │ Loading docs.csv (not part of  │ about 4–8 s                            │
+  │ the timed call)                │                                        │
+  └────────────────────────────────┴────────────────────────────────────────┘
+
+  Possible sources of confusion:
+  - The whole notebook takes much longer, about 15–20 minutes. Most of that is
+    the scaling experiment and brute force, especially brute force at n = 3,000,
+    which alone took 91 s. That time doesn't count. Only the final timer cell
+    counts, and the limit applies to that call: under 15 minutes. You're at
+    about 1.7 minutes.
+  - Timing changes between runs. CPU speed and load vary, so the same code took
+    60 s and 111 s on your laptop. The marked time is the instructor's Colab
+    re-run, which will probably be around 1.5–2 minutes, far below the limit.
+
+  If there's a specific number in your Colab output that looks wrong to you,
+  paste or screenshot it and I'll trace exactly where it comes from.
+
+✻ Worked for 1m 41s · done 12:05 PM
+
+❯ so now for the submition ready what i have to do ?                            
+
+● You're nearly done with Task 2. It needs 2 files: the notebook with all
+  outputs visible, and submission.csv.
+
+  Steps (about 10 minutes plus about 20 minutes of running)
+
+  1. Upload the final notebook to Colab
+  - In Colab, choose File → Upload notebook and pick:
+    C:\Users\umara\Downloads\RC3_AI_HACK\task2\Task2_NearDuplicates_final.ipynb
+  - Check the runtime: Runtime → Change runtime type → CPU.
+
+  2. Add the official timer cell
+  - Ask an organiser for the "provided timer cell" now; it isn't in any of the
+    files.
+  - Paste it as the very last cell, replacing the current last cell (the one
+    that prints pairs found: and writes submission.csv).
+  - If their timer cell doesn't write the CSV, put the line below in a cell
+    after it, so the timed full-data call stays in their cell and runs only
+    once:
+  pd.DataFrame(sorted(pairs), columns=["id1","id2"]).to_csv("submission.csv",
+  index=False)
+    Make sure the variable name matches whatever their cell stores the result
+    in.
+  - If there is no official timer cell, keep my last cell as it is.
+
+  3. Do a clean run
+  - Choose Runtime → Restart session and run all, and approve the Drive popup.
+  - Wait about 15–20 minutes, without editing anything while it runs.
+  - Then check:
+    - The cell numbers go [1], [2], [3]… in order, with no gaps.
+    - There is no red error anywhere.
+    - Dev precision, recall and F1 = 1.0000.
+    - The last cell shows pairs found: 7298 and a runtime.
+
+  4. Match the written analysis to the new run
+  - Timings will differ slightly from the last run. In section 6, double-click
+    the text cell and update these numbers to the ones the cells above it now
+    show:
+    - the 5 scaling times and the slope (1.040)
+    - the stage times at 40,000 documents
+    - the brute-force times, slope, 38.7 hours and ≈ 9,200
+    - the full runtime (101.7 s)
+  - Use only numbers that are actually printed, because the handbook marks
+    honesty. Then press Shift+Enter on that cell.
+
+  5. Download both files
+  - File → Download → Download .ipynb, then rename it to something like
+    Task2_<YourName>.ipynb.
+  - Click the 📁 Files panel on the left, then the ⋮ next to submission.csv,
+    then Download.
+
+  6. Quick check of submission.csv
+  - Open it and confirm the header is exactly id1,id2.
+  - It should have 7,298 rows, each like d000018,d013568 with the smaller id
+    first.
+
+  7. Submit
+  - Submit the notebook and submission.csv the way the organisers specify (form,
+    email or Drive).
+
+  Don't include
+
+  - ❌ The organiser's answer files (ground_truth_pairs.csv,
+    family_pairs_all.csv, rules.csv, frequent_itemsets.csv)
+  - ❌ The older notebooks (Task2_NearDuplicates.ipynb, Task2_NearDuplicates 
+    final .ipynb)
+  - ❌ The helper scripts (dev_test.py, full_test.py, make_notebook.py). Only
+    include lsh_core.py if the organisers ask for source code; the same code is
+    already inside the notebook.
+
+  While Colab runs (about 20 minutes), shall we start Task 1 in a new chat? That
+  chat export is what gets marked for Task 1.
+
+✻ Cogitated for 13s · done 12:07 PM
+
+❯ if the timer cell is not present add them and make sure the repo have 1 final 
+  ipynb fle                                                                     
+
+● I'll add a timer cell as the last cell and keep just one notebook in the task2
+  folder.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● The organiser's two data-generator notebooks are also in the project root, and
+  their names are confusing. Since you asked for exactly one .ipynb, I'll move
+  them to the same backup folder.
+  Ran 1 shell command (ctrl+o to expand)
+
+● I added the timer cell, and the project now has exactly one notebook:
+  C:\Users\umara\Downloads\RC3_AI_HACK\task2\Task2_NearDuplicates_final.ipynb.
+  All 20 cells pass a syntax check. The new timer cell itself has not run
+  anywhere yet; it runs for the first time when you do the Colab run below.
+
+  The timer cell (last cell)
+
+  # ================= TIMER CELL: do not edit =================
+  import time, resource
+  ids, texts = docs["id"].tolist(), docs["text"].tolist()
+
+  _t0 = time.perf_counter()
+  pairs = find_similar_pairs(ids, texts, threshold=0.8)
+  runtime = time.perf_counter() - _t0
+  ...prints documents, pairs, runtime (s and min) and peak memory (GB) vs the 15
+  min / 12 GB limits
+  ...writes submission.csv after checking id1 < id2 and no duplicate rows
+
+  - It is the last cell, and it is the only place where find_similar_pairs runs
+    on the full corpus, as the handbook requires.
+  - It times exactly one call, then reports the runtime and peak memory against
+    both limits.
+  - It writes submission.csv in the same cell, so nothing comes after the timer.
+  - The heading above it says plainly that no official timer cell was provided,
+    so this cell does that job.
+  - Its old output was cleared; Colab fills it in on the next run.
+  - The peak-memory line uses resource, which only works on Linux. That's fine
+    on Colab, but this cell will fail if run on your Windows laptop.
+
+  What I moved out of the project
+
+  Nothing was deleted. Everything below is in a backup folder:
+  C:\Users\umara\AppData\Local\Temp\claude\1338534e54fa02a8\f85aed0c-8a35-4057-9
+  3b4-2d63c530cae5\scratchpad\old_task2_notebooks
+
+  ┌──────────────────────────────┬──────────────────────────────────────────┐
+  │             File             │             Why it was moved             │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ Task2_NearDuplicates final   │ Your Colab copy. Its outputs are already │
+  │ .ipynb                       │  in the final notebook.                  │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ Task2_NearDuplicates.ipynb   │ The first version, without results       │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │ make_notebook.py             │ Built the old version and is now out of  │
+  │                              │ date                                     │
+  ├──────────────────────────────┼──────────────────────────────────────────┤
+  │                              │ The organiser's data-generator           │
+  │ Task 1.ipynb, Task_2.ipynb   │ notebooks. They are not your work, and   │
+  │                              │ the names were confusing.                │
+  └──────────────────────────────┴──────────────────────────────────────────┘
+
+  The task2 folder still has lsh_core.py, dev_test.py and full_test.py as
+  supporting code.
+
+  You still need to
+
+  1. Upload Task2_NearDuplicates_final.ipynb to Colab and check the runtime is
+     set to CPU.
+  2. Run Runtime → Restart session and run all, about 15–20 minutes.
+  3. Check the last cell's output: 7,298 pairs, about 1.5–2 minutes, a few GB of
+     memory.
+  4. Update section 6 if the timings changed in this run.
+  5. Download the notebook (File → Download .ipynb) and submission.csv (📁 Files
+     panel), then submit both.
+
+  If the organisers later hand out an official timer cell, paste it in place of
+  the last cell.
+
+✻ Sautéed for 43s · done 12:10 PM
+
+※ recap: You're getting Task 2 (near-duplicate detection) ready to submit, and it's finished: the single notebook in the `task2` folder now has a timer cell as its last cell. Next, upload it to Colab, choose Restart session and run all, then download the notebook and submission.csv. (disable recaps in /config)
+
+❯ ok now start task 4 but tell me is they are link to task 1 ?                  
+
+● Are Task 4 and Task 1 linked?
+
+  No. They are separate tasks with separate marks and deliverables. The handbook
+  doesn't require Task 4 to use anything from Task 1.
+
+  The only overlap is in the idea behind Track A:
+
+  - Task 1 produces Jira-style tickets with acceptance criteria.
+  - Track A reads a Jira ticket's acceptance criteria and checks whether a pull
+    request (PR) meets them.
+
+  Even so, Track A must fetch the ticket from the live Jira or Azure DevOps API,
+  not from Task 1's files. So linking them saves no work and adds setup:
+  - a Jira account
+  - a GitHub token
+  - a public webhook address
+  - a test repository with real merges
+
+  Track B (GitHub Repository Analyzer) has no link to Task 1 at all. I still
+  recommend Track B. It uses only the public GitHub API, needs no Jira and does
+  no risky automatic merges, so it can realistically be finished in the time
+  left. Today's main round ends at 2:00 PM.
+
+  ---
+
+  Before you start: use a new chat
+
+  Task 4 is worth 40 marks, and the main thing marked is your exported chat.
+  This conversation is mostly about Task 2, so don't build Task 4 here.
+
+  1. Open a new Claude Code session in a new folder, for example
+     RC3_AI_HACK\task4.
+  2. You write the prompts, one stage at a time. Marks go to clear prompts that
+     focus on one stage and to you checking the output, not to how much code
+     there is.
+  3. At the end, type /export to save the complete, unedited chat for
+     submission.
+
+  If I wrote Task 4 here, the export would be weak evidence and would mix in
+  Task 2.
+
+  ---
+
+  Plan for Track B (paste this as your first message in the new chat)
+
+  ▎ I'm building Track B: GitHub Repository Analyzer CLI for a hackathon. Before
+  ▎ writing any code, help me plan it.
+  ▎
+  ▎ Requirements: python analyze.py <github-repo-url> prints a terminal report 
+  ▎ with 5 sections:
+  ▎ 1. Tech stack, with evidence for each item
+  ▎ 2. File structure summary
+  ▎ 3. Code complexity score, with its formula explained
+  ▎ 4. Dependency health, with what "healthy" means
+  ▎ 5. Contribution activity chart in the terminal (commits per week or month, 
+  ▎ plus top contributors)
+  ▎
+  ▎ It must work on any public repo, handle an invalid URL, repo not found, rate
+  ▎ limit and missing dependency files with clear messages, and never invent 
+  ▎ data: if something can't be determined, the report says so.
+  ▎
+  ▎ Constraints:
+  ▎ - Python with requests and rich only
+  ▎ - Optional GITHUB_TOKEN read from an environment variable; never hard-coded
+  ▎ - No other APIs except the PyPI and npm registries for latest versions
+  ▎
+  ▎ Give me: the module layout, which GitHub API endpoints each section needs, 
+  ▎ what each stage takes in and returns, and the order to build and test them. 
+  ▎ No code yet.
+
+  Stages: one prompt each, test before moving on
+
+  #: 1
+  Stage: CLI and GitHub client
+  What to ask for: URL parsing, a get() helper with error handling, the token
+    from the environment
+  How to test it: A good URL, https://github.com/x/doesnotexist, not-a-url
+  ────────────────────────────────────────
+  #: 2
+  Stage: Tech stack
+  What to ask for: Languages endpoint plus detection of config files
+    (package.json, requirements.txt, Dockerfile…), with the evidence for each
+  How to test it: Compare with the language bar on the repo's GitHub page
+  ────────────────────────────────────────
+  #: 3
+  Stage: File structure
+  What to ask for: Git tree endpoint (recursive): top folders, file counts and
+    types, a short purpose note for each
+  How to test it: Compare with the repo page
+  ────────────────────────────────────────
+  #: 4
+  Stage: Complexity score
+  What to ask for: Define the formula first (for example size, file count,
+  folder
+    depth, share of large files), then code it and print the reasons
+  How to test it: Check the score by hand on a small repo
+  ────────────────────────────────────────
+  #: 5
+  Stage: Dependency health
+  What to ask for: Parse requirements.txt / package.json; mark each dependency
+    pinned or unpinned and latest or outdated using PyPI/npm; say "no manifest
+    found" when there is none
+  How to test it: A repo without a manifest; one with unpinned versions
+  ────────────────────────────────────────
+  #: 6
+  Stage: Activity chart
+  What to ask for: Commits per week from the stats endpoint (it returns HTTP 202
+
+    while computing, so retry), bar chart with rich, top contributors
+  How to test it: An inactive repo → "no activity"
+  ────────────────────────────────────────
+  #: 7
+  Stage: Combine, README and demo
+  What to ask for: One report, the README (states Track B, the libraries, how to
+
+    run), full runs on 2 different repos
+  How to test it: Save both outputs as demo evidence
+
+  In every stage, prompt like this:
+  - "Here is what this stage must return: [JSON or function signature]. Use only
+    this context. Don't guess: if the API doesn't give the data, return 'Not
+    available'."
+  - After running, paste the actual output back. Point out anything wrong, for
+    example "language % doesn't match GitHub's page; fix only this", and ask for
+    a focused fix.
+  - At least once, deliberately test a failure case (bad URL, rate limit) and
+    show it being handled in the chat.
+
+  Time plan (from now until 2:00)
+
+  ┌────────┬────────────────────────────────┐
+  │  Time  │              Work              │
+  ├────────┼────────────────────────────────┤
+  │ 10 min │ Planning prompt                │
+  ├────────┼────────────────────────────────┤
+  │ 15 min │ Stage 1                        │
+  ├────────┼────────────────────────────────┤
+  │ 25 min │ Stages 2–3                     │
+  ├────────┼────────────────────────────────┤
+  │ 25 min │ Stages 4–5                     │
+  ├────────┼────────────────────────────────┤
+  │ 15 min │ Stage 6                        │
+  ├────────┼────────────────────────────────┤
+  │ 15 min │ Stage 7, demo runs and /export │
+  └────────┴────────────────────────────────┘
+
+  If time runs short, cut extra features, not testing. Don't forget Task 1 (20
+  marks); keep about 30–40 minutes for it too.
+
+  Your Task 2 Colab run can keep going in the background meanwhile. Once the new
+  Task 4 chat is open, paste the planning prompt above to begin.
+
+✻ Crunched for 31s · done 12:14 PM
+
+❯ ok im start working on the track b but now the org annuce that we have to     
+  perfom both track a and b as the tack a is conenct to track 1 , start working 
+  on task 1 as first explain me what is happening in it                         
+
+● What Task 1 asks for
+
+  In one sentence: build a small tool that takes a messy client brief and turns
+  it into developer-ready Jira tickets, without inventing anything. Anything the
+  brief doesn't say becomes a question for the client.
+
+  The problem it solves
+
+  Clients write briefs like:
+
+  ▎ "We want a modern, fast website where users can sign up and pay online. It 
+  ▎ should work on mobile. Launch before Eid. Actually web only for now."
+
+  A project manager currently reads this, writes tasks by hand and keeps going
+  back to the client with questions. Your tool does that first pass
+  automatically.
+
+  The golden rule: never assume
+
+  ┌───────────────────┬────────────────────────────────────┬────────────────┐
+  │  The brief says   │           Your tool must           │  It must NOT   │
+  ├───────────────────┼────────────────────────────────────┼────────────────┤
+  │ "users can pay    │ create a payment ticket and ask:   │ pick Stripe,   │
+  │ online"           │ "Which payment methods and         │ or add refunds │
+  │                   │ currencies?"                       │                │
+  ├───────────────────┼────────────────────────────────────┼────────────────┤
+  │ "fast website"    │ flag "fast" as vague and ask for a │ invent "loads  │
+  │                   │  measurable target                 │ in 2 seconds"  │
+  ├───────────────────┼────────────────────────────────────┼────────────────┤
+  │ "mobile app" …    │ flag a contradiction, quote both   │ silently       │
+  │ later "web only"  │ sentences, and ask which applies   │ choose one     │
+  ├───────────────────┼────────────────────────────────────┼────────────────┤
+  │ "integrate with   │ flag an undefined term             │ guess what     │
+  │ HRMS"             │                                    │ HRMS is        │
+  ├───────────────────┼────────────────────────────────────┼────────────────┤
+  │ "users can sign   │ ask about the scope gap: "Is       │ add password   │
+  │ up"               │ password reset needed?"            │ reset itself   │
+  └───────────────────┴────────────────────────────────────┴────────────────┘
+
+  The 6 stages your tool must have
+
+  ① Input        → paste a brief or load a .txt file
+  ② Understand   → extract goals, features, users, constraints, integrations, 
+  deadlines,
+                   each WITH an exact quote from the brief
+  ③ Detect gaps  → missing info, vague words, contradictions, undefined terms, 
+  scope gaps
+                   → each becomes a specific client question
+  ④ Break down   → epics → small tasks, each with a description, acceptance 
+  criteria and a source quote
+  ⑤ Tickets      → one ticket per task, in a fixed Jira format
+  ⑥ Output       → shown on screen + downloadable CSV and JSON
+
+  Every ticket has these fields
+
+  ┌──────────────────────┬──────────────────────────────────────────────────┐
+  │        Field         │                       Rule                       │
+  ├──────────────────────┼──────────────────────────────────────────────────┤
+  │ Ticket ID            │ generated, for example TASK-001                  │
+  ├──────────────────────┼──────────────────────────────────────────────────┤
+  │ Title, Type          │ Type is Epic, Story or Task                      │
+  ├──────────────────────┼──────────────────────────────────────────────────┤
+  │ Description          │ what to build and why, in the brief's own words  │
+  ├──────────────────────┼──────────────────────────────────────────────────┤
+  │ Acceptance criteria  │ testable conditions, each taken from the brief   │
+  ├──────────────────────┼──────────────────────────────────────────────────┤
+  │ Source reference     │ an exact quote from the brief                    │
+  ├──────────────────────┼──────────────────────────────────────────────────┤
+  │ Dependencies         │ only where the brief makes the link clear        │
+  ├──────────────────────┼──────────────────────────────────────────────────┤
+  │ Open questions       │ any open questions mark the ticket "Needs        │
+  │                      │ clarification"; none means "Ready"               │
+  ├──────────────────────┼──────────────────────────────────────────────────┤
+  │ Priority, estimate,  │ "Not specified" unless the brief states them     │
+  │ deadline             │                                                  │
+  └──────────────────────┴──────────────────────────────────────────────────┘
+
+  How it's marked (20 marks)
+
+  The main item is your exported chat, more than the code. Marks come from:
+  - planning first
+  - one stage per prompt, each with a role, focused context, rules and a JSON
+    output format
+  - chaining the checked output of one stage into the next
+  - testing on two briefs, one clear and one vague or contradictory
+  - catching mistakes the AI makes and fixing them step by step
+
+  A single prompt that asks for everything scores low.
+
+  Deliverables
+
+  1. The full exported chat (/export in Claude Code)
+  2. Source code + README: libraries, how to run it, how it avoids assumptions
+  3. Demo output for both briefs, with the briefs included
+  4. A ticket export (CSV or JSON) for each brief
+
+  ---
+
+  How Task 1 now connects to Task 4 Track A
+
+  I can only take your word for the organiser's announcement, but it fits the
+  design: Task 1 produces the tickets, and Track A checks the code against them.
+
+  Client brief
+     │  TASK 1
+     ▼
+  Tickets CSV ──import──► Jira test project (Jira assigns keys like RC3-1, 
+  RC3-2)
+                                │
+  Developer: branch "feature/RC3-1-signup" → opens PR on a GitHub test repo
+                                │  TASK 4 – TRACK A
+                                ▼
+  Webhook → read RC3-1 from branch name → fetch the ticket's acceptance criteria
+  from the Jira API
+         → fetch the PR diff from GitHub → LLM verdict {fulfilled, feedback}
+         → fulfilled=false: comment on the PR + mark the check as Failed
+         → fulfilled=true : merge the PR
+
+  Design Task 1 with this in mind:
+
+  1. Export a Jira-importable CSV. Use the columns Summary, Issue Type, 
+     Description, Priority, Labels. Jira's CSV import maps these directly.
+  2. Put the acceptance criteria inside the Description under a fixed heading,
+     for example:
+  h3. Acceptance Criteria
+  * User can sign up with email
+  * ...
+     Jira has no standard acceptance-criteria field, so Track A finds them by
+     looking for this heading. This is the actual link between the two tasks.
+  3. Keep the TASK-001 id as a Label. Jira assigns its own keys on import
+     (RC3-1), so the label keeps the trail back to the brief.
+  4. Also export JSON for on-screen use and the deliverable.
+
+  For Track A you will need (set these up yourself; I can't create accounts or 
+  handle tokens):
+  - a free Jira Cloud test project, plus a Jira API token
+  - a GitHub test repository, plus a GitHub personal access token
+  - both tokens stored as environment variables, never pasted into a chat
+
+  ---
+
+  Technical setup for Task 1
+
+  ┌─────────────┬───────────────────────────────────────────────────────────┐
+  │    Part     │                          Choice                           │
+  ├─────────────┼───────────────────────────────────────────────────────────┤
+  │ Language    │ Python                                                    │
+  ├─────────────┼───────────────────────────────────────────────────────────┤
+  │ LLM         │ Claude API (for example claude-sonnet-5-5), key read from │
+  │             │  the ANTHROPIC_API_KEY environment variable               │
+  ├─────────────┼───────────────────────────────────────────────────────────┤
+  │ Interface   │ Command line (python brief2tickets.py brief.txt): fastest │
+  │             │  to build and test                                        │
+  ├─────────────┼───────────────────────────────────────────────────────────┤
+  │ Libraries   │ anthropic, plus the standard library json, csv and        │
+  │             │ argparse                                                  │
+  ├─────────────┼───────────────────────────────────────────────────────────┤
+  │ LLM stages  │ ② Extract, ③ Gaps, ④ Breakdown: 3 prompts, each returning │
+  │             │  JSON                                                     │
+  ├─────────────┼───────────────────────────────────────────────────────────┤
+  │             │ quote check (every quote must actually appear in the      │
+  │ Plain-code  │ brief, which catches invented content), ticket numbering, │
+  │ stages      │  "Not specified" defaults, Ready vs. Needs-clarification  │
+  │             │ status, CSV and JSON export                               │
+  └─────────────┴───────────────────────────────────────────────────────────┘
+
+  The quote check is your strongest point for "never assume". Ordinary code, not
+  the AI, confirms that every quote really exists in the brief. Anything that
+  fails is flagged instead of turned into a ticket.
+
+  ---
+
+  How to start (new chat, because the chat is what's marked)
+
+  1. Open a new Claude Code session in RC3_AI_HACK\task1.
+  2. Paste this as your first message:
+
+  ▎ I'm building Task 1: Client Brief → Jira Tickets converter for a hackathon. 
+  ▎ Plan first, no code yet.
+  ▎
+  ▎ Golden rule: never assume. If the brief doesn't state something, write "Not 
+  ▎ specified" and raise a client question. Every extracted item must carry an 
+  ▎ exact quote from the brief.
+  ▎
+  ▎ Stages:
+  ▎ 1. Input (.txt file)
+  ▎ 2. Extract (goals, features, users, constraints, integrations, deadlines, 
+  ▎ each with a quote)
+  ▎ 3. Detect gaps (missing, vague, contradiction with both quotes, undefined 
+  ▎ terms, scope gaps), each as a specific client question linked to the tickets
+  ▎ it blocks
+  ▎ 4. Break down into epics and tasks with acceptance criteria and a source 
+  ▎ quote
+  ▎ 5. Tickets with these fields: ID (TASK-001), Title, Type, Description, 
+  ▎ Acceptance criteria, Source reference, Dependencies, Open questions, Status 
+  ▎ (Ready or Needs clarification), Priority, Estimate and Deadline ("Not 
+  ▎ specified" unless stated)
+  ▎ 6. Output on screen + JSON + a Jira-importable CSV (Summary, Issue Type, 
+  ▎ Description, Priority, Labels), with acceptance criteria inside the 
+  ▎ Description under the heading h3. Acceptance Criteria so a later PR-reviewer
+  ▎ tool can parse them
+  ▎
+  ▎ Tech: Python CLI, Anthropic SDK, key from the ANTHROPIC_API_KEY environment 
+  ▎ variable. One LLM call per stage, each returning JSON. Plain code verifies 
+  ▎ that every quote exists in the brief.
+  ▎
+  ▎ Give me: the module layout, the exact JSON schema each stage returns, and 
+  ▎ the build and test order.
+
+  3. Then build one stage per prompt, run each on a real brief, and paste the
+     output back with corrections.
+  4. Write two test briefs, one clear and one vague or contradictory. Writing
+     them yourself is stronger evidence than asking the AI for them.
+  5. At the end, type /export.
+
+  Time check: you now have Task 1 plus Track A plus Track B before 2:00 PM. Aim
+  for about 35 minutes on Task 1, then Track A, which reuses Task 1's CSV, then
+  Track B. Keep each one small and tested rather than large and unchecked.
+
+✻ Cooked for 37s · done 12:20 PM
+
+※ recap: You're working through the four RC3 hackathon tasks; Task 2 is ready and you're about to start Task 1, which now feeds Task 4 Track A. Next, open a new Claude Code chat in a task1 folder and paste the planning prompt I gave you.
+
+❯ use the ultracode and give me the implemetation paln for task 1               
+
+● Workflow(Judge panel of 3 independent Task 1 implementation plans, synthesis,
+          handbook-completeness critic, final revision)
+  ⎿  /workflows to view dynamic workflow runs
+
+● I've started a background workflow to write the Task 1 implementation plan. It
+  runs in 4 steps:
+
+  1. Draft: 3 independent planners, each from a different angle:
+     - "never assume" rigor
+     - building a working tool within about 40 minutes
+     - the marking scheme plus the Track A link
+  2. Synthesize: a judge scores the drafts and merges the best one with the
+     strongest ideas from the others.
+  3. Critique: a strict reviewer re-reads the handbook and checks the merged
+     plan line by line for anything missing, invented or not doable in the time.
+  4. Finalize: the reviewer's fixes are applied.
+
+  The final plan will cover:
+  - the architecture
+  - each stage's JSON output format
+  - the Jira CSV format that Track A will read
+  - ready-to-paste prompts for your new Task 1 chat
+  - two demo briefs (one clear, one vague or contradictory)
+  - a testing checklist
+  - deliverables
+  - a time plan
+
+  It should take a few minutes, and I'll show you the plan when it finishes. You
+  can watch progress with /workflows. Meanwhile, if you haven't yet:
+  - create a free Jira Cloud test project for Track A
+  - create a GitHub test repository
+  - make sure your Task 2 Colab run is still going
+
+✻ Baked for 40s · done 12:25 PM
+
+❯ show me the plan when its ready                                               
+
+● The workflow is still running. I'll show you the full plan as soon as it
+  finishes; you don't need to do anything meanwhile.
+
+✻ Worked for 1s · done 12:29 PM
+
+❯ is the plan ready now? secondy i dont have the antropic api key i am using    
+  the org premieun seat can i use these their as i have no money to buy they    
+  api key                                                                       
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Is the plan ready?
+
+  Not yet: 3 of the 4 steps are done. The 3 drafts are written and merged into
+  one plan. The final reviewer is now checking it against the handbook, and its
+  fixes still have to be applied. I'll show you the full plan as soon as it
+  finishes.
+
+  No API key: yes, you can still do Task 1
+
+  Your organisation's premium seat covers Claude chat and Claude Code, but it 
+  doesn't include an API key. API use is billed separately in the Anthropic
+  Console, so the plan's assumption of ANTHROPIC_API_KEY won't work for you. You
+  have three free options:
+
+  Option 1 (recommended): call Claude Code from your tool, with no API key
+
+  Claude Code has a "headless" mode that runs one prompt and prints the answer,
+  using your existing seat login. Your Python tool can call it like any other
+  program:
+
+  import subprocess, json
+
+  def ask_llm(prompt: str) -> str:
+      r = subprocess.run(
+          ["claude", "-p", prompt, "--output-format", "json"],
+          capture_output=True, text=True, timeout=300, encoding="utf-8")
+      if r.returncode != 0:
+          raise RuntimeError(f"claude CLI failed: {r.stderr[:300]}")
+      return json.loads(r.stdout)["result"]   # the model's reply text
+
+  - Free: it uses your seat, so there's no key and nothing to pay.
+  - Nothing secret in your code, which satisfies the "protect your secrets" rule
+    automatically.
+  - It's still Claude, so prompt quality stays the same.
+  - Test it first in a terminal: claude -p "Reply with only: OK". If it prints
+    OK, it works.
+  - Limits: each call takes a few seconds and counts toward your seat's usage
+    limits. That's fine for a few briefs, but don't loop over hundreds of calls.
+  - Windows tip: if Python can't find claude, use the full path from where 
+    claude.
+
+  Option 2: a free LLM API key
+
+  The handbook allows "an AI assistant of your choice".
+  - Google Gemini: a free key from aistudio.google.com, with a generous free
+    tier.
+  - Groq: a free key, very fast, Llama models.
+
+  Store the key in an environment variable such as GEMINI_API_KEY and never
+  paste it into the chat. You create the account yourself; I can't do that for
+  you.
+
+  Option 3: ask the organisers
+
+  Since Track A also needs an LLM, they may provide a key or credits. It's worth
+  asking, but don't wait for the answer.
+
+  Make the tool work with any of these
+
+  Put all LLM calls behind one function in llm.py, ask_llm(prompt), and nothing
+  else in the tool needs to know which model is used. You can switch between
+  Claude Code headless and Gemini with a setting like LLM_BACKEND=claude-cli.
+  Track A can reuse the same llm.py. Write this down in the README, because it's
+  good design evidence.
+
+  When the plan arrives, I'll adapt it to Option 1 by swapping the "Anthropic
+  SDK + API key" parts for this ask_llm wrapper. Everything else, including the
+  stages, the never-assume checks and the Jira CSV, stays the same.
+
+✻ Worked for 20s · done 12:30 PM
+
+❯ ok use option 2 with gemini api  and show me the plan                         
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The final step (applying the reviewer's fixes) is running now. I'll show the
+  plan, adapted to Gemini, the moment it finishes. Meanwhile, here is the Gemini
+  setup.
+
+  Gemini setup (about 5 minutes)
+
+  1. Get a free key
+  - Go to aistudio.google.com, sign in with your Google account, and click Get 
+    API key → Create API key.
+  - Copy the key, but don't paste it into any chat, this one included. The
+    exported chat is submitted and must contain no secrets.
+
+  2. Store it as an environment variable, in your own terminal, not through 
+  Claude
+
+  Open a normal PowerShell window and run:
+  setx GEMINI_API_KEY "paste-your-key-here"
+  Then close and reopen your terminal and your Claude Code session so they pick
+  it up.
+
+  ⚠️ Don't run it with the ! prefix in Claude Code: that would put your key into
+  the chat transcript.
+
+  3. Install the SDK
+  pip install google-genai
+
+  4. The single LLM function your tool will use (llm.py)
+  import os, json
+  from google import genai
+  from google.genai import types
+
+  MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+
+  def ask_llm(prompt: str) -> dict:
+      if not os.environ.get("GEMINI_API_KEY"):
+          raise SystemExit("GEMINI_API_KEY is not set. See README.")
+      client = genai.Client()   # reads GEMINI_API_KEY from the environment
+      resp = client.models.generate_content(
+          model=MODEL,
+          contents=prompt,
+          config=types.GenerateContentConfig(
+              response_mime_type="application/json",   # forces JSON output
+              temperature=0,                            # stable, less creative 
+  = fewer inventions
+          ),
+      )
+      return json.loads(resp.text)
+
+  - response_mime_type="application/json" makes Gemini reply in JSON, which
+    suits the stage-by-stage design.
+  - temperature=0 makes answers repeatable and less likely to invent details.
+  - Model: gemini-2.5-flash has a free tier. If AI Studio shows a newer Flash
+    model, set the GEMINI_MODEL variable to that name; no code change is needed.
+  - Free-tier rate limits are fine for a handful of briefs. If you get an HTTP
+    429 error, wait a minute; the plan will include a single retry.
+
+  5. Quick test (key set, terminal reopened):
+  python -c "from llm import ask_llm; print(ask_llm('Return JSON {\"ok\": 
+  true}'))"
+  It should print {'ok': True}.
+
+  The full plan comes next; I'll swap its "Anthropic SDK + API key" parts for
+  this llm.py.
+
+✻ Cogitated for 15s · done 12:33 PM
+
+● Dynamic workflow "Judge panel of 3 independent Task 1 implementation plans,
+synthesis, handbook-completeness critic, final revision" completed · 7m 56s
+
+  Read 1 file, ran 3 shell commands (ctrl+o to expand)
+
+● The plan is ready: 3 drafts were merged, and a strict reviewer found 14 gaps
+  (1 high), all of which were fixed. Now I'll switch its LLM parts from the
+  Anthropic API to Gemini.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The shell couldn't parse the inline script because of its quoting, so I'll
+  save it to a file and run that instead.
+
+  Made 1 scratchpad edit +78, ran 2 shell commands (ctrl+o to expand)
+
+● The Task 1 plan is ready and switched to the free Gemini API. The workflow
+  merged 3 independent drafts, then a strict reviewer checked the result against
+  the handbook and found 14 gaps (1 serious), all now fixed. The full plan is
+  about 6,500 words: C:\Users\umara\Downloads\RC3_AI_HACK\task1\PLAN_full.md. It
+  contains every prompt ready to paste, the JSON formats and both demo briefs.
+  Here is the overview.
+
+  Task 1 plan: "Brief2Jira"
+
+  1. What you're building
+
+  A Python command-line tool: python main.py briefs\vague.txt --out out\vague.
+  It takes a client brief and produces:
+  - tickets, open questions and rejected items, shown in full on screen and
+    saved to run.log
+  - tickets.json
+  - tickets_jira.csv, which can be imported into Jira and is then used by Track
+    A
+
+  2. The pipeline: Gemini proposes, plain code checks
+
+  brief.txt
+   [1 INPUT]       code   load, refuse empty brief, split into sentences S1..Sn
+   [2 UNDERSTAND]  Gemini → facts JSON (each with an exact quote)
+                   code   keep only facts whose quote really appears in the 
+  brief; the rest go to rejected[]
+   [3 GAPS]        Gemini → questions: missing | vague | contradiction | 
+  undefined_term | scope_gap
+                   code   check quotes; a contradiction needs 2 quotes from 
+  different sentences;
+                          add template questions for missing users, platform, 
+  integrations, deadline, priority
+   [4 BREAK DOWN]  Gemini → epics/tasks + acceptance criteria, each with a quote
+                   code   drop anything unquoted; flag invented words (stripe, 
+  refund, login, "2 seconds"…)
+   [5 TICKETS]     code   TASK-001.., "Not specified" defaults, Ready vs Needs 
+  clarification
+   [6 OUTPUT]      code   console + run.log + JSON + Jira CSV
+  Only 3 Gemini calls per brief. Everything that could be used to invent
+  something is checked by ordinary code.
+
+  3. Files
+
+  task1/  main.py  llm.py  prompts.py  verify.py  tickets.py  export.py
+          tests/   briefs/clear.txt  briefs/vague.txt   out/clear/  out/vague/
+          PLAN.md  TESTING.md  README.md   chats/00_planning_chat.md  
+  chats/01_build_chat.md
+
+  4. How Track A uses the output
+
+  The CSV columns are Summary, Issue Type, Description, Priority, Labels. The
+  Description always contains:
+  h3. Acceptance Criteria
+  * Members can book a class up to 7 days before it starts
+  ...
+  h3. Details
+  Status: Needs clarification | Priority: Not specified | ...
+  The label TASK-002 maps each Jira key (for example RC3-2) back to its ticket.
+  Track A then:
+  1. reads RC3-2 from the PR branch name
+  2. fetches the ticket through Jira API v2
+  3. runs the shared parse_ac() on the Description
+  4. sends the criteria and the PR diff to Gemini
+
+  If parse_ac() finds no criteria, Track A does not merge.
+
+  5. Prompt sequence for the new chat (full text is in section 5 of the plan 
+  file)
+
+  ┌─────┬──────────────────────────┬────────────────────────────────────────┐
+  │  #  │          Prompt          │            Check afterwards            │
+  ├─────┼──────────────────────────┼────────────────────────────────────────┤
+  │ P1  │ Review the plan against  │ Update PLAN.md: "Changes after P1      │
+  │     │ the handbook. No code.   │ review"                                │
+  ├─────┼──────────────────────────┼────────────────────────────────────────┤
+  │ P2  │ llm.py (Gemini) + quote  │ pytest passes; {'ok': True} test call; │
+  │     │ checker + unit tests     │  missing key → exit 2                  │
+  ├─────┼──────────────────────────┼────────────────────────────────────────┤
+  │     │ Stages 1–2: Input +      │ Ctrl+F 3 quotes in the brief; an       │
+  │ P3  │ Understand               │ edited quote is rejected; empty brief  │
+  │     │                          │ → exit 1                               │
+  ├─────┼──────────────────────────┼────────────────────────────────────────┤
+  │ P4  │ Stage 3: Gaps            │ No false "which platform?" question on │
+  │     │                          │  clear.txt                             │
+  ├─────┼──────────────────────────┼────────────────────────────────────────┤
+  │ P5  │ Stage 4: Break down      │ Every warning from the invented-word   │
+  │     │                          │ check is pasted back as an error       │
+  ├─────┼──────────────────────────┼────────────────────────────────────────┤
+  │ —   │ 5-minute fix loop        │ Defect #1 fixed in the chat            │
+  ├─────┼──────────────────────────┼────────────────────────────────────────┤
+  │ P6  │ Stages 5–6: Tickets +    │ CSV round-trip test; IDs unique        │
+  │     │ export                   │                                        │
+  ├─────┼──────────────────────────┼────────────────────────────────────────┤
+  │     │ Run vague.txt,           │ Defect #2, one you found yourself;     │
+  │ P7  │ line-by-line review,     │ fill in TESTING.md                     │
+  │     │ edge cases               │                                        │
+  ├─────┼──────────────────────────┼────────────────────────────────────────┤
+  │ P8  │ README                   │ Every claim matches the code           │
+  └─────┴──────────────────────────┴────────────────────────────────────────┘
+
+  6. Demo briefs (full text in section 6)
+
+  - clear.txt: a gym class-booking web app. It has explicit users, platform,
+    priorities, a deadline (15 March 2027) and one stated dependency. Expected
+    result: mostly Ready tickets.
+  - vague.txt: a grocery app with 8 deliberate traps. Expected result: mostly
+    Needs clarification, with 8 or more questions linked to the tickets they
+    block.
+
+  ┌─────┬──────────────────────────────────┬────────────────────────────────┐
+  │  #  │        Trap in the brief         │    What the tool must flag     │
+  ├─────┼──────────────────────────────────┼────────────────────────────────┤
+  │ 1   │ App Store/Google Play vs "web    │ contradiction (quote both)     │
+  │     │ only"                            │                                │
+  ├─────┼──────────────────────────────────┼────────────────────────────────┤
+  │ 2   │ "fast, modern and secure"        │ vague (one per word)           │
+  ├─────┼──────────────────────────────────┼────────────────────────────────┤
+  │ 3   │ "ORMS"                           │ undefined term                 │
+  ├─────┼──────────────────────────────────┼────────────────────────────────┤
+  │ 4   │ loyalty scheme "like last time"  │ undefined term                 │
+  ├─────┼──────────────────────────────────┼────────────────────────────────┤
+  │ 5   │ "pay online"                     │ scope gap (payment methods,    │
+  │     │                                  │ currency…)                     │
+  ├─────┼──────────────────────────────────┼────────────────────────────────┤
+  │ 6   │ delivery slots                   │ scope gap                      │
+  ├─────┼──────────────────────────────────┼────────────────────────────────┤
+  │ 7   │ "the usual reports"              │ vague                          │
+  ├─────┼──────────────────────────────────┼────────────────────────────────┤
+  │ 8   │ "as soon as possible", no        │ missing deadline and           │
+  │     │ feature ranking                  │ priorities                     │
+  └─────┴──────────────────────────────────┴────────────────────────────────┘
+
+  7. Testing (TESTING.md, 14 checks)
+
+  The checks include:
+  - quote-checker unit tests
+  - contradiction rejection
+  - a search for invented details
+  - 8/8 traps caught
+  - status logic
+  - CSV round-trip
+  - edge cases: empty brief, "Build an app.", missing key
+
+  Log at least 2 real defects that were fixed in the chat.
+
+  8. What changed for Gemini
+
+  - Library and key: pip install google-genai, key in GEMINI_API_KEY (set it
+    yourself with setx), model gemini-2.5-flash on the free tier.
+  - JSON mode: response_mime_type="application/json" and temperature=0.
+  - Truncated replies (finish_reason=MAX_TOKENS) are reported as errors. If
+    replies come back empty, set thinking_budget=0.
+  - A rate-limit error (HTTP 429) triggers one retry after waiting 30 seconds.
+  - The key check before submitting now searches for AIza, the prefix of Gemini
+    keys.
+
+  9. Time plan: about 55 minutes of work
+
+  If you only have 40 minutes, apply the cut-list in section 9 of the plan file.
+
+  Never cut:
+  - one prompt per stage
+  - the quote checks
+  - "Not specified" and status set by code
+  - both briefs with their outputs
+  - 2 real fixes shown in the chat
+  - both chats exported unedited
+
+  Start now
+
+  1. Get the Gemini key at aistudio.google.com. Run setx GEMINI_API_KEY "..." in
+     your own PowerShell window, then reopen your terminals. Never paste the
+     key into a chat.
+  2. pip install google-genai pytest
+  3. Save this chat as planning evidence. Run /export here and save it as
+     task1/chats/00_planning_chat.md. The plan says this conversation is your
+     planning record, so export it complete and unedited, Task 2 parts included.
+  4. Open a new Claude Code chat in task1/. Create PLAN.md from the 1-page
+     template at the end of PLAN_full.md, save the two briefs into briefs/, then
+     paste prompt P1.
+  5. Work through P2–P8 one at a time, pasting the real output back after each
+     one.
+  6. Export that chat as task1/chats/01_build_chat.md.
+
+✻ Cogitated for 10m 20s · done 12:35 PM
+
+❯ show me the plan now and i add the gemini api , in the system env also makde  
+  the .env file under the task 1 folder                                         
+
+● You've put the key in two places, so first I'll confirm both are set up,
+  without reading or printing the key itself, because this chat will be
+  exported.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The variable is set, but the key is 53 characters without the usual AIza
+  prefix, and the .env file isn't in task1/. I'm checking both now without
+  displaying the key.
+
+  Ran 1 shell command (ctrl+o to expand)
+● The API key looks well-formed (it begins with AQ., a newer Google key format),
+  and no .env file exists in the project. I'm now testing the key with one real
+  Gemini call.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+● The key works, and gemini-2.5-flash answered in JSON mode, so I'm updating the
+  plan's key-leak check to search for your actual key before opening the plan.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● Update(PLAN_full.md)
+  ⎿  Added 1 line, removed 1 line
+      513  - [ ] `PLAN.md`, which states it was drafted with AI help (cha
+           t 00) and reviewed in P1; `TESTING.md`; `README.md`
+      514  - [ ] `briefs/clear.txt`, `briefs/vague.txt`
+      515  - [ ] `out/clear/` and `out/vague/`, each with `run.log`, `tic
+           kets.json` and `tickets_jira.csv`. `report.md` is optional
+      516 -- [ ] No API key in any file or chat export: `Get-ChildItem -R
+          -ecurse -File | Select-String -Pattern 'AIza'` returns 0 hits, 
+          -including inside `chats/` (Gemini keys start with `AIza`)     
+      516 +- [ ] No API key in any file or chat export. This searches for
+          + your real key value without printing it, and must print `0` (
+          +it also covers `chats/`): `$k=[Environment]::GetEnvironmentVar
+          +iable('GEMINI_API_KEY','User'); (Get-ChildItem -Recurse -File 
+          +| Select-String -SimpleMatch -Pattern $k).Count`. Your key sta
+          +rts with `AQ.`, so a prefix search for `AIza` would not catch 
+          +it.                                                           
+      517  
+      518  **README outline:**
+      519  1. Purpose and the 6-stage diagram (LLM vs code).
+
+● Update(PLAN_full.md)
+  ⎿  Added 1 line, removed 1 line
+      554  | 37–43 | P6 Tickets and export (clear.txt) |
+      555  | 43–49 | P7 vague.txt run, review, edge cases, TESTING.md (de
+           fect #2) |
+      556  | 49–52 | P8 README |
+      557 -| 52–55 | Export chat 00 and chat 01 unedited, run the `AIza` 
+          -key search over everything including `chats/`, zip |          
+      557 +| 52–55 | Export chat 00 and chat 01 unedited, run the key-val
+          +ue search (section 8) over everything including `chats/`, zip 
+          +|                                                             
+      558  
+      559  **PLAN.md template (max 1 page):**
+      560  ```
+
+  Ran 1 shell command (ctrl+o to expand)
+
+● The full plan is now open in VS Code:
+  C:\Users\umara\Downloads\RC3_AI_HACK\task1\PLAN_full.md. Press Ctrl+Shift+V to
+  see it formatted. The overview is in my previous message; the file has every
+  prompt (P1–P8) word for word, plus the JSON formats and both demo briefs.
+
+  Your Gemini setup
+
+  ┌───────────────────────────┬─────────────────────────────────────────────┐
+  │           Check           │                   Result                    │
+  ├───────────────────────────┼─────────────────────────────────────────────┤
+  │ GEMINI_API_KEY in your    │ ✅ set                                      │
+  │ user environment          │                                             │
+  ├───────────────────────────┼─────────────────────────────────────────────┤
+  │                           │ ✅ OK. It starts with AQ., Google's newer   │
+  │ Key format                │ key format, and has no stray quotes or      │
+  │                           │ spaces.                                     │
+  ├───────────────────────────┼─────────────────────────────────────────────┤
+  │ google-genai library      │ ✅ installed (2.34.0)                       │
+  ├───────────────────────────┼─────────────────────────────────────────────┤
+  │ Real test call to         │ ✅ returned {"ok": true} in JSON mode       │
+  │ gemini-2.5-flash          │                                             │
+  ├───────────────────────────┼─────────────────────────────────────────────┤
+  │ .env file in task1        │ ❌ not found anywhere in the project        │
+  └───────────────────────────┴─────────────────────────────────────────────┘
+
+  About the .env file: you don't need one, so I'd skip it.
+  - The key is already in your environment, and Gemini's library reads it from
+    there automatically.
+  - A .env file is the most common way keys leak, because it gets zipped and
+    submitted by accident. The handbook says leaking a key can cost marks.
+  - If you still want one: name it exactly .env (Notepad often saves it as
+    .env.txt without telling you) and leave it out of the submission zip.
+
+  Model: the plan uses gemini-2.5-flash, which I've tested. Your account also
+  has gemini-3.5-flash, which is newer and probably better at following the
+  "never assume" rules. You can switch any time with --model gemini-3.5-flash or
+  by setting GEMINI_MODEL, with no code change.
+
+  One plan fix: the final "no key in any file" check searched for AIza, the old
+  key prefix, so it would have missed your AQ. key. It now searches for your
+  actual key value without printing it (section 8 of the plan).
+
+  Important: Claude Code only sees the new variable after a restart. Close and
+  reopen your terminal and Claude Code before starting the Task 1 chat.
+
+  Next steps
+
+  1. Save this conversation: run /export here and save it as
+     task1\chats\00_planning_chat.md. It's your planning evidence.
+  2. Restart the terminal and open a new Claude Code chat in task1\.
+  3. Create PLAN.md from the 1-page template at the bottom of PLAN_full.md, and
+     save the two briefs from section 6 into briefs\.
+  4. Paste prompt P1 from section 5 and work through P2–P8 one prompt at a time.
+
+✻ Crunched for 1m 53s · done 12:38 PM

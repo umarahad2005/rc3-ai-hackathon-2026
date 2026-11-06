@@ -1,0 +1,78 @@
+Brief2Jira  brief=briefs/clear.txt  model=gemini-2.5-flash  out=out/clear
+
+##############################################################################
+# STAGE 1 INPUT - 16 sentences
+##############################################################################
+  S1: FitLane Gym - Class Booking Web App
+  S2: FitLane Gym runs group fitness classes at one branch.
+  S3: We need a web application that works in desktop and mobile browsers.
+  S4: It has two user groups: members and front-desk staff.
+  S5: Staff create classes with a name, instructor, start time and capacity.
+  S6: Members can book a class up to 7 days before it starts.
+  S7: Members can only book classes that staff have already created.
+  S8: When a class reaches its capacity, booking closes and members see the message "Class full".
+  S9: Members can cancel a booking up to 2 hours before the class starts.
+  S10: Cancelling frees the place for another member.
+  S11: Staff can view the list of members booked into each class and print it.
+  S12: Members receive a booking confirmation after they book.
+  S13: Booking and cancellation are high priority.
+  S14: The printable list is low priority.
+  S15: The app must launch on 15 March 2027.
+  S16: Members identify themselves with their membership number.
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+  F1 [constraint] FitLane Gym runs group fitness classes at one branch
+      quote: "FitLane Gym runs group fitness classes at one branch."  (S2)
+  F2 [constraint] We need a web application
+      quote: "We need a web application"  (S3)
+  F3 [constraint] The web application works in desktop browsers
+      quote: "works in desktop and mobile browsers."  (S3)
+  F4 [constraint] The web application works in mobile browsers
+      quote: "works in desktop and mobile browsers."  (S3)
+  F5 [user] The system has user group: members
+      quote: "It has two user groups: members and front-desk staff."  (S4)
+  F6 [user] The system has user group: front-desk staff
+      quote: "It has two user groups: members and front-desk staff."  (S4)
+  F7 [feature] Staff create classes with a name, instructor, start time and capacity
+      quote: "Staff create classes with a name, instructor, start time and capacity."  (S5)
+  F8 [feature] Members can book a class
+      quote: "Members can book a class"  (S6)
+  F9 [constraint] Members can book a class up to 7 days before it starts
+      quote: "Members can book a class up to 7 days before it starts."  (S6)
+  F10 [constraint] Members can only book classes that staff have already created
+      quote: "Members can only book classes that staff have already created."  (S7)
+  F11 [feature] When a class reaches its capacity, booking closes
+      quote: "When a class reaches its capacity, booking closes"  (S8)
+  F12 [feature] members see the message "Class full"
+      quote: "members see the message "Class full"."  (S8)
+  F13 [feature] Members can cancel a booking
+      quote: "Members can cancel a booking"  (S9)
+  F14 [constraint] Members can cancel a booking up to 2 hours before the class starts
+      quote: "Members can cancel a booking up to 2 hours before the class starts."  (S9)
+  F15 [feature] Cancelling frees the place for another member
+      quote: "Cancelling frees the place for another member."  (S10)
+  F16 [feature] Staff can view the list of members booked into each class
+      quote: "Staff can view the list of members booked into each class"  (S11)
+  F17 [feature] Staff can print the list of members booked into each class
+      quote: "and print it."  (S11)
+  F18 [feature] Members receive a booking confirmation after they book
+      quote: "Members receive a booking confirmation after they book."  (S12)
+  F19 [priority] Booking is high priority
+      quote: "Booking and cancellation are high priority."  (S13)
+  F20 [priority] cancellation are high priority
+      quote: "Booking and cancellation are high priority."  (S13)
+  F21 [priority] The printable list is low priority
+      quote: "The printable list is low priority."  (S14)
+  F22 [deadline] The app must launch on 15 March 2027
+      quote: "The app must launch on 15 March 2027."  (S15)
+  F23 [constraint] Members identify themselves with their membership number
+      quote: "Members identify themselves with their membership number."  (S16)
+Rejected: None
+
+##############################################################################
+# STAGE 3 GAPS (LLM + templates) - verified questions
+##############################################################################
+ERROR: stage failed: Gemini free-tier DAILY quota exhausted; re-run after the quota resets. API said: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests
+No export written.

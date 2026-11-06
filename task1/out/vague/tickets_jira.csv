@@ -1,0 +1,147 @@
+"Summary","Issue Type","Description","Priority","Labels"
+"Order groceries","Epic","Enable customers to order groceries through a digital platform.
+
+h3. Acceptance Criteria
+Not applicable (epic) - see child tickets TASK-002, TASK-003, TASK-004
+
+h3. Source
+{quote}S3: ""to order groceries""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-002] What is the specific target measurement for the app to be considered fast?
+* [Q-003] How do you define a modern app for this project?
+* [Q-004] What specific security standards or protocols must the app meet to be considered secure?
+
+h3. Details
+Status: Needs clarification | Parent: None | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-001"
+"Browse products and pay online","Story","Customers browse products, add them to a basket and pay online.
+
+h3. Acceptance Criteria
+* Customers browse products, add them to a basket and pay online.
+
+h3. Source
+{quote}S5: ""Customers browse products, add them to a basket and pay online""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-001] Should the first version be a web application or a mobile app for the App Store and Google Play?
+* [Q-009] What is the specific target date for the live launch?
+* [Q-010] Which payment provider or gateway should be used to pay online?
+* [Q-011] Which features have the highest priority for the first release?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-001 | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-002"
+"Select delivery slots","Story","Provide delivery slots as they are important to the business.
+
+h3. Acceptance Criteria
+* Delivery slots are important to us.
+
+h3. Source
+{quote}S8: ""Delivery slots are important to us""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-007] What are the rules and constraints for selecting and booking delivery slots?
+* [Q-009] What is the specific target date for the live launch?
+* [Q-011] Which features have the highest priority for the first release?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-001 | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-003"
+"Apply loyalty scheme","Story","Implement the loyalty scheme to work like last time.
+
+h3. Acceptance Criteria
+* The loyalty scheme to work like last time.
+
+h3. Source
+{quote}S7: ""loyalty scheme to work like last time""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-006] How did the loyalty scheme work last time?
+* [Q-009] What is the specific target date for the live launch?
+* [Q-011] Which features have the highest priority for the first release?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-001 | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-004"
+"Sync with ORMS","Epic","Integrate orders with the ORMS for warehouse visibility.
+
+h3. Acceptance Criteria
+Not applicable (epic) - see child tickets TASK-006
+
+h3. Source
+{quote}S6: ""Orders should sync with our ORMS""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-002] What is the specific target measurement for the app to be considered fast?
+* [Q-003] How do you define a modern app for this project?
+* [Q-004] What specific security standards or protocols must the app meet to be considered secure?
+
+h3. Details
+Status: Needs clarification | Parent: None | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-005"
+"Sync orders with ORMS","Task","Orders should sync with our ORMS so the warehouse sees them straight away.
+
+h3. Acceptance Criteria
+* Orders should sync with our ORMS.
+* The warehouse sees the orders straight away.
+
+h3. Source
+{quote}S6: ""Orders should sync with our ORMS""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-005] What is the ORMS and what interface or API does it provide for syncing orders?
+* [Q-009] What is the specific target date for the live launch?
+* [Q-011] Which features have the highest priority for the first release?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-005 | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-006"
+"Admins usual reports","Epic","Provide weekly reports for administrators.
+
+h3. Acceptance Criteria
+Not applicable (epic) - see child tickets TASK-008
+
+h3. Source
+{quote}S9: ""Admins should get the usual reports""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-002] What is the specific target measurement for the app to be considered fast?
+* [Q-003] How do you define a modern app for this project?
+* [Q-004] What specific security standards or protocols must the app meet to be considered secure?
+
+h3. Details
+Status: Needs clarification | Parent: None | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-007"
+"Receive usual reports every week","Story","Admins should get the usual reports every week.
+
+h3. Acceptance Criteria
+* Admins should get the usual reports every week.
+
+h3. Source
+{quote}S9: ""Admins should get the usual reports every week""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-008] Which specific reports are included in the usual reports and what data must each contain?
+* [Q-009] What is the specific target date for the live launch?
+* [Q-011] Which features have the highest priority for the first release?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-007 | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-008"

@@ -1,0 +1,278 @@
+Brief2Jira  brief=briefs/clear.txt  model=gemini-2.5-flash  out=out/clear
+
+##############################################################################
+# STAGE 1 INPUT - 16 sentences
+##############################################################################
+  S1: FitLane Gym - Class Booking Web App
+  S2: FitLane Gym runs group fitness classes at one branch.
+  S3: We need a web application that works in desktop and mobile browsers.
+  S4: It has two user groups: members and front-desk staff.
+  S5: Staff create classes with a name, instructor, start time and capacity.
+  S6: Members can book a class up to 7 days before it starts.
+  S7: Members can only book classes that staff have already created.
+  S8: When a class reaches its capacity, booking closes and members see the message "Class full".
+  S9: Members can cancel a booking up to 2 hours before the class starts.
+  S10: Cancelling frees the place for another member.
+  S11: Staff can view the list of members booked into each class and print it.
+  S12: Members receive a booking confirmation after they book.
+  S13: Booking and cancellation are high priority.
+  S14: The printable list is low priority.
+  S15: The app must launch on 15 March 2027.
+  S16: Members identify themselves with their membership number.
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+  F1 [constraint] A web application that works in desktop and mobile browsers.
+      quote: "We need a web application that works in desktop and mobile browsers."  (S3)
+  F2 [user] Two user groups: members and front-desk staff.
+      quote: "It has two user groups: members and front-desk staff."  (S4)
+  F3 [feature] Staff create classes with a name, instructor, start time and capacity.
+      quote: "Staff create classes with a name, instructor, start time and capacity."  (S5)
+  F4 [feature] Members can book a class up to 7 days before it starts.
+      quote: "Members can book a class up to 7 days before it starts."  (S6)
+  F5 [constraint] Members can only book classes that staff have already created.
+      quote: "Members can only book classes that staff have already created."  (S7)
+  F6 [feature] When a class reaches its capacity, booking closes and members see the message "Class full".
+      quote: "When a class reaches its capacity, booking closes and members see the message "Class full"."  (S8)
+  F7 [feature] Members can cancel a booking up to 2 hours before the class starts.
+      quote: "Members can cancel a booking up to 2 hours before the class starts."  (S9)
+  F8 [feature] Cancelling frees the place for another member.
+      quote: "Cancelling frees the place for another member."  (S10)
+  F9 [feature] Staff can view the list of members booked into each class and print it.
+      quote: "Staff can view the list of members booked into each class and print it."  (S11)
+  F10 [feature] Members receive a booking confirmation after they book.
+      quote: "Members receive a booking confirmation after they book."  (S12)
+  F11 [priority] Booking and cancellation are high priority.
+      quote: "Booking and cancellation are high priority."  (S13)
+  F12 [priority] The printable list is low priority.
+      quote: "The printable list is low priority."  (S14)
+  F13 [deadline] The app must launch on 15 March 2027.
+      quote: "The app must launch on 15 March 2027."  (S15)
+  F14 [feature] Members identify themselves with their membership number.
+      quote: "Members identify themselves with their membership number."  (S16)
+Rejected: None
+
+##############################################################################
+# STAGE 3 GAPS (LLM + templates) - verified questions
+##############################################################################
+  Q1 (missing, llm) How do staff log in or authenticate to the web application?
+  Q2 (scope_gap, llm) How do members use their membership number to log in or authenticate to the web application?
+      quote: "Members identify themselves with their membership number."
+      related facts: F14
+  Q3 (scope_gap, llm) What information about members should be included on the printable list for each class?
+      quote: "Staff can view the list of members booked into each class and print it."
+      related facts: F9
+  Q4 (scope_gap, llm) How do members receive the booking confirmation?
+      quote: "Members receive a booking confirmation after they book."
+      related facts: F10
+  Q5 (missing, template) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+Templated questions added: 1
+Rejected: None
+
+##############################################################################
+# STAGE 4 BREAK DOWN (LLM) - verified epics and tasks
+##############################################################################
+  E1 Staff Class Management
+    E1.T1 [Story] Allow staff to create classes  facts=F3  AC=1  deps=-  blocked_by=Q1
+    E1.T2 [Story] Allow staff to view and print class member lists  facts=F9  AC=2  deps=-  blocked_by=Q1,Q3
+  E2 Member Class Booking and Cancellation
+    E2.T1 [Story] Allow members to book a class  facts=F4,F5,F6  AC=4  deps=E1.T1  blocked_by=Q2
+    E2.T2 [Story] Allow members to cancel a class booking  facts=F7,F8  AC=2  deps=-  blocked_by=Q2
+    E2.T3 [Story] Send booking confirmation to members  facts=F10  AC=1  deps=E2.T1  blocked_by=Q4
+  E3 User Identification and Web Application Foundation
+    E3.T1 [Task] Implement member identification  facts=F14  AC=1  deps=-  blocked_by=Q2
+    E3.T3 [Task] Develop web application for desktop and mobile browsers  facts=F1  AC=1  deps=-  blocked_by=-
+Rejected (1):
+  [breakdown] task sourced only from user/priority/deadline/estimate facts and no verified acceptance criterion: {"local_id": "E3.T2", "type": "Task", "title": "Implement staff authentication", "description": "A method for front-desk staff to log in or authenticate to the web application needs to be implemented.", "source_fact_ids": ["F2"], "acceptance_criteria": [], "dependencies": [], "priority": {"value": null, "quote": null}, "estimate": {"value": null, "quote": null}, "deadline": {"value": "15 March 2027", "quote": "The app must launch on 15 March 2027."}, "blocked_by_question_ids": ["Q1"]}
+
+##############################################################################
+# STAGE 5+6 TICKETS AND REPORT
+##############################################################################
+==============================================================================
+TICKETS (10)
+==============================================================================
+TASK-001  [Epic]  Staff Class Management
+  Children: TASK-002, TASK-003
+  Description: This epic covers the functionalities for front-desk staff to create and manage classes, including viewing and printing member lists.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-002, TASK-003
+  Source: S5: "Staff create classes with a name, instructor, start time and capacity."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-005] (missing) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+TASK-002  [Story]  Allow staff to create classes
+  Parent: TASK-001
+  Description: Front-desk staff need the ability to create new group fitness classes, defining their name, instructor, start time, and capacity.
+  Acceptance Criteria:
+    - Staff must be able to create classes with a name, instructor, start time and capacity.   <- "Staff create classes with a name, instructor, start time and capacity."
+  Source: S5: "Staff create classes with a name, instructor, start time and capacity."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (missing) How do staff log in or authenticate to the web application?
+
+TASK-003  [Story]  Allow staff to view and print class member lists
+  Parent: TASK-001
+  Description: Front-desk staff must be able to view the list of members booked into each class and have the option to print this list.
+  Acceptance Criteria:
+    - Staff can view the list of members booked into each class.   <- "Staff can view the list of members booked into each class and print it."
+    - Staff can print the list of members booked into each class.   <- "Staff can view the list of members booked into each class and print it."
+  Source: S11: "Staff can view the list of members booked into each class and print it."
+  Dependencies: None stated in brief
+  Priority: low priority
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (missing) How do staff log in or authenticate to the web application?
+    [Q-003] (scope_gap) What information about members should be included on the printable list for each class?
+
+TASK-004  [Epic]  Member Class Booking and Cancellation
+  Children: TASK-005, TASK-006, TASK-007
+  Description: This epic focuses on the member-facing functionalities for booking and cancelling group fitness classes, including related notifications.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-005, TASK-006, TASK-007
+  Source: S6: "Members can book a class up to 7 days before it starts."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-005] (missing) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+TASK-005  [Story]  Allow members to book a class
+  Parent: TASK-004
+  Description: Members need to be able to book a class, adhering to specific timeframes and class capacity limits.
+  Acceptance Criteria:
+    - Members can book a class up to 7 days before it starts.   <- "Members can book a class up to 7 days before it starts."
+    - Members can only book classes that staff have already created.   <- "Members can only book classes that staff have already created."
+    - When a class reaches its capacity, booking closes.   <- "When a class reaches its capacity, booking closes and members see the message "Class full"."
+    - When a class reaches its capacity, members see the message "Class full".   <- "When a class reaches its capacity, booking closes and members see the message "Class full"."
+  Source: S6: "Members can book a class up to 7 days before it starts."
+  Dependencies: TASK-002
+  Priority: high priority
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-002] (scope_gap) How do members use their membership number to log in or authenticate to the web application?
+
+TASK-006  [Story]  Allow members to cancel a class booking
+  Parent: TASK-004
+  Description: Members must be able to cancel their class bookings within a specified timeframe, which should free up the booked spot.
+  Acceptance Criteria:
+    - Members can cancel a booking up to 2 hours before the class starts.   <- "Members can cancel a booking up to 2 hours before the class starts."
+    - Cancelling frees the place for another member.   <- "Cancelling frees the place for another member."
+  Source: S9: "Members can cancel a booking up to 2 hours before the class starts."
+  Dependencies: None stated in brief
+  Priority: high priority
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-002] (scope_gap) How do members use their membership number to log in or authenticate to the web application?
+
+TASK-007  [Story]  Send booking confirmation to members
+  Parent: TASK-004
+  Description: After successfully booking a class, members must receive a confirmation.
+  Acceptance Criteria:
+    - Members receive a booking confirmation after they book.   <- "Members receive a booking confirmation after they book."
+  Source: S12: "Members receive a booking confirmation after they book."
+  Dependencies: TASK-005
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-004] (scope_gap) How do members receive the booking confirmation?
+
+TASK-008  [Epic]  User Identification and Web Application Foundation
+  Children: TASK-009, TASK-010
+  Description: This epic covers the foundational aspects of the web application, including user identification for members and staff, and the overall web application development.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-009, TASK-010
+  Source: S16: "Members identify themselves with their membership number."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-005] (missing) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+TASK-009  [Task]  Implement member identification
+  Parent: TASK-008
+  Description: The system needs to implement a mechanism for members to identify themselves using their unique membership number.
+  Acceptance Criteria:
+    - Members must identify themselves with their membership number.   <- "Members identify themselves with their membership number."
+  Source: S16: "Members identify themselves with their membership number."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-002] (scope_gap) How do members use their membership number to log in or authenticate to the web application?
+
+TASK-010  [Task]  Develop web application for desktop and mobile browsers
+  Parent: TASK-008
+  Description: The core web application needs to be developed to function correctly across both desktop and mobile browser environments.
+  Acceptance Criteria:
+    - The web application must work in desktop and mobile browsers.   <- "We need a web application that works in desktop and mobile browsers."
+  Source: S3: "We need a web application that works in desktop and mobile browsers."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Ready
+  Open Questions: None
+
+==============================================================================
+OPEN QUESTIONS BY CATEGORY (5)
+==============================================================================
+[missing] (2)
+  Q-001: How do staff log in or authenticate to the web application?
+      linked tickets: TASK-002, TASK-003
+  Q-005: Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+      linked tickets: TASK-001, TASK-004, TASK-008
+
+[scope_gap] (3)
+  Q-002: How do members use their membership number to log in or authenticate to the web application?
+      quote: "Members identify themselves with their membership number."
+      linked tickets: TASK-005, TASK-006, TASK-009
+  Q-003: What information about members should be included on the printable list for each class?
+      quote: "Staff can view the list of members booked into each class and print it."
+      linked tickets: TASK-003
+  Q-004: How do members receive the booking confirmation?
+      quote: "Members receive a booking confirmation after they book."
+      linked tickets: TASK-007
+
+General questions (not linked to a specific task, attached to every epic): Q-005
+
+==============================================================================
+REJECTED ITEMS (1)
+==============================================================================
+  [breakdown] task sourced only from user/priority/deadline/estimate facts and no verified acceptance criterion: {"local_id": "E3.T2", "type": "Task", "title": "Implement staff authentication", "description": "A method for front-desk staff to log in or authenticate to the web application needs to be implemented.", "source_fact_ids": ["F2"], "acceptance_criteria": [], "dependencies": [], "priority": {"value": null, "quote": null}, "estimate": {"value": null, "quote": null}, "deadline": {"value": "15 March 2027", "quote": "The app must launch on 15 March 2027."}, "blocked_by_question_ids": ["Q1"]}
+
+==============================================================================
+LINT WARNINGS (1)
+==============================================================================
+  WARNING invented term: notification in TASK-004
+
+==============================================================================
+COUNTS
+==============================================================================
+  Facts: 14
+  Questions: 5 (missing: 2, scope_gap: 3)
+  Tickets: 10 (Ready: 1, Needs clarification: 9)
+  Rejected items: 1
+  Lint warnings: 1
+
+Wrote out/clear\tickets.json, out/clear\tickets_jira.csv, out/clear\run.log

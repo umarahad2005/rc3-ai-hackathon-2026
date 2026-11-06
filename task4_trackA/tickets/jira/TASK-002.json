@@ -1,0 +1,10 @@
+{
+  "key": "TASK-002",
+  "fields": {
+    "summary": "Create classes as staff",
+    "description": "Staff create classes with a name, instructor, start time and capacity so that members can book classes that staff have already created.\n\nh3. Acceptance Criteria\n* Staff create classes with a name, instructor, start time and capacity.\n* Members can only book classes that staff have already created.\n\nh3. Source\n{quote}S5: \"Staff create classes with a name, instructor, start time and capacity.\"{quote}\n\nh3. Dependencies\nNone stated in brief\n\nh3. Open Questions\nNone\n\nh3. Details\nStatus: Ready | Parent: TASK-001 | Priority: Not specified | Estimate: Not specified | Deadline: 15 March 2027",
+    "labels": [
+      "TASK-002"
+    ]
+  }
+}

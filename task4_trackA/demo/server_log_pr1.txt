@@ -1,0 +1,12 @@
+Listening on http://0.0.0.0:8765/webhook
+[1/6 webhook] pull_request/opened umarahad2005/rc3-pr-reviewer-demo#1 'TASK-004 Manage class capacity' branch=feature/TASK-004-class-full-incomplete
+[1/6 webhook] reviewing umarahad2005/rc3-pr-reviewer-demo#1
+[1/6 webhook] PR #1 'TASK-004 Manage class capacity' branch=feature/TASK-004-class-full-incomplete sha=25dff26
+[2/6 story] ticket ID TASK-004
+[2/6 story] 'Manage class capacity and closing' source=csv AC=1
+[3/6 code] diff 491 chars
+[4/6 llm] asking LLM for a verdict
+[4/6 llm] fulfilled=False error=None
+[5/6 decision] decision=BLOCK reason=Acceptance criteria not fulfilled.
+[6/6 action] POST /repos/umarahad2005/rc3-pr-reviewer-demo/statuses/25dff262232c5ccfd1a58ee682000e651eaef348 (status failure on 25dff26)
+[6/6 action] POST /repos/umarahad2005/rc3-pr-reviewer-demo/issues/1/comments (comment FAILED on PR #1)

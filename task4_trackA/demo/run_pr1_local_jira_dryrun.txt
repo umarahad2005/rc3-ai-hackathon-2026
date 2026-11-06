@@ -1,0 +1,26 @@
+[1/6 webhook] reviewing umarahad2005/rc3-pr-reviewer-demo#1 (dry-run)
+[1/6 webhook] PR #1 'TASK-004 Manage class capacity' branch=feature/TASK-004-class-full-incomplete sha=25dff26
+[2/6 story] ticket ID TASK-004
+[2/6 story] 'Manage class capacity and closing' source=jira-local AC=1
+[3/6 code] diff 491 chars
+[4/6 llm] asking LLM for a verdict
+[4/6 llm] fulfilled=False error=None
+[5/6 decision] decision=BLOCK reason=Acceptance criteria not fulfilled.
+[6/6 action] [DRY-RUN] POST /repos/umarahad2005/rc3-pr-reviewer-demo/statuses/25dff262232c5ccfd1a58ee682000e651eaef348 (status failure on 25dff26)
+[6/6 action] [DRY-RUN] POST /repos/umarahad2005/rc3-pr-reviewer-demo/issues/1/comments (comment FAILED on PR #1)
+{
+  "ticket_id": "TASK-004",
+  "decision": "BLOCK",
+  "reason": "Acceptance criteria not fulfilled.",
+  "actions": [
+    "[DRY-RUN] POST /repos/umarahad2005/rc3-pr-reviewer-demo/statuses/25dff262232c5ccfd1a58ee682000e651eaef348 (status failure on 25dff26)",
+    "[DRY-RUN] POST /repos/umarahad2005/rc3-pr-reviewer-demo/issues/1/comments (comment FAILED on PR #1)"
+  ],
+  "verdict": {
+    "fulfilled": false,
+    "feedback": "The code diff fails to meet the acceptance criteria. It currently lacks the logic to check if a class has reached its capacity, does not prevent bookings when full, and does not return the required message 'Class full'.",
+    "error": null,
+    "reason": "Acceptance criteria not fulfilled.",
+    "raw": "{\n  \"fulfilled\": false,\n  \"feedback\": \"The code diff fails to meet the acceptance criteria. It currently lacks the logic to check if a class has reached its capacity, does not prevent bookings when full, and does not return the required message 'Class full'.\"\n}"
+  }
+}

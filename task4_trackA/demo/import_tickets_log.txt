@@ -1,0 +1,8 @@
+imported RC3-7.txt -> tickets/jira\RC3-7.json (2 acceptance criteria)
+imported RC3-8_booking_window.docx -> tickets/jira\RC3-8.json (2 acceptance criteria)
+imported RC3-9.pdf -> tickets/jira\RC3-9.json (2 acceptance criteria)
+imported task1_tickets_jira.csv -> tickets/jira\TASK-001.json (0 acceptance criteria)
+imported task1_tickets_jira.csv -> tickets/jira\TASK-002.json (2 acceptance criteria)
+imported task1_tickets_jira.csv -> tickets/jira\TASK-003.json (5 acceptance criteria)
+imported task1_tickets_jira.csv -> tickets/jira\TASK-004.json (1 acceptance criteria)
+imported task1_tickets_jira.csv -> tickets/jira\TASK-005.json (1 acceptance criteria)

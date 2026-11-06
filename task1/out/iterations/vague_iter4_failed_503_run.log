@@ -1,0 +1,23 @@
+Brief2Jira  brief=briefs/vague.txt  model=gemini-2.5-flash  out=out/vague
+
+##############################################################################
+# STAGE 1 INPUT - 12 sentences
+##############################################################################
+  S1: Hi team,
+  S2: We are a family-run grocery business and want to finally go digital.
+  S3: Customers will download our new app from the App Store and Google Play to order groceries.
+  S4: The app must be fast, modern and secure.
+  S5: Customers browse products, add them to a basket and pay online.
+  S6: Orders should sync with our ORMS so the warehouse sees them straight away.
+  S7: We would also like the loyalty scheme to work like last time.
+  S8: Delivery slots are important to us.
+  S9: Admins should get the usual reports every week.
+  S10: For budget reasons we want web only for the first version.
+  S11: We need this live as soon as possible.
+  S12: Thanks, Bilal
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+ERROR: stage failed: Gemini API error: ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+No export written.

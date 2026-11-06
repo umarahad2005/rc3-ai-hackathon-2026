@@ -1,0 +1,10 @@
+{
+  "key": "RC3-21",
+  "fields": {
+    "summary": "<sir's ticket title>",
+    "description": "h3. Acceptance Criteria\n* <criterion 1 from sir's ticket>\n* <criterion 2 from sir's ticket>",
+    "labels": [
+      "RC3-21"
+    ]
+  }
+}
