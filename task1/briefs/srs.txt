@@ -1,0 +1,48 @@
+SRS: Sign Up and Login Pages
+Nov 5, 2026 · @faisal
+1. Introduction
+1.1 Purpose
+This document specifies the requirements for the Sign Up and Login pages of the application. It is the reference for design, development and testing of user registration and authentication.
+1.2 Scope
+In scope: account creation with email and password, email verification, login, logout, "remember me", and password reset entry points. Out of scope: social login, multi-factor authentication, and admin user management (listed as future work in section 8).
+1.3 Definitions
+Term	Meaning
+User	A person creating an account or signing in
+Session	The authenticated period after a successful login
+Access token	Short-lived credential sent with each authenticated request
+Lockout	Temporary block on login after repeated failed attempts
+2. Overall description
+2.1 User classes
+•	New visitor: has no account and wants to register.
+•	Returning user: has a verified account and wants to sign in.
+2.2 Operating environment
+The pages run in current versions of Chrome, Firefox, Safari and Edge, on desktop and mobile screens from 360 px wide. They talk to a backend REST API over HTTPS.
+2.3 Assumptions and dependencies
+•	An email service is available to send verification and reset emails.
+•	The backend stores passwords only as salted hashes (bcrypt or Argon2).
+•	Authentication uses tokens issued by the backend; the exact mechanism (JWT or server session) is confirmed in section 8.
+2.4 Constraints
+•	All traffic uses HTTPS.
+•	The pages must follow the product's existing design system.
+3. Sign up page
+A new visitor can create an account with a name, email and password, then verify the email address before first login.
+3.1 Fields and validation
+Field	Required	Validation rule
+Full name	Yes	2 to 60 characters; letters, spaces, hyphens and apostrophes
+Email	Yes	Valid email format; maximum 254 characters; unique, case-insensitive
+Password	Yes	8 to 64 characters with at least one uppercase letter, one lowercase letter, one digit and one symbol
+Confirm password	Yes	Must match the password
+Terms and privacy checkbox	Yes	Must be ticked to submit
+3.2 Functional requirements
+•	SU-1: The system shall display the sign up form with the fields above and a "Sign up" button.
+•	SU-2: The system shall validate each field on blur and again on submit, showing the error under the field.
+•	SU-3: The system shall keep the "Sign up" button disabled until all required fields are valid.
+•	SU-4: The system shall let the user show or hide the password and confirm password values.
+•	SU-5: The system shall show a password strength indicator while the user types.
+•	SU-6: On submit, the system shall check that the email is not already registered and reject the request with a clear message if it is.
+•	SU-7: The system shall store the password only as a salted hash and never return it in any response.
+•	SU-8: On success, the system shall create the account in an unverified state and send a verification email containing a link valid for 24 hours.
+•	SU-9: The system shall show a confirmation screen telling the user to check their email, with a "Resend email" action limited to once every 60 seconds.
+•	SU-10: When the user opens a valid verification link, the system shall mark the account verified and redirect to the login page with a success message.
+•	SU-11: If the verification link is expired or invalid, the system shall explain this and offer to send a new link.
+•	SU-12: The page shall include a "Already have an account? Log in" link to the login page.

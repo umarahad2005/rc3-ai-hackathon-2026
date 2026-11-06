@@ -1,0 +1,587 @@
+{
+  "brief_file": "briefs/vague.txt",
+  "model": "gemini-3-flash-preview",
+  "generated_at": "2026-11-05T14:02:55+05:00",
+  "tickets": [
+    {
+      "ticket_id": "TASK-001",
+      "title": "Order groceries",
+      "type": "Epic",
+      "parent": null,
+      "children": [
+        "TASK-002",
+        "TASK-003",
+        "TASK-004"
+      ],
+      "description": "Enable customers to order groceries through a digital platform.",
+      "acceptance_criteria": [],
+      "source_reference": "S3: \"to order groceries\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-002",
+          "category": "vague",
+          "question": "What is the specific target measurement for the app to be considered fast?",
+          "quote": "The app must be fast, modern and secure",
+          "quote_b": null
+        },
+        {
+          "id": "Q-003",
+          "category": "vague",
+          "question": "How do you define a modern app for this project?",
+          "quote": "The app must be fast, modern and secure",
+          "quote_b": null
+        },
+        {
+          "id": "Q-004",
+          "category": "vague",
+          "question": "What specific security standards or protocols must the app meet to be considered secure?",
+          "quote": "The app must be fast, modern and secure",
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-002",
+      "title": "Browse products and pay online",
+      "type": "Story",
+      "parent": "TASK-001",
+      "children": [],
+      "description": "Customers browse products, add them to a basket and pay online.",
+      "acceptance_criteria": [
+        {
+          "text": "Customers browse products, add them to a basket and pay online.",
+          "quote": "Customers browse products, add them to a basket and pay online"
+        }
+      ],
+      "source_reference": "S5: \"Customers browse products, add them to a basket and pay online\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-001",
+          "category": "contradiction",
+          "question": "Should the first version be a web application or a mobile app for the App Store and Google Play?",
+          "quote": "Customers will download our new app from the App Store and Google Play",
+          "quote_b": "we want web only for the first version"
+        },
+        {
+          "id": "Q-009",
+          "category": "vague",
+          "question": "What is the specific target date for the live launch?",
+          "quote": "We need this live as soon as possible",
+          "quote_b": null
+        },
+        {
+          "id": "Q-010",
+          "category": "missing",
+          "question": "Which payment provider or gateway should be used to pay online?",
+          "quote": "Customers browse products, add them to a basket and pay online",
+          "quote_b": null
+        },
+        {
+          "id": "Q-011",
+          "category": "missing",
+          "question": "Which features have the highest priority for the first release?",
+          "quote": null,
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-003",
+      "title": "Select delivery slots",
+      "type": "Story",
+      "parent": "TASK-001",
+      "children": [],
+      "description": "Provide delivery slots as they are important to the business.",
+      "acceptance_criteria": [
+        {
+          "text": "Delivery slots are important to us.",
+          "quote": "Delivery slots are important to us"
+        }
+      ],
+      "source_reference": "S8: \"Delivery slots are important to us\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-007",
+          "category": "scope_gap",
+          "question": "What are the rules and constraints for selecting and booking delivery slots?",
+          "quote": "Delivery slots are important to us",
+          "quote_b": null
+        },
+        {
+          "id": "Q-009",
+          "category": "vague",
+          "question": "What is the specific target date for the live launch?",
+          "quote": "We need this live as soon as possible",
+          "quote_b": null
+        },
+        {
+          "id": "Q-011",
+          "category": "missing",
+          "question": "Which features have the highest priority for the first release?",
+          "quote": null,
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-004",
+      "title": "Apply loyalty scheme",
+      "type": "Story",
+      "parent": "TASK-001",
+      "children": [],
+      "description": "Implement the loyalty scheme to work like last time.",
+      "acceptance_criteria": [
+        {
+          "text": "The loyalty scheme to work like last time.",
+          "quote": "loyalty scheme to work like last time"
+        }
+      ],
+      "source_reference": "S7: \"loyalty scheme to work like last time\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-006",
+          "category": "undefined_term",
+          "question": "How did the loyalty scheme work last time?",
+          "quote": "loyalty scheme to work like last time",
+          "quote_b": null
+        },
+        {
+          "id": "Q-009",
+          "category": "vague",
+          "question": "What is the specific target date for the live launch?",
+          "quote": "We need this live as soon as possible",
+          "quote_b": null
+        },
+        {
+          "id": "Q-011",
+          "category": "missing",
+          "question": "Which features have the highest priority for the first release?",
+          "quote": null,
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-005",
+      "title": "Sync with ORMS",
+      "type": "Epic",
+      "parent": null,
+      "children": [
+        "TASK-006"
+      ],
+      "description": "Integrate orders with the ORMS for warehouse visibility.",
+      "acceptance_criteria": [],
+      "source_reference": "S6: \"Orders should sync with our ORMS\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-002",
+          "category": "vague",
+          "question": "What is the specific target measurement for the app to be considered fast?",
+          "quote": "The app must be fast, modern and secure",
+          "quote_b": null
+        },
+        {
+          "id": "Q-003",
+          "category": "vague",
+          "question": "How do you define a modern app for this project?",
+          "quote": "The app must be fast, modern and secure",
+          "quote_b": null
+        },
+        {
+          "id": "Q-004",
+          "category": "vague",
+          "question": "What specific security standards or protocols must the app meet to be considered secure?",
+          "quote": "The app must be fast, modern and secure",
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-006",
+      "title": "Sync orders with ORMS",
+      "type": "Task",
+      "parent": "TASK-005",
+      "children": [],
+      "description": "Orders should sync with our ORMS so the warehouse sees them straight away.",
+      "acceptance_criteria": [
+        {
+          "text": "Orders should sync with our ORMS.",
+          "quote": "Orders should sync with our ORMS"
+        },
+        {
+          "text": "The warehouse sees the orders straight away.",
+          "quote": "so the warehouse sees them straight away"
+        }
+      ],
+      "source_reference": "S6: \"Orders should sync with our ORMS\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-005",
+          "category": "undefined_term",
+          "question": "What is the ORMS and what interface or API does it provide for syncing orders?",
+          "quote": "Orders should sync with our ORMS",
+          "quote_b": null
+        },
+        {
+          "id": "Q-009",
+          "category": "vague",
+          "question": "What is the specific target date for the live launch?",
+          "quote": "We need this live as soon as possible",
+          "quote_b": null
+        },
+        {
+          "id": "Q-011",
+          "category": "missing",
+          "question": "Which features have the highest priority for the first release?",
+          "quote": null,
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-007",
+      "title": "Admins usual reports",
+      "type": "Epic",
+      "parent": null,
+      "children": [
+        "TASK-008"
+      ],
+      "description": "Provide weekly reports for administrators.",
+      "acceptance_criteria": [],
+      "source_reference": "S9: \"Admins should get the usual reports\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-002",
+          "category": "vague",
+          "question": "What is the specific target measurement for the app to be considered fast?",
+          "quote": "The app must be fast, modern and secure",
+          "quote_b": null
+        },
+        {
+          "id": "Q-003",
+          "category": "vague",
+          "question": "How do you define a modern app for this project?",
+          "quote": "The app must be fast, modern and secure",
+          "quote_b": null
+        },
+        {
+          "id": "Q-004",
+          "category": "vague",
+          "question": "What specific security standards or protocols must the app meet to be considered secure?",
+          "quote": "The app must be fast, modern and secure",
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    },
+    {
+      "ticket_id": "TASK-008",
+      "title": "Receive usual reports every week",
+      "type": "Story",
+      "parent": "TASK-007",
+      "children": [],
+      "description": "Admins should get the usual reports every week.",
+      "acceptance_criteria": [
+        {
+          "text": "Admins should get the usual reports every week.",
+          "quote": "Admins should get the usual reports every week"
+        }
+      ],
+      "source_reference": "S9: \"Admins should get the usual reports every week\"",
+      "dependencies": [],
+      "open_questions": [
+        {
+          "id": "Q-008",
+          "category": "vague",
+          "question": "Which specific reports are included in the usual reports and what data must each contain?",
+          "quote": "Admins should get the usual reports every week",
+          "quote_b": null
+        },
+        {
+          "id": "Q-009",
+          "category": "vague",
+          "question": "What is the specific target date for the live launch?",
+          "quote": "We need this live as soon as possible",
+          "quote_b": null
+        },
+        {
+          "id": "Q-011",
+          "category": "missing",
+          "question": "Which features have the highest priority for the first release?",
+          "quote": null,
+          "quote_b": null
+        }
+      ],
+      "priority": "Not specified",
+      "estimate": "Not specified",
+      "deadline": "Not specified",
+      "status": "Needs clarification"
+    }
+  ],
+  "general_questions": [
+    {
+      "id": "Q-002",
+      "category": "vague",
+      "question": "What is the specific target measurement for the app to be considered fast?",
+      "quote": "The app must be fast, modern and secure",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F6"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001",
+        "TASK-005",
+        "TASK-007"
+      ]
+    },
+    {
+      "id": "Q-003",
+      "category": "vague",
+      "question": "How do you define a modern app for this project?",
+      "quote": "The app must be fast, modern and secure",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F6"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001",
+        "TASK-005",
+        "TASK-007"
+      ]
+    },
+    {
+      "id": "Q-004",
+      "category": "vague",
+      "question": "What specific security standards or protocols must the app meet to be considered secure?",
+      "quote": "The app must be fast, modern and secure",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F6"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001",
+        "TASK-005",
+        "TASK-007"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q-001",
+      "category": "contradiction",
+      "question": "Should the first version be a web application or a mobile app for the App Store and Google Play?",
+      "quote": "Customers will download our new app from the App Store and Google Play",
+      "quote_b": "we want web only for the first version",
+      "related_fact_ids": [
+        "F3",
+        "F4",
+        "F14"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-002"
+      ]
+    },
+    {
+      "id": "Q-002",
+      "category": "vague",
+      "question": "What is the specific target measurement for the app to be considered fast?",
+      "quote": "The app must be fast, modern and secure",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F6"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001",
+        "TASK-005",
+        "TASK-007"
+      ]
+    },
+    {
+      "id": "Q-003",
+      "category": "vague",
+      "question": "How do you define a modern app for this project?",
+      "quote": "The app must be fast, modern and secure",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F6"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001",
+        "TASK-005",
+        "TASK-007"
+      ]
+    },
+    {
+      "id": "Q-004",
+      "category": "vague",
+      "question": "What specific security standards or protocols must the app meet to be considered secure?",
+      "quote": "The app must be fast, modern and secure",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F6"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-001",
+        "TASK-005",
+        "TASK-007"
+      ]
+    },
+    {
+      "id": "Q-005",
+      "category": "undefined_term",
+      "question": "What is the ORMS and what interface or API does it provide for syncing orders?",
+      "quote": "Orders should sync with our ORMS",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F8"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-006"
+      ]
+    },
+    {
+      "id": "Q-006",
+      "category": "undefined_term",
+      "question": "How did the loyalty scheme work last time?",
+      "quote": "loyalty scheme to work like last time",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F10"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-004"
+      ]
+    },
+    {
+      "id": "Q-007",
+      "category": "scope_gap",
+      "question": "What are the rules and constraints for selecting and booking delivery slots?",
+      "quote": "Delivery slots are important to us",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F11"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-003"
+      ]
+    },
+    {
+      "id": "Q-008",
+      "category": "vague",
+      "question": "Which specific reports are included in the usual reports and what data must each contain?",
+      "quote": "Admins should get the usual reports every week",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F12",
+        "F13"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-008"
+      ]
+    },
+    {
+      "id": "Q-009",
+      "category": "vague",
+      "question": "What is the specific target date for the live launch?",
+      "quote": "We need this live as soon as possible",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F15"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-006",
+        "TASK-008"
+      ]
+    },
+    {
+      "id": "Q-010",
+      "category": "missing",
+      "question": "Which payment provider or gateway should be used to pay online?",
+      "quote": "Customers browse products, add them to a basket and pay online",
+      "quote_b": null,
+      "related_fact_ids": [
+        "F7"
+      ],
+      "source": "llm",
+      "linked_tickets": [
+        "TASK-002"
+      ]
+    },
+    {
+      "id": "Q-011",
+      "category": "missing",
+      "question": "Which features have the highest priority for the first release?",
+      "quote": null,
+      "quote_b": null,
+      "related_fact_ids": [],
+      "source": "template",
+      "linked_tickets": [
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-006",
+        "TASK-008"
+      ]
+    }
+  ],
+  "rejected": [],
+  "lint_warnings": [
+    "WARNING unsourced word 'platform' in description of TASK-001",
+    "WARNING unsourced word 'select' in title of TASK-003",
+    "WARNING unsourced word 'apply' in title of TASK-004",
+    "WARNING unsourced word 'integrate' in description of TASK-005",
+    "WARNING unsourced word 'visibility' in description of TASK-005",
+    "WARNING unsourced word 'weekly' in description of TASK-007",
+    "WARNING unsourced word 'administrators' in description of TASK-007",
+    "WARNING unsourced word 'receive' in title of TASK-008"
+  ]
+}

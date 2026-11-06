@@ -1,0 +1,27 @@
+[auto] baseline taken: existing branches are not re-reviewed; only NEW pushes are
+[auto] watching umarahad2005/rc3-pr-reviewer-demo (default branch main) every 10s - push a branch like feature/RC3-5-x
+[auto] push umarahad2005/rc3-pr-reviewer-demo@feature/RC3-7-cancel-booking ad1587a ticket=RC3-7
+[auto] opened PR #4 'RC3-7 cancel booking up to 2 hours before class'
+[1/6 webhook] reviewing umarahad2005/rc3-pr-reviewer-demo#4
+[1/6 webhook] PR #4 'RC3-7 cancel booking up to 2 hours before class' branch=feature/RC3-7-cancel-booking sha=ad1587a
+[2/6 story] ticket ID RC3-7
+[2/6 story] 'Cancel a booking' source=jira-local AC=2
+[3/6 code] diff 841 chars
+[4/6 llm] asking LLM for a verdict
+[4/6 llm] fulfilled=True error=None
+[5/6 decision] decision=MERGE reason=All acceptance criteria fulfilled.
+[6/6 action] POST /repos/umarahad2005/rc3-pr-reviewer-demo/statuses/ad1587a35ad84d3e18979e65379085b2d04900a4 (status success on ad1587a)
+[6/6 action] POST /repos/umarahad2005/rc3-pr-reviewer-demo/issues/4/comments (comment PASSED on PR #4)
+[6/6 action] PUT /repos/umarahad2005/rc3-pr-reviewer-demo/pulls/4/merge (squash-merge PR #4)
+[auto] push umarahad2005/rc3-pr-reviewer-demo@feature/RC3-8-booking-window d0fe7a2 ticket=RC3-8
+[auto] opened PR #5 'RC3-8 booking window'
+[1/6 webhook] reviewing umarahad2005/rc3-pr-reviewer-demo#5
+[1/6 webhook] PR #5 'RC3-8 booking window' branch=feature/RC3-8-booking-window sha=d0fe7a2
+[2/6 story] ticket ID RC3-8
+[2/6 story] 'Book a class in advance' source=jira-local AC=2
+[3/6 code] diff 435 chars
+[4/6 llm] asking LLM for a verdict
+[4/6 llm] fulfilled=False error=None
+[5/6 decision] decision=BLOCK reason=Acceptance criteria not fulfilled.
+[6/6 action] POST /repos/umarahad2005/rc3-pr-reviewer-demo/statuses/d0fe7a27760240d8c6409a91bee3ad98475871fc (status failure on d0fe7a2)
+[6/6 action] POST /repos/umarahad2005/rc3-pr-reviewer-demo/issues/5/comments (comment FAILED on PR #5)

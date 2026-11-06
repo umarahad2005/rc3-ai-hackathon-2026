@@ -1,0 +1,356 @@
+Brief2Jira  brief=briefs/vague.txt  model=gemini-flash-lite-latest  out=out/vague
+
+##############################################################################
+# STAGE 1 INPUT - 13 sentences
+##############################################################################
+  S1: Hi team,
+  S2: We are a family-run grocery business and want to finally go digital.
+  S3: Customers will download our new app from the App Store and Google Play to order groceries.
+  S4: The app must be fast, modern and secure.
+  S5: Customers browse products, add them to a basket and pay online.
+  S6: Orders should sync with our ORMS so the warehouse sees them straight away.
+  S7: We would also like the loyalty scheme to work like last time.
+  S8: Delivery slots are important to us.
+  S9: Admins should get the usual reports every week.
+  S10: For budget reasons we want web only for the first version.
+  S11: We need this live as soon as possible.
+  S12: Thanks,
+  S13: Bilal
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+Transient API error (429/503). Waiting 30 s and retrying once...
+  F1 [user] Family-run grocery business
+      quote: "We are a family-run grocery business"  (S2)
+  F2 [goal] Go digital
+      quote: "and want to finally go digital."  (S2)
+  F3 [user] Customers
+      quote: "Customers will download"  (S3)
+  F4 [feature] Download new app from the App Store and Google Play to order groceries
+      quote: "our new app from the App Store and Google Play to order groceries."  (S3)
+  F5 [constraint] The app must be fast, modern and secure
+      quote: "The app must be fast, modern and secure."  (S4)
+  F6 [feature] Customers browse products, add them to a basket and pay online
+      quote: "Customers browse products, add them to a basket and pay online."  (S5)
+  F7 [feature] Orders should sync with our ORMS so the warehouse sees them straight away
+      quote: "Orders should sync with our ORMS so the warehouse sees them straight away."  (S6)
+  F8 [integration] ORMS
+      quote: "Orders should sync with our ORMS so the warehouse sees them straight away."  (S6)
+  F9 [feature] Loyalty scheme to work like last time
+      quote: "We would also like the loyalty scheme to work like last time."  (S7)
+  F10 [feature] Delivery slots are important
+      quote: "Delivery slots are important to us."  (S8)
+  F11 [user] Admins
+      quote: "Admins should get the usual reports every week."  (S9)
+  F12 [feature] Admins should get the usual reports every week
+      quote: "Admins should get the usual reports every week."  (S9)
+  F13 [constraint] For budget reasons we want web only for the first version
+      quote: "For budget reasons we want web only for the first version."  (S10)
+  F14 [constraint] We need this live as soon as possible
+      quote: "We need this live as soon as possible."  (S11)
+Rejected: None
+
+##############################################################################
+# STAGE 3 GAPS (LLM + templates) - verified questions
+##############################################################################
+Transient API error (429/503). Waiting 30 s and retrying once...
+  [missing]
+  Q9 (missing, llm) What specific metrics or data points must each weekly report contain?
+      quote: "Admins should get the usual reports every week."
+      related facts: F12
+  Q11 (missing, template) Which features have the highest priority for the first release?
+  [vague]
+  Q2 (vague, llm) What is the measurable target or definition for fast?
+      quote: "The app must be fast, modern and secure."
+      related facts: F5
+  Q3 (vague, llm) What is the measurable target or definition for modern?
+      quote: "The app must be fast, modern and secure."
+      related facts: F5
+  Q4 (vague, llm) What is the measurable target or definition for secure?
+      quote: "The app must be fast, modern and secure."
+      related facts: F5
+  Q8 (vague, llm) Which specific reports are meant by usual reports?
+      quote: "Admins should get the usual reports every week."
+      related facts: F12
+  Q10 (vague, llm) What is the concrete target date for live?
+      quote: "We need this live as soon as possible."
+      related facts: F14
+  [contradiction]
+  Q1 (contradiction, llm) Which platform is the first version targeted for?
+      quote: "our new app from the App Store and Google Play to order groceries."
+      quote_b: "For budget reasons we want web only for the first version."
+      related facts: F4, F13
+  [undefined_term]
+  Q5 (undefined_term, llm) What does ORMS stand for, and what interface or API does it expose?
+      quote: "Orders should sync with our ORMS so the warehouse sees them straight away."
+      related facts: F8
+  Q6 (undefined_term, llm) What are the rules and mechanics of how the loyalty scheme worked last time?
+      quote: "We would also like the loyalty scheme to work like last time."
+      related facts: F9
+  [scope_gap]
+  Q7 (scope_gap, llm) What are the specific rules and behaviour required for delivery slots?
+      quote: "Delivery slots are important to us."
+      related facts: F10
+Templated questions added: 1
+Rejected: None
+
+##############################################################################
+# STAGE 4 BREAK DOWN (LLM) - verified epics and tasks
+##############################################################################
+  E1 Customers browse products, add them to a basket and pay online
+    E1.T1 [Story] Customers browse products, add them to a basket and pay online  facts=F6  AC=1  deps=-  blocked_by=Q11,Q10
+  E2 Orders should sync with our ORMS so the warehouse sees them straight away
+    E2.T1 [Task] Orders should sync with our ORMS so the warehouse sees them straight away  facts=F7  AC=0  deps=-  blocked_by=Q5,Q12,Q11,Q10
+  E3 We would also like the loyalty scheme to work like last time
+    E3.T1 [Story] We would also like the loyalty scheme to work like last time  facts=F9  AC=0  deps=-  blocked_by=Q6,Q13,Q11,Q10
+  E4 Delivery slots are important to us
+    E4.T1 [Story] Delivery slots are important to us  facts=F10  AC=0  deps=-  blocked_by=Q7,Q14,Q11,Q10
+  E5 Admins should get the usual reports every week
+    E5.T1 [Story] Admins should get the usual reports every week  facts=F12  AC=1  deps=-  blocked_by=Q8,Q9,Q11,Q10
+Questions raised by code in Stage 4:
+  Q12 (missing, breakdown) What testable acceptance conditions apply to 'Orders should sync with our ORMS so the warehouse sees them straight away'?
+  Q13 (missing, breakdown) What testable acceptance conditions apply to 'We would also like the loyalty scheme to work like last time'?
+  Q14 (missing, breakdown) What testable acceptance conditions apply to 'Delivery slots are important to us'?
+Rejected: None
+
+##############################################################################
+# STAGE 5+6 TICKETS AND REPORT
+##############################################################################
+==============================================================================
+TICKETS (10)
+==============================================================================
+TASK-001  [Epic]  Customers browse products, add them to a basket and pay online
+  Children: TASK-002
+  Description: Customers browse products, add them to a basket and pay online.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-002
+  Source: S5: "Customers browse products, add them to a basket and pay online."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) Which platform is the first version targeted for?
+    [Q-002] (vague) What is the measurable target or definition for fast?
+    [Q-003] (vague) What is the measurable target or definition for modern?
+    [Q-004] (vague) What is the measurable target or definition for secure?
+
+TASK-002  [Story]  Customers browse products, add them to a basket and pay online
+  Parent: TASK-001
+  Description: Customers browse products, add them to a basket and pay online.
+  Acceptance Criteria:
+    - Customers browse products, add them to a basket and pay online.   <- "Customers browse products, add them to a basket and pay online."
+  Source: S5: "Customers browse products, add them to a basket and pay online."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-010] (vague) What is the concrete target date for live?
+    [Q-011] (missing) Which features have the highest priority for the first release?
+
+TASK-003  [Epic]  Orders should sync with our ORMS so the warehouse sees them straight away
+  Children: TASK-004
+  Description: Orders should sync with our ORMS so the warehouse sees them straight away.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-004
+  Source: S6: "Orders should sync with our ORMS so the warehouse sees them straight away."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) Which platform is the first version targeted for?
+    [Q-002] (vague) What is the measurable target or definition for fast?
+    [Q-003] (vague) What is the measurable target or definition for modern?
+    [Q-004] (vague) What is the measurable target or definition for secure?
+
+TASK-004  [Task]  Orders should sync with our ORMS so the warehouse sees them straight away
+  Parent: TASK-003
+  Description: Orders should sync with our ORMS so the warehouse sees them straight away.
+  Acceptance Criteria: None stated in brief
+  Source: S6: "Orders should sync with our ORMS so the warehouse sees them straight away."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-005] (undefined_term) What does ORMS stand for, and what interface or API does it expose?
+    [Q-010] (vague) What is the concrete target date for live?
+    [Q-011] (missing) Which features have the highest priority for the first release?
+    [Q-012] (missing) What testable acceptance conditions apply to 'Orders should sync with our ORMS so the warehouse sees them straight away'?
+
+TASK-005  [Epic]  We would also like the loyalty scheme to work like last time
+  Children: TASK-006
+  Description: We would also like the loyalty scheme to work like last time.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-006
+  Source: S7: "We would also like the loyalty scheme to work like last time."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) Which platform is the first version targeted for?
+    [Q-002] (vague) What is the measurable target or definition for fast?
+    [Q-003] (vague) What is the measurable target or definition for modern?
+    [Q-004] (vague) What is the measurable target or definition for secure?
+
+TASK-006  [Story]  We would also like the loyalty scheme to work like last time
+  Parent: TASK-005
+  Description: We would also like the loyalty scheme to work like last time.
+  Acceptance Criteria: None stated in brief
+  Source: S7: "We would also like the loyalty scheme to work like last time."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-006] (undefined_term) What are the rules and mechanics of how the loyalty scheme worked last time?
+    [Q-010] (vague) What is the concrete target date for live?
+    [Q-011] (missing) Which features have the highest priority for the first release?
+    [Q-013] (missing) What testable acceptance conditions apply to 'We would also like the loyalty scheme to work like last time'?
+
+TASK-007  [Epic]  Delivery slots are important to us
+  Children: TASK-008
+  Description: Delivery slots are important to us.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-008
+  Source: S8: "Delivery slots are important to us."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) Which platform is the first version targeted for?
+    [Q-002] (vague) What is the measurable target or definition for fast?
+    [Q-003] (vague) What is the measurable target or definition for modern?
+    [Q-004] (vague) What is the measurable target or definition for secure?
+
+TASK-008  [Story]  Delivery slots are important to us
+  Parent: TASK-007
+  Description: Delivery slots are important to us.
+  Acceptance Criteria: None stated in brief
+  Source: S8: "Delivery slots are important to us."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-007] (scope_gap) What are the specific rules and behaviour required for delivery slots?
+    [Q-010] (vague) What is the concrete target date for live?
+    [Q-011] (missing) Which features have the highest priority for the first release?
+    [Q-014] (missing) What testable acceptance conditions apply to 'Delivery slots are important to us'?
+
+TASK-009  [Epic]  Admins should get the usual reports every week
+  Children: TASK-010
+  Description: Admins should get the usual reports every week.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-010
+  Source: S9: "Admins should get the usual reports every week."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) Which platform is the first version targeted for?
+    [Q-002] (vague) What is the measurable target or definition for fast?
+    [Q-003] (vague) What is the measurable target or definition for modern?
+    [Q-004] (vague) What is the measurable target or definition for secure?
+
+TASK-010  [Story]  Admins should get the usual reports every week
+  Parent: TASK-009
+  Description: Admins should get the usual reports every week.
+  Acceptance Criteria:
+    - Admins should get the usual reports every week.   <- "Admins should get the usual reports every week."
+  Source: S9: "Admins should get the usual reports every week."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-008] (vague) Which specific reports are meant by usual reports?
+    [Q-009] (missing) What specific metrics or data points must each weekly report contain?
+    [Q-010] (vague) What is the concrete target date for live?
+    [Q-011] (missing) Which features have the highest priority for the first release?
+
+==============================================================================
+OPEN QUESTIONS BY CATEGORY (14)
+==============================================================================
+[missing] (5)
+  Q-009: What specific metrics or data points must each weekly report contain?
+      quote: "Admins should get the usual reports every week."
+      linked tickets: TASK-010
+  Q-011: Which features have the highest priority for the first release?
+      linked tickets: TASK-002, TASK-004, TASK-006, TASK-008, TASK-010
+  Q-012: What testable acceptance conditions apply to 'Orders should sync with our ORMS so the warehouse sees them straight away'?
+      linked tickets: TASK-004
+  Q-013: What testable acceptance conditions apply to 'We would also like the loyalty scheme to work like last time'?
+      linked tickets: TASK-006
+  Q-014: What testable acceptance conditions apply to 'Delivery slots are important to us'?
+      linked tickets: TASK-008
+
+[vague] (5)
+  Q-002: What is the measurable target or definition for fast?
+      quote: "The app must be fast, modern and secure."
+      linked tickets: TASK-001, TASK-003, TASK-005, TASK-007, TASK-009
+  Q-003: What is the measurable target or definition for modern?
+      quote: "The app must be fast, modern and secure."
+      linked tickets: TASK-001, TASK-003, TASK-005, TASK-007, TASK-009
+  Q-004: What is the measurable target or definition for secure?
+      quote: "The app must be fast, modern and secure."
+      linked tickets: TASK-001, TASK-003, TASK-005, TASK-007, TASK-009
+  Q-008: Which specific reports are meant by usual reports?
+      quote: "Admins should get the usual reports every week."
+      linked tickets: TASK-010
+  Q-010: What is the concrete target date for live?
+      quote: "We need this live as soon as possible."
+      linked tickets: TASK-002, TASK-004, TASK-006, TASK-008, TASK-010
+
+[contradiction] (1)
+  Q-001: Which platform is the first version targeted for?
+      quote A: "our new app from the App Store and Google Play to order groceries."
+      quote B: "For budget reasons we want web only for the first version."
+      linked tickets: TASK-001, TASK-003, TASK-005, TASK-007, TASK-009
+
+[undefined_term] (2)
+  Q-005: What does ORMS stand for, and what interface or API does it expose?
+      quote: "Orders should sync with our ORMS so the warehouse sees them straight away."
+      linked tickets: TASK-004
+  Q-006: What are the rules and mechanics of how the loyalty scheme worked last time?
+      quote: "We would also like the loyalty scheme to work like last time."
+      linked tickets: TASK-006
+
+[scope_gap] (1)
+  Q-007: What are the specific rules and behaviour required for delivery slots?
+      quote: "Delivery slots are important to us."
+      linked tickets: TASK-008
+
+General questions (not linked to a specific task, attached to every epic): Q-001, Q-002, Q-003, Q-004
+
+==============================================================================
+REJECTED ITEMS (0)
+==============================================================================
+  None
+
+==============================================================================
+LINT WARNINGS (0)
+==============================================================================
+  None
+
+==============================================================================
+COUNTS
+==============================================================================
+  Facts: 14
+  Questions: 14 (missing: 5, vague: 5, contradiction: 1, undefined_term: 2, scope_gap: 1)
+  Tickets: 10 (Ready: 0, Needs clarification: 10)
+  Rejected items: 0
+  Lint warnings: 0
+
+Wrote out/vague\tickets.json, out/vague\tickets_jira.csv, out/vague\run.log

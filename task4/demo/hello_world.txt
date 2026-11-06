@@ -1,0 +1,74 @@
+┌──────────────────────────────── Repository Analysis: octocat/Hello-World ─────────────────────────────────┐
+│ My first repository on GitHub!                                                                            │
+│ Stars 3,900   Forks 7,386   Default branch master   Analysed 2026-11-05 08:12 UTC   Authenticated yes     │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 1. Tech Stack ───────────────────────────────────────────────────────────────────────────────────────────┐
+│ Not available: No languages or known manifest/tooling files detected (language data unavailable: GitHub   │
+│ detected no languages)                                                                                    │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 2. File Structure ───────────────────────────────────────────────────────────────────────────────────────┐
+│ 1 files | 0 dirs | max depth 0 | total size 13 B                                                          │
+│ Top level                                                                                                 │
+│                                                                                                           │
+│   Entry    Kind   Files   Purpose (from name; - = not determined)                                         │
+│  ─────────────────────────────────────────────────────────────────                                        │
+│   README   file       1   project overview                                                                │
+│                                                                                                           │
+│ Top extensions                                                                                            │
+│                                                                                                           │
+│   Extension   Files                                                                                       │
+│  ───────────────────                                                                                      │
+│   (none)          1                                                                                       │
+│                                                                                                           │
+│ Key files/dirs present: README                                                                            │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 3. Code Complexity: 0.0 / 100 (Low) ─────────────────────────────────────────────────────────────────────┐
+│                                                                                                           │
+│   Component         Measured                         Points                                               │
+│  ───────────────────────────────────────────────────────────                                              │
+│   size              1 files                       0.00 / 25                                               │
+│   depth             max depth 0                   0.00 / 25                                               │
+│   large_files       0 of 1 files >100 KB (0.0%)   0.00 / 25                                               │
+│   language_spread   language data unavailable     0.00 / 25                                               │
+│                                                                                                           │
+│ Formula:                                                                                                  │
+│ score = size + depth + large_files + lang_spread (0-25 each, 0-100)                                       │
+│   size        = 25*min(1, log10(files)/4)       [10,000+ files = 25]                                      │
+│   depth       = 25*min(1, max_depth/10)         [depth 10+ = 25]                                          │
+│   large_files = 25*min(1, share>100KB / 0.10)   [10%+ large = 25]                                         │
+│   lang_spread = 25*min(1, (langs>=1% - 1)/5)    [6+ langs = 25]                                           │
+│ Bands: <25 Low, 25-<50 Moderate, 50-<75 High, >=75 Very high.                                             │
+│ Caveat: Heuristic based on file count, nesting, file sizes and language bytes from the GitHub API; it     │
+│ does not measure lines of code or cyclomatic complexity.                                                  │
+│ Note: language data unavailable                                                                           │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 4. Dependency Health ────────────────────────────────────────────────────────────────────────────────────┐
+│ Not available: No requirements.txt or package.json found (repo root or sub-folders)                       │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 5. Contribution Activity (default branch) ───────────────────────────────────────────────────────────────┐
+│ 0 commits in the last 52 weeks | 0 active weeks (default branch, GitHub stats API)                        │
+│ Commits per week (last 12 weeks):                                                                         │
+│ 2026-08-16 │                                         0                                                    │
+│ 2026-08-23 │                                         0                                                    │
+│ 2026-08-30 │                                         0                                                    │
+│ 2026-09-06 │                                         0                                                    │
+│ 2026-09-13 │                                         0                                                    │
+│ 2026-09-20 │                                         0                                                    │
+│ 2026-09-27 │                                         0                                                    │
+│ 2026-10-04 │                                         0                                                    │
+│ 2026-10-11 │                                         0                                                    │
+│ 2026-10-18 │                                         0                                                    │
+│ 2026-10-25 │                                         0                                                    │
+│ 2026-11-01 │                                         0                                                    │
+│ Top 3 contributors (all-time commits, GitHub API):                                                        │
+│ Spaceghost    │██████████████████████████████ 1                                                           │
+│ octocat       │██████████████████████████████ 1                                                           │
+│ Cameron423698 │██████████████████████████████ 1                                                           │
+│ Note: No commits in the last 52 weeks                                                                     │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Unavailable sections:
+  1. Tech Stack: Not available: No languages or known manifest/tooling files detected (language data 
+unavailable: GitHub detected no languages)
+  4. Dependency Health: Not available: No requirements.txt or package.json found (repo root or sub-folders)
+GitHub API calls: 5 | rate limit remaining: 4968/5000 (resets 09:10 UTC) | token used: yes (authenticated, 
+5,000 requests/hour)

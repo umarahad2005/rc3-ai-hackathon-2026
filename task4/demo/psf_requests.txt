@@ -1,0 +1,114 @@
+┌──────────────────────────────────── Repository Analysis: psf/requests ────────────────────────────────────┐
+│ A simple, yet elegant, HTTP library.                                                                      │
+│ Stars 54,610   Forks 11,504   Default branch main   Analysed 2026-11-05 08:12 UTC   Authenticated yes     │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 1. Tech Stack ───────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                                           │
+│   Name             Category   Evidence                                                                    │
+│  ───────────────────────────────────────────────────────────────────────                                  │
+│   Python           language   GitHub languages API: 99.4% of code bytes                                   │
+│   pyproject.toml   build      file present: pyproject.toml                                                │
+│   setup.py         build      file present: setup.py                                                      │
+│   Makefile         build      file present: Makefile                                                      │
+│   GitHub Actions   tool       8 workflow files in .github/workflows/                                      │
+│   tox              tool       file present: tox.ini                                                       │
+│   pre-commit       tool       file present: .pre-commit-config.yaml                                       │
+│                                                                                                           │
+│ Note: Frameworks are detected from requirements.txt/package.json (root, or shallowest sub-folders) and    │
+│ known file names.                                                                                         │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 2. File Structure ───────────────────────────────────────────────────────────────────────────────────────┐
+│ 130 files | 23 dirs | max depth 4 | total size 4.2 MB                                                     │
+│ Top level                                                                                                 │
+│                                                                                                           │
+│   Entry                     Kind   Files   Purpose (from name; - = not determined)                        │
+│  ──────────────────────────────────────────────────────────────────────────────────                       │
+│   tests/                    dir       42   tests                                                          │
+│   docs/                     dir       26   documentation                                                  │
+│   src/                      dir       20   source code                                                    │
+│   .github/                  dir       19   GitHub config / CI workflows                                   │
+│   ext/                      dir        7   -                                                              │
+│   .coveragerc               file       1   config/tooling                                                 │
+│   .git-blame-ignore-revs    file       1   config/tooling                                                 │
+│   .gitignore                file       1   git ignore rules                                               │
+│   .pre-commit-config.yaml   file       1   config/tooling                                                 │
+│   .readthedocs.yaml         file       1   config/tooling                                                 │
+│   AUTHORS.rst               file       1   -                                                              │
+│   HISTORY.md                file       1   change log                                                     │
+│   LICENSE                   file       1   license                                                        │
+│   Makefile                  file       1   build tasks                                                    │
+│   MANIFEST.in               file       1   -                                                              │
+│                                                                                                           │
+│ Top extensions                                                                                            │
+│                                                                                                           │
+│   Extension   Files                                                                                       │
+│  ───────────────────                                                                                      │
+│   py             37                                                                                       │
+│   rst            16                                                                                       │
+│   (none)         15                                                                                       │
+│   md             13                                                                                       │
+│   yml            10                                                                                       │
+│   (dotfile)       5                                                                                       │
+│   png             5                                                                                       │
+│   cnf             4                                                                                       │
+│                                                                                                           │
+│ Key files/dirs present: LICENSE, README.md, tests/, docs/, .github/workflows                              │
+│ Note: +6 more top-level entries not shown                                                                 │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 3. Code Complexity: 34.8 / 100 (Moderate) ───────────────────────────────────────────────────────────────┐
+│                                                                                                           │
+│   Component         Measured                            Points                                            │
+│  ──────────────────────────────────────────────────────────────                                           │
+│   size              130 files                       13.21 / 25                                            │
+│   depth             max depth 4                     10.00 / 25                                            │
+│   large_files       6 of 130 files >100 KB (4.6%)   11.54 / 25                                            │
+│   language_spread   1 language >=1% of bytes         0.00 / 25                                            │
+│                                                                                                           │
+│ Formula:                                                                                                  │
+│ score = size + depth + large_files + lang_spread (0-25 each, 0-100)                                       │
+│   size        = 25*min(1, log10(files)/4)       [10,000+ files = 25]                                      │
+│   depth       = 25*min(1, max_depth/10)         [depth 10+ = 25]                                          │
+│   large_files = 25*min(1, share>100KB / 0.10)   [10%+ large = 25]                                         │
+│   lang_spread = 25*min(1, (langs>=1% - 1)/5)    [6+ langs = 25]                                           │
+│ Bands: <25 Low, 25-<50 Moderate, 50-<75 High, >=75 Very high.                                             │
+│ Caveat: Heuristic based on file count, nesting, file sizes and language bytes from the GitHub API; it     │
+│ does not measure lines of code or cyclomatic complexity.                                                  │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 4. Dependency Health: Not healthy ───────────────────────────────────────────────────────────────────────┐
+│ Definition: Healthy = at least 80% of dependencies pinned to an exact version AND at least 80% of pinned  │
+│ dependencies on the latest release.                                                                       │
+│ Manifests: docs/requirements.txt | 1 deps | 1 pinned (100.0%) | up to date (of pinned with a successful   │
+│ lookup): 0.0%                                                                                             │
+│ State: up-to-date/outdated only for pinned deps; ranges are never judged.                                 │
+│                                                                                                           │
+│  Package   Spec      Latest   State                                                                       │
+│  ─────────────────────────────────────                                                                    │
+│  Sphinx    ==7.2.6   9.2.0    outdated                                                                    │
+│                                                                                                           │
+│ Verdict: Not healthy                                                                                      │
+│ Note: Checked 1 of 1 registry lookups                                                                     │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 5. Contribution Activity (default branch) ───────────────────────────────────────────────────────────────┐
+│ 109 commits in the last 52 weeks | 30 active weeks (default branch, GitHub stats API)                     │
+│ Commits per week (last 12 weeks):                                                                         │
+│ 2026-08-16 │████████████████████                     1                                                    │
+│ 2026-08-23 │████████████████████████████████████████ 2                                                    │
+│ 2026-08-30 │████████████████████                     1                                                    │
+│ 2026-09-06 │                                         0                                                    │
+│ 2026-09-13 │                                         0                                                    │
+│ 2026-09-20 │████████████████████                     1                                                    │
+│ 2026-09-27 │                                         0                                                    │
+│ 2026-10-04 │                                         0                                                    │
+│ 2026-10-11 │                                         0                                                    │
+│ 2026-10-18 │                                         0                                                    │
+│ 2026-10-25 │████████████████████                     1                                                    │
+│ 2026-11-01 │                                         0                                                    │
+│ Top 5 contributors (all-time commits, GitHub API):                                                        │
+│ kennethreitz    │██████████████████████████████ 1,006                                                     │
+│ Lukasa          │██████████████████▎            610                                                       │
+│ sigmavirus24    │███████████▊                   396                                                       │
+│ nateprewitt     │██████████▌                    352                                                       │
+│ dependabot[bot] │██                             66                                                        │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+GitHub API calls: 7 | rate limit remaining: 4979/5000 (resets 09:10 UTC) | token used: yes (authenticated, 
+5,000 requests/hour)

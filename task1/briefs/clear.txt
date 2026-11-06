@@ -1,0 +1,17 @@
+FitLane Gym - Class Booking Web App
+
+FitLane Gym runs group fitness classes at one branch. We need a web application that works in
+desktop and mobile browsers. It has two user groups: members and front-desk staff.
+
+Staff create classes with a name, instructor, start time and capacity.
+Members can book a class up to 7 days before it starts.
+Members can only book classes that staff have already created.
+When a class reaches its capacity, booking closes and members see the message "Class full".
+Members can cancel a booking up to 2 hours before the class starts. Cancelling frees the place
+for another member.
+Staff can view the list of members booked into each class and print it.
+Members receive a booking confirmation after they book.
+
+Booking and cancellation are high priority. The printable list is low priority.
+The app must launch on 15 March 2027.
+Members identify themselves with their membership number.

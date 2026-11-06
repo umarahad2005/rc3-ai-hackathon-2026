@@ -1,0 +1,8 @@
+.env
+__pycache__/
+.pytest_cache/
+.watch_state.json
+
+# Never commit env files (real or example)
+.env.*
+.env.example

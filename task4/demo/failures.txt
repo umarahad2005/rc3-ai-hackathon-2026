@@ -1,0 +1,13 @@
+$ python analyze.py not-a-url
+Error: Invalid URL: 'not-a-url' is not a GitHub repository URL. Expected e.g. 
+https://github.com/owner/repo
+exit=2
+
+$ python analyze.py https://github.com/x/doesnotexist
+Error: Repository not found: x/doesnotexist (check spelling, or it may be private)
+exit=3
+
+$ GITHUB_TOKEN=bad python analyze.py https://github.com/octocat/Hello-World
+Error: GITHUB_TOKEN was rejected by GitHub (401 Bad credentials). Fix it or remove it (Remove-Item 
+Env:GITHUB_TOKEN, or edit the GITHUB_TOKEN line in .env)
+exit=5

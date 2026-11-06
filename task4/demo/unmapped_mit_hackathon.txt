@@ -1,0 +1,154 @@
+┌──────────────────────── Repository Analysis: umarahad2005/unmapped_mit_hackathon ─────────────────────────┐
+│ Description: Not available: no description set on GitHub                                                  │
+│ Stars 0   Forks 0   Default branch master   Analysed 2026-11-05 08:13 UTC   Authenticated yes             │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 1. Tech Stack ───────────────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                                           │
+│   Name             Category    Evidence                                                                   │
+│  ────────────────────────────────────────────────────────────────────────────────────                     │
+│   JavaScript       language    GitHub languages API: 44.1% of code bytes                                  │
+│   Python           language    GitHub languages API: 42.4% of code bytes                                  │
+│   CSS              language    GitHub languages API: 13.4% of code bytes                                  │
+│   Next.js          framework   frontend/package.json dependencies: next 16.2.4                            │
+│   React            framework   frontend/package.json dependencies: react 19.2.4                           │
+│   FastAPI          framework   frontend/requirements.txt line 5: fastapi==0.115.0                         │
+│   SQLAlchemy       framework   frontend/requirements.txt line 19: sqlalchemy==2.0.35                      │
+│   pandas           framework   frontend/requirements.txt line 25: pandas==2.2.2                           │
+│   NumPy            framework   frontend/requirements.txt line 26: numpy==1.26.4                           │
+│   pytest           framework   frontend/requirements.txt line 39: pytest==8.3.2                           │
+│   GitHub Actions   tool        1 workflow file in .github/workflows/                                      │
+│   ESLint           dev tool    frontend/package.json devDependencies: eslint ^9                           │
+│                                                                                                           │
+│ Note: Frameworks are detected from requirements.txt/package.json (root, or shallowest sub-folders) and    │
+│ known file names.                                                                                         │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 2. File Structure ───────────────────────────────────────────────────────────────────────────────────────┐
+│ 152 files | 65 dirs | max depth 5 | total size 982.7 KB                                                   │
+│ Top level                                                                                                 │
+│                                                                                                           │
+│   Entry                Kind   Files   Purpose (from name; - = not determined)                             │
+│  ─────────────────────────────────────────────────────────────────────────────                            │
+│   unmapped_fast_api/   dir       97   -                                                                   │
+│   frontend/            dir       52   frontend app                                                        │
+│   .github/             dir        1   GitHub config / CI workflows                                        │
+│   DOCUMENTATION.md     file       1   -                                                                   │
+│   README.md            file       1   project overview                                                    │
+│                                                                                                           │
+│ Top extensions                                                                                            │
+│                                                                                                           │
+│   Extension   Files                                                                                       │
+│  ───────────────────                                                                                      │
+│   py             63                                                                                       │
+│   json           32                                                                                       │
+│   js             31                                                                                       │
+│   css             7                                                                                       │
+│   svg             5                                                                                       │
+│   md              4                                                                                       │
+│   txt             3                                                                                       │
+│   mjs             2                                                                                       │
+│                                                                                                           │
+│ Key files/dirs present: README.md, .github/workflows                                                      │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 3. Code Complexity: 37.8 / 100 (Moderate) ───────────────────────────────────────────────────────────────┐
+│                                                                                                           │
+│   Component         Measured                            Points                                            │
+│  ──────────────────────────────────────────────────────────────                                           │
+│   size              152 files                       13.64 / 25                                            │
+│   depth             max depth 5                     12.50 / 25                                            │
+│   large_files       1 of 152 files >100 KB (0.7%)    1.64 / 25                                            │
+│   language_spread   3 languages >=1% of bytes       10.00 / 25                                            │
+│                                                                                                           │
+│ Formula:                                                                                                  │
+│ score = size + depth + large_files + lang_spread (0-25 each, 0-100)                                       │
+│   size        = 25*min(1, log10(files)/4)       [10,000+ files = 25]                                      │
+│   depth       = 25*min(1, max_depth/10)         [depth 10+ = 25]                                          │
+│   large_files = 25*min(1, share>100KB / 0.10)   [10%+ large = 25]                                         │
+│   lang_spread = 25*min(1, (langs>=1% - 1)/5)    [6+ langs = 25]                                           │
+│ Bands: <25 Low, 25-<50 Moderate, 50-<75 High, >=75 Very high.                                             │
+│ Caveat: Heuristic based on file count, nesting, file sizes and language bytes from the GitHub API; it     │
+│ does not measure lines of code or cyclomatic complexity.                                                  │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 4. Dependency Health: Not healthy ───────────────────────────────────────────────────────────────────────┐
+│ Definition: Healthy = at least 80% of dependencies pinned to an exact version AND at least 80% of pinned  │
+│ dependencies on the latest release.                                                                       │
+│ Manifests: frontend/package.json, frontend/requirements.txt, unmapped_fast_api/requirements.txt | 49 deps │
+│ | 43 pinned (87.8%) | up to date (of pinned with a successful lookup): 0.0%                               │
+│ State: up-to-date/outdated only for pinned deps; ranges are never judged.                                 │
+│                                                                                                           │
+│  Package               Eco    Spec        Latest              State                                       │
+│  ────────────────────────────────────────────────────────────────────────────────────                     │
+│  @google/genai         npm    ^1.50.1     not checked (cap)   unknown (range)                             │
+│  chart.js              npm    ^4.5.1      not checked (cap)   unknown (range)                             │
+│  leaflet               npm    ^1.9.4      not checked (cap)   unknown (range)                             │
+│  next                  npm    16.2.4      16.4.5              outdated                                    │
+│  react                 npm    19.2.4      19.3.1              outdated                                    │
+│  react-chartjs-2       npm    ^5.3.1      not checked (cap)   unknown (range)                             │
+│  react-dom             npm    19.2.4      19.3.1              outdated                                    │
+│  react-leaflet         npm    ^5.0.0      not checked (cap)   unknown (range)                             │
+│  eslint                npm    ^9          not checked (cap)   unknown (range)                             │
+│  eslint-config-next    npm    16.2.4      16.4.5              outdated                                    │
+│  fastapi               pypi   ==0.115.0   0.162.0             outdated                                    │
+│  uvicorn               pypi   ==0.30.0    0.54.0              outdated                                    │
+│  pydantic              pypi   ==2.7.0     2.14.2              outdated                                    │
+│  jsonschema            pypi   ==4.23.0    4.26.0              outdated                                    │
+│  google-generativeai   pypi   ==0.8.0     0.8.6               outdated                                    │
+│  networkx              pypi   ==3.3       3.7                 outdated                                    │
+│  sqlalchemy            pypi   ==2.0.35    2.1.8               outdated                                    │
+│  asyncpg               pypi   ==0.29.0    0.32.0              outdated                                    │
+│  pgvector              pypi   ==0.3.2     0.5.1               outdated                                    │
+│  alembic               pypi   ==1.13.2    1.20.1              outdated                                    │
+│  pandas                pypi   ==2.2.2     3.1.1               outdated                                    │
+│  numpy                 pypi   ==1.26.4    2.5.4               outdated                                    │
+│  qrcode                pypi   ==7.4.2     8.2                 outdated                                    │
+│  Pillow                pypi   ==10.4.0    13.0.0              outdated                                    │
+│  weasyprint            pypi   ==62.1      70.0                outdated                                    │
+│  httpx                 pypi   ==0.27.0    0.28.1              outdated                                    │
+│  pytest                pypi   ==8.3.2     9.2.0               outdated                                    │
+│  pytest-asyncio        pypi   ==0.23.8    1.4.1.post1         outdated                                    │
+│  python-dotenv         pypi   ==1.0.1     1.2.4               outdated                                    │
+│  fastapi               pypi   ==0.115.0   0.162.0             outdated                                    │
+│  uvicorn               pypi   ==0.30.0    0.54.0              outdated                                    │
+│  pydantic              pypi   ==2.7.0     2.14.2              outdated                                    │
+│  jsonschema            pypi   ==4.23.0    4.26.0              outdated                                    │
+│  google-generativeai   pypi   ==0.8.0     0.8.6               outdated                                    │
+│  google-adk            pypi   ==1.0.0     2.13.0              outdated                                    │
+│  networkx              pypi   ==3.3       3.7                 outdated                                    │
+│  sqlalchemy            pypi   ==2.0.35    not checked (cap)   unknown (lookup failed)                     │
+│  asyncpg               pypi   ==0.29.0    not checked (cap)   unknown (lookup failed)                     │
+│  pgvector              pypi   ==0.3.2     not checked (cap)   unknown (lookup failed)                     │
+│  alembic               pypi   ==1.13.2    not checked (cap)   unknown (lookup failed)                     │
+│  pandas                pypi   ==2.2.2     not checked (cap)   unknown (lookup failed)                     │
+│  numpy                 pypi   ==1.26.4    not checked (cap)   unknown (lookup failed)                     │
+│  qrcode                pypi   ==7.4.2     not checked (cap)   unknown (lookup failed)                     │
+│  Pillow                pypi   ==10.4.0    not checked (cap)   unknown (lookup failed)                     │
+│  weasyprint            pypi   ==62.1      not checked (cap)   unknown (lookup failed)                     │
+│  httpx                 pypi   ==0.27.0    not checked (cap)   unknown (lookup failed)                     │
+│  pytest                pypi   ==8.3.2     not checked (cap)   unknown (lookup failed)                     │
+│  pytest-asyncio        pypi   ==0.23.8    not checked (cap)   unknown (lookup failed)                     │
+│  python-dotenv         pypi   ==1.0.1     not checked (cap)   unknown (lookup failed)                     │
+│                                                                                                           │
+│ Verdict: Not healthy                                                                                      │
+│ Note: Checked 30 of 49; pinned checked first; duplicate httpx ignored (requirements.txt line 41);         │
+│ duplicate httpx ignored (requirements.txt line 47); up-to-date share based on 30 of 43 pinned             │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌─ 5. Contribution Activity (default branch) ───────────────────────────────────────────────────────────────┐
+│ 15 commits in the last 52 weeks | 2 active weeks (default branch, GitHub stats API)                       │
+│ Commits per week (last 12 weeks):                                                                         │
+│ 2026-08-16 │                                         0                                                    │
+│ 2026-08-23 │                                         0                                                    │
+│ 2026-08-30 │                                         0                                                    │
+│ 2026-09-06 │                                         0                                                    │
+│ 2026-09-13 │                                         0                                                    │
+│ 2026-09-20 │                                         0                                                    │
+│ 2026-09-27 │                                         0                                                    │
+│ 2026-10-04 │                                         0                                                    │
+│ 2026-10-11 │                                         0                                                    │
+│ 2026-10-18 │                                         0                                                    │
+│ 2026-10-25 │                                         0                                                    │
+│ 2026-11-01 │                                         0                                                    │
+│ No commits in the last 12 weeks shown (15 earlier in the 52-week window).                                 │
+│ Top 1 contributors (all-time commits, GitHub API):                                                        │
+│ umarahad2005 │██████████████████████████████ 17                                                           │
+└───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+GitHub API calls: 8 | rate limit remaining: 4960/5000 (resets 09:10 UTC) | token used: yes (authenticated, 
+5,000 requests/hour)

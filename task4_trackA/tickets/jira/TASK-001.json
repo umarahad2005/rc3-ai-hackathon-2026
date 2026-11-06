@@ -1,0 +1,10 @@
+{
+  "key": "TASK-001",
+  "fields": {
+    "summary": "Class Booking Web App",
+    "description": "FitLane Gym runs group fitness classes at one branch. We need a web application that works in desktop and mobile browsers.\n\nh3. Acceptance Criteria\nNot applicable (epic) - see child tickets TASK-002, TASK-003, TASK-004, TASK-005\n\nh3. Source\n{quote}S2-S3: \"FitLane Gym runs group fitness classes at one branch. We need a web application that works in desktop and mobile browsers.\"{quote}\n\nh3. Dependencies\nNone stated in brief\n\nh3. Open Questions\n* [Q-002] Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?\n\nh3. Details\nStatus: Needs clarification | Parent: None | Priority: Not specified | Estimate: Not specified | Deadline: 15 March 2027",
+    "labels": [
+      "TASK-001"
+    ]
+  }
+}

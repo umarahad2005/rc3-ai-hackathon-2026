@@ -1,0 +1,223 @@
+Brief2Jira  brief=briefs/clear.txt  model=gemini-3-flash-preview  out=out/clear
+
+##############################################################################
+# STAGE 1 INPUT - 16 sentences
+##############################################################################
+  S1: FitLane Gym - Class Booking Web App
+  S2: FitLane Gym runs group fitness classes at one branch.
+  S3: We need a web application that works in desktop and mobile browsers.
+  S4: It has two user groups: members and front-desk staff.
+  S5: Staff create classes with a name, instructor, start time and capacity.
+  S6: Members can book a class up to 7 days before it starts.
+  S7: Members can only book classes that staff have already created.
+  S8: When a class reaches its capacity, booking closes and members see the message "Class full".
+  S9: Members can cancel a booking up to 2 hours before the class starts.
+  S10: Cancelling frees the place for another member.
+  S11: Staff can view the list of members booked into each class and print it.
+  S12: Members receive a booking confirmation after they book.
+  S13: Booking and cancellation are high priority.
+  S14: The printable list is low priority.
+  S15: The app must launch on 15 March 2027.
+  S16: Members identify themselves with their membership number.
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+  F1 [goal] FitLane Gym needs a Class Booking Web App
+      quote: "FitLane Gym - Class Booking Web App"  (S1)
+  F2 [constraint] The web application must work in desktop and mobile browsers
+      quote: "a web application that works in desktop and mobile browsers"  (S3)
+  F3 [user] The system has members and front-desk staff
+      quote: "two user groups: members and front-desk staff"  (S4)
+  F4 [feature] Staff create classes with name, instructor, start time and capacity
+      quote: "Staff create classes with a name, instructor, start time and capacity"  (S5)
+  F5 [feature] Members can book a class up to 7 days before it starts
+      quote: "Members can book a class up to 7 days before it starts"  (S6)
+  F6 [constraint] Members can only book classes that staff have already created
+      quote: "Members can only book classes that staff have already created"  (S7)
+  F7 [feature] Booking closes and shows Class full when capacity is reached
+      quote: "When a class reaches its capacity, booking closes and members see the message "Class full""  (S8)
+  F8 [feature] Members can cancel a booking up to 2 hours before the class starts
+      quote: "Members can cancel a booking up to 2 hours before the class starts"  (S9)
+  F9 [feature] Cancelling frees the place for another member
+      quote: "Cancelling frees the place for another member"  (S10)
+  F10 [feature] Staff can view and print the list of members booked into each class
+      quote: "Staff can view the list of members booked into each class and print it"  (S11)
+  F11 [feature] Members receive a booking confirmation after they book
+      quote: "Members receive a booking confirmation after they book"  (S12)
+  F12 [priority] Booking and cancellation are high priority
+      quote: "Booking and cancellation are high priority"  (S13)
+  F13 [priority] The printable list is low priority
+      quote: "The printable list is low priority"  (S14)
+  F14 [deadline] The app must launch on 15 March 2027
+      quote: "The app must launch on 15 March 2027"  (S15)
+  F15 [feature] Members identify themselves with their membership number
+      quote: "Members identify themselves with their membership number"  (S16)
+Rejected: None
+
+##############################################################################
+# STAGE 3 GAPS (LLM + templates) - verified questions
+##############################################################################
+  [missing]
+  Q4 (missing, template) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+  [scope_gap]
+  Q1 (scope_gap, llm) How should the booking confirmation be delivered to the member?
+      quote: "Members receive a booking confirmation after they book."
+      related facts: F11
+  Q2 (scope_gap, llm) How should front-desk staff identify themselves to access the system?
+      quote: "It has two user groups: members and front-desk staff."
+      related facts: F3
+  Q3 (scope_gap, llm) What information should be included in the printable list of members?
+      quote: "Staff can view the list of members booked into each class and print it."
+      related facts: F10
+Templated questions added: 1
+Rejected: None
+
+##############################################################################
+# STAGE 4 BREAK DOWN (LLM) - verified epics and tasks
+##############################################################################
+  E1 Staff Class Management
+    E1.T1 [Story] Create fitness classes  facts=F4  AC=1  deps=-  blocked_by=-
+    E1.T2 [Story] View and print booked members  facts=F10,F13  AC=1  deps=-  blocked_by=Q3
+  E2 Member Booking and Cancellation
+    E2.T1 [Story] Book fitness classes  facts=F5,F6,F7,F11,F12,F15  AC=5  deps=E1.T1  blocked_by=Q1
+    E2.T2 [Story] Cancel class bookings  facts=F8,F9,F12  AC=2  deps=-  blocked_by=-
+Rejected (1):
+  [breakdown] question link dropped: question is not about this task (its quote is not one of the task's source/AC quotes): {"task": "Create fitness classes", "blocked_by_dropped": ["Q2"]}
+
+##############################################################################
+# STAGE 5+6 TICKETS AND REPORT
+##############################################################################
+==============================================================================
+TICKETS (6)
+==============================================================================
+TASK-001  [Epic]  Staff Class Management
+  Children: TASK-002, TASK-003
+  Description: Staff create classes and view the list of members booked into each class.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-002, TASK-003
+  Source: S5: "Staff create classes with a name, instructor, start time and capacity."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-002] (scope_gap) How should front-desk staff identify themselves to access the system?
+    [Q-004] (missing) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+TASK-002  [Story]  Create fitness classes
+  Parent: TASK-001
+  Description: Staff create classes with a name, instructor, start time and capacity so that members can book them.
+  Acceptance Criteria:
+    - Staff create classes with a name, instructor, start time and capacity.   <- "Staff create classes with a name, instructor, start time and capacity."
+  Source: S5: "Staff create classes with a name, instructor, start time and capacity"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Ready
+  Open Questions: None
+
+TASK-003  [Story]  View and print booked members
+  Parent: TASK-001
+  Description: Staff can view the list of members booked into each class and print it.
+  Acceptance Criteria:
+    - Staff can view the list of members booked into each class and print it.   <- "Staff can view the list of members booked into each class and print it."
+  Source: S11: "Staff can view the list of members booked into each class and print it"
+  Dependencies: None stated in brief
+  Priority: Low
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-003] (scope_gap) What information should be included in the printable list of members?
+
+TASK-004  [Epic]  Member Booking and Cancellation
+  Children: TASK-005, TASK-006
+  Description: Members book and cancel classes using their membership number.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-005, TASK-006
+  Source: S6: "Members can book a class up to 7 days before it starts."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-002] (scope_gap) How should front-desk staff identify themselves to access the system?
+    [Q-004] (missing) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+TASK-005  [Story]  Book fitness classes
+  Parent: TASK-004
+  Description: Members book classes using their membership number, receiving a confirmation upon booking.
+  Acceptance Criteria:
+    - Members identify themselves with their membership number.   <- "Members identify themselves with their membership number."
+    - Members can book a class up to 7 days before it starts.   <- "Members can book a class up to 7 days before it starts."
+    - Members can only book classes that staff have already created.   <- "Members can only book classes that staff have already created."
+    - When a class reaches its capacity, booking closes and members see the message "Class full".   <- "When a class reaches its capacity, booking closes and members see the message "Class full""
+    - Members receive a booking confirmation after they book.   <- "Members receive a booking confirmation after they book."
+  Source: S6: "Members can book a class up to 7 days before it starts"
+  Dependencies: TASK-002
+  Priority: High
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (scope_gap) How should the booking confirmation be delivered to the member?
+
+TASK-006  [Story]  Cancel class bookings
+  Parent: TASK-004
+  Description: Members cancel a booking to free the place for another member.
+  Acceptance Criteria:
+    - Members can cancel a booking up to 2 hours before the class starts.   <- "Members can cancel a booking up to 2 hours before the class starts."
+    - Cancelling frees the place for another member.   <- "Cancelling frees the place for another member."
+  Source: S9: "Members can cancel a booking up to 2 hours before the class starts"
+  Dependencies: None stated in brief
+  Priority: High
+  Estimate: Not specified
+  Deadline: 15 March 2027
+  Status: Ready
+  Open Questions: None
+
+==============================================================================
+OPEN QUESTIONS BY CATEGORY (4)
+==============================================================================
+[missing] (1)
+  Q-004: Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+      linked tickets: TASK-001, TASK-004
+
+[scope_gap] (3)
+  Q-001: How should the booking confirmation be delivered to the member?
+      quote: "Members receive a booking confirmation after they book."
+      linked tickets: TASK-005
+  Q-002: How should front-desk staff identify themselves to access the system?
+      quote: "It has two user groups: members and front-desk staff."
+      linked tickets: TASK-001, TASK-004
+  Q-003: What information should be included in the printable list of members?
+      quote: "Staff can view the list of members booked into each class and print it."
+      linked tickets: TASK-003
+
+General questions (not linked to a specific task, attached to every epic): Q-002, Q-004
+
+==============================================================================
+REJECTED ITEMS (1)
+==============================================================================
+  [breakdown] question link dropped: question is not about this task (its quote is not one of the task's source/AC quotes): {"task": "Create fitness classes", "blocked_by_dropped": ["Q2"]}
+
+==============================================================================
+LINT WARNINGS (4)
+==============================================================================
+  WARNING unsourced word 'management' in title of TASK-001
+  WARNING unsourced word 'using' in description of TASK-004
+  WARNING unsourced word 'using' in description of TASK-005
+  WARNING unsourced word 'receiving' in description of TASK-005
+
+==============================================================================
+COUNTS
+==============================================================================
+  Facts: 15
+  Questions: 4 (missing: 1, scope_gap: 3)
+  Tickets: 6 (Ready: 2, Needs clarification: 4)
+  Rejected items: 1
+  Lint warnings: 4
+
+Wrote out/clear\tickets.json, out/clear\tickets_jira.csv, out/clear\run.log

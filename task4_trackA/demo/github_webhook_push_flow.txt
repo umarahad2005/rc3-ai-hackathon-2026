@@ -1,0 +1,8 @@
+# Live GitHub webhook (ngrok -> python cli.py serve) - push flow
+2026-11-05T09:25:16.248Z  push  HTTP 200
+2026-11-05T09:25:16.133Z  pull_request  HTTP 200
+2026-11-05T09:25:13.019Z  pull_request  HTTP 500
+2026-11-05T09:25:07.222Z  push  HTTP 500
+2026-11-05T09:25:06.015Z  pull_request  HTTP 200
+2026-11-05T09:20:09.013Z  push  HTTP 404
+{"checks":[{"context":"ai-pr-reviewer","state":"SUCCESS"}],"mergedAt":"2026-11-05T09:25:13Z","number":6,"state":"MERGED","title":"RC3-9 note"}

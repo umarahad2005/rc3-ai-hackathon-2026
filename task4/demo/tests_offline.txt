@@ -1,0 +1,15 @@
+test_bad_token_exit_5 (tests.test_offline.ErrorPaths.test_bad_token_exit_5) ... ok
+test_invalid_url_exit_2 (tests.test_offline.ErrorPaths.test_invalid_url_exit_2) ... ok
+test_network_error_exit_6 (tests.test_offline.ErrorPaths.test_network_error_exit_6) ... ok
+test_not_found_exit_3 (tests.test_offline.ErrorPaths.test_not_found_exit_3) ... ok
+test_rate_limit_exit_4 (tests.test_offline.ErrorPaths.test_rate_limit_exit_4) ... ok
+test_202_stats_reported_not_available (tests.test_offline.NeverInvent.test_202_stats_reported_not_available) ... ok
+test_nested_manifest_and_registry_failure (tests.test_offline.NeverInvent.test_nested_manifest_and_registry_failure) ... ok
+test_no_manifest_reported (tests.test_offline.NeverInvent.test_no_manifest_reported) ... ok
+test_invalid_forms (tests.test_offline.UrlParsing.test_invalid_forms) ... ok
+test_valid_forms (tests.test_offline.UrlParsing.test_valid_forms) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.074s
+
+OK

@@ -1,0 +1,57 @@
+Brief2Jira  brief=briefs\srs.txt  model=gemini-flash-lite-latest  out=out\srs
+
+##############################################################################
+# STAGE 1 INPUT - 45 sentences
+##############################################################################
+  S1: SRS: Sign Up and Login Pages
+  S2: Nov 5, 2026 · @faisal
+  S3: 1.
+  S4: Introduction 1.1 Purpose
+  S5: This document specifies the requirements for the Sign Up and Login pages of the application.
+  S6: It is the reference for design, development and testing of user registration and authentication.
+  S7: 1.2 Scope
+  S8: In scope: account creation with email and password, email verification, login, logout, "remember me", and password reset entry points.
+  S9: Out of scope: social login, multi-factor authentication, and admin user management (listed as future work in section 8).
+  S10: 1.3 Definitions
+  S11: Term	Meaning
+  S12: User	A person creating an account or signing in Session	The authenticated period after a successful login Access token	Short-lived credential sent with each authenticated request Lockout	Temporary block on login after repeated failed attempts
+  S13: 2.
+  S14: Overall description 2.1 User classes
+  S15: •	New visitor: has no account and wants to register.
+  S16: •	Returning user: has a verified account and wants to sign in.
+  S17: 2.2 Operating environment
+  S18: The pages run in current versions of Chrome, Firefox, Safari and Edge, on desktop and mobile screens from 360 px wide.
+  S19: They talk to a backend REST API over HTTPS.
+  S20: 2.3 Assumptions and dependencies
+  S21: •	An email service is available to send verification and reset emails.
+  S22: •	The backend stores passwords only as salted hashes (bcrypt or Argon2).
+  S23: •	Authentication uses tokens issued by the backend; the exact mechanism (JWT or server session) is confirmed in section 8.
+  S24: 2.4 Constraints
+  S25: •	All traffic uses HTTPS.
+  S26: •	The pages must follow the product's existing design system.
+  S27: 3.
+  S28: Sign up page
+  S29: A new visitor can create an account with a name, email and password, then verify the email address before first login.
+  S30: 3.1 Fields and validation
+  S31: Field	Required	Validation rule
+  S32: Full name	Yes	2 to 60 characters; letters, spaces, hyphens and apostrophes Email	Yes	Valid email format; maximum 254 characters; unique, case-insensitive Password	Yes	8 to 64 characters with at least one uppercase letter, one lowercase letter, one digit and one symbol Confirm password	Yes	Must match the password Terms and privacy checkbox	Yes	Must be ticked to submit 3.2 Functional requirements
+  S33: •	SU-1: The system shall display the sign up form with the fields above and a "Sign up" button.
+  S34: •	SU-2: The system shall validate each field on blur and again on submit, showing the error under the field.
+  S35: •	SU-3: The system shall keep the "Sign up" button disabled until all required fields are valid.
+  S36: •	SU-4: The system shall let the user show or hide the password and confirm password values.
+  S37: •	SU-5: The system shall show a password strength indicator while the user types.
+  S38: •	SU-6: On submit, the system shall check that the email is not already registered and reject the request with a clear message if it is.
+  S39: •	SU-7: The system shall store the password only as a salted hash and never return it in any response.
+  S40: •	SU-8: On success, the system shall create the account in an unverified state and send a verification email containing a link valid for 24 hours.
+  S41: •	SU-9: The system shall show a confirmation screen telling the user to check their email, with a "Resend email" action limited to once every 60 seconds.
+  S42: •	SU-10: When the user opens a valid verification link, the system shall mark the account verified and redirect to the login page with a success message.
+  S43: •	SU-11: If the verification link is expired or invalid, the system shall explain this and offer to send a new link.
+  S44: •	SU-12: The page shall include a "Already have an account?
+  S45: Log in" link to the login page.
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+Transient API error (429/503). Waiting 30 s and retrying once...
+ERROR: stage failed: Gemini rate limit / overload (429 or 503) hit twice; wait a minute and re-run. API said: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+No export written. Any earlier successful run.log / tickets.json / tickets_jira.csv in this folder were left unchanged.
