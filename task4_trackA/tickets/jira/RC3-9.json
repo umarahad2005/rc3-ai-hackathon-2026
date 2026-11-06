@@ -1,0 +1,10 @@
+{
+  "key": "RC3-9",
+  "fields": {
+    "summary": "Print the class list",
+    "description": "Staff print the list of booked members.\n\nh3. Acceptance Criteria\n* Staff can view the list of members booked into each class.\n* Staff can print the list.",
+    "labels": [
+      "RC3-9"
+    ]
+  }
+}

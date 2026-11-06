@@ -1,0 +1,495 @@
+Brief2Jira  brief=briefs/vague.txt  model=gemini-2.5-flash  out=out/vague
+
+##############################################################################
+# STAGE 1 INPUT - 12 sentences
+##############################################################################
+  S1: Hi team,
+  S2: We are a family-run grocery business and want to finally go digital.
+  S3: Customers will download our new app from the App Store and Google Play to order groceries.
+  S4: The app must be fast, modern and secure.
+  S5: Customers browse products, add them to a basket and pay online.
+  S6: Orders should sync with our ORMS so the warehouse sees them straight away.
+  S7: We would also like the loyalty scheme to work like last time.
+  S8: Delivery slots are important to us.
+  S9: Admins should get the usual reports every week.
+  S10: For budget reasons we want web only for the first version.
+  S11: We need this live as soon as possible.
+  S12: Thanks, Bilal
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+  F1 [user] The client is a family-run grocery business.
+      quote: "We are a family-run grocery business"  (S2)
+  F2 [goal] The client wants to go digital.
+      quote: "want to finally go digital"  (S2)
+  F3 [user] Customers are a user group who will download the new app.
+      quote: "Customers will download our new app"  (S3)
+  F4 [constraint] The new app will be available from the App Store and Google Play.
+      quote: "app from the App Store and Google Play"  (S3)
+  F5 [feature] Customers will use the app to order groceries.
+      quote: "to order groceries"  (S3)
+  F6 [constraint] The app must be fast.
+      quote: "The app must be fast"  (S4)
+  F9 [feature] Customers can browse products.
+      quote: "Customers browse products"  (S5)
+  F10 [feature] Customers can add products to a basket.
+      quote: "add them to a basket"  (S5)
+  F11 [feature] Customers can pay online.
+      quote: "and pay online"  (S5)
+  F12 [integration] Orders should sync with the existing ORMS.
+      quote: "Orders should sync with our ORMS"  (S6)
+  F13 [goal] The warehouse should see orders straight away.
+      quote: "the warehouse sees them straight away"  (S6)
+  F14 [feature] A loyalty scheme is desired, working like last time.
+      quote: "the loyalty scheme to work like last time"  (S7)
+  F15 [priority] Delivery slots are important.
+      quote: "Delivery slots are important to us"  (S8)
+  F16 [user] Admins are a user group.
+      quote: "Admins should get"  (S9)
+  F17 [feature] Admins should get reports.
+      quote: "get the usual reports"  (S9)
+  F18 [constraint] Reports should be weekly.
+      quote: "reports every week"  (S9)
+  F19 [constraint] The first version should be web only.
+      quote: "web only for the first version"  (S10)
+  F20 [constraint] The web-only approach is for budget reasons.
+      quote: "For budget reasons"  (S10)
+  F21 [priority] The project needs to be live as soon as possible.
+      quote: "live as soon as possible"  (S11)
+Rejected (2):
+  [understand] quote not in brief: {"id": "F7", "category": "constraint", "text": "The app must be modern.", "quote": "must be modern"}
+  [understand] quote not in brief: {"id": "F8", "category": "constraint", "text": "The app must be secure.", "quote": "must be secure"}
+
+##############################################################################
+# STAGE 3 GAPS (LLM + templates) - verified questions
+##############################################################################
+  Q1 (contradiction, llm) The brief states 'Customers will download our new app from the App Store and Google Play' but also 'web only for the first version'. Which platform should the first version of the customer-facing application be developed for?
+      quote: "Customers will download our new app from the App Store and Google Play"
+      quote_b: "web only for the first version"
+      related facts: F3, F4, F19
+  Q2 (vague, llm) What specific criteria or characteristics define a 'modern' app for your business?
+      quote: "The app must be fast, modern and secure."
+  Q3 (vague, llm) What specific security standards, certifications, or measures are required for the app?
+      quote: "The app must be fast, modern and secure."
+  Q4 (vague, llm) What is the maximum acceptable delay for orders to be visible to the warehouse after a customer places them?
+      quote: "the warehouse sees them straight away"
+      related facts: F13
+  Q5 (vague, llm) How would you rank the priority of implementing delivery slots compared to other features mentioned in the brief?
+      quote: "Delivery slots are important to us"
+      related facts: F15
+  Q6 (vague, llm) What is the target date or timeframe for the project to go live?
+      quote: "live as soon as possible"
+      related facts: F21
+  Q7 (undefined_term, llm) What does ORMS stand for, and what interface or API does it expose for integration?
+      quote: "our ORMS"
+      related facts: F12
+  Q8 (undefined_term, llm) Please describe the functionalities and rules of the loyalty scheme you are referring to as 'last time'.
+      quote: "the loyalty scheme to work like last time"
+      related facts: F14
+  Q9 (undefined_term, llm) What specific reports are considered 'the usual reports' for admins?
+      quote: "the usual reports"
+      related facts: F17
+  Q10 (scope_gap, llm) What product attributes (e.g., name, description, price, image, stock level) should be displayed when customers browse products?
+      quote: "Customers browse products"
+      related facts: F9
+  Q11 (scope_gap, llm) What functionalities are required for the customer's basket, such as updating quantities, removing items, or viewing subtotals?
+      quote: "add them to a basket"
+      related facts: F10
+  Q12 (scope_gap, llm) What payment methods (e.g., credit card, debit card, digital wallets) should be supported for online payments?
+      quote: "and pay online"
+      related facts: F11
+  Q13 (scope_gap, llm) What are the specific requirements for delivery slot functionality, such as defining available slots, capacity limits, or customer selection rules?
+      quote: "Delivery slots are important to us"
+      related facts: F15
+  Q14 (scope_gap, llm) What specific data points or metrics should be included in the weekly reports for admins?
+      quote: "get the usual reports every week"
+      related facts: F17, F18
+  Q15 (scope_gap, llm) In what format (e.g., CSV, PDF, in-app dashboard) should the weekly reports be delivered to admins?
+      quote: "get the usual reports every week"
+      related facts: F17, F18
+  Q16 (missing, llm) Who are the primary target users for the application, including any specific demographics, technical proficiency levels, or accessibility requirements?
+  Q17 (missing, llm) Are there any other existing systems or third-party services, besides the ORMS and loyalty scheme, that the new platform needs to integrate with?
+  Q18 (missing, llm) Is there any existing data (e.g., customer accounts, product catalogs, past orders) that needs to be migrated to the new digital platform?
+  Q19 (missing, llm) What are the hosting and deployment requirements for the web-only version of the application?
+  Q20 (missing, llm) What are the expected support and maintenance requirements for the new digital platform once it is live?
+Templated questions added: 0
+Rejected: None
+
+##############################################################################
+# STAGE 4 BREAK DOWN (LLM) - verified epics and tasks
+##############################################################################
+  E1 Customer Web Ordering Platform
+    E1.T1 [Story] Develop customer web platform  facts=F2,F5,F19,F20  AC=2  deps=-  blocked_by=Q1,Q6
+    E1.T2 [Story] Enable product browsing  facts=F9  AC=1  deps=-  blocked_by=Q10
+    E1.T3 [Story] Implement shopping basket functionality  facts=F10  AC=1  deps=-  blocked_by=Q11
+    E1.T4 [Story] Implement online payment for orders  facts=F11  AC=1  deps=-  blocked_by=Q12
+    E1.T5 [Story] Implement delivery slot selection  facts=F15  AC=1  deps=-  blocked_by=Q5,Q13
+    E1.T6 [Task] Ensure the platform is fast  facts=F6  AC=0  deps=-  blocked_by=Q1,Q21
+    E1.T7 [Task] Ensure the platform is modern  facts=F6  AC=0  deps=-  blocked_by=Q1,Q2,Q22
+    E1.T8 [Task] Ensure the platform is secure  facts=F6  AC=0  deps=-  blocked_by=Q1,Q3,Q23
+  E2 Order Management System Integration
+    E2.T1 [Task] Integrate with ORMS for order sync  facts=F12  AC=1  deps=-  blocked_by=Q7
+    E2.T2 [Task] Ensure warehouse sees orders straight away  facts=F13  AC=1  deps=-  blocked_by=Q4
+  E3 Loyalty Scheme Implementation
+    E3.T1 [Story] Implement loyalty scheme functionality  facts=F14  AC=1  deps=-  blocked_by=Q8
+  E4 Admin Reporting
+    E4.T1 [Story] Generate weekly reports for admins  facts=F17,F18  AC=2  deps=-  blocked_by=Q9,Q14,Q15
+Questions raised by code in Stage 4:
+  Q21 (missing, breakdown) What testable acceptance conditions apply to 'Ensure the platform is fast'?
+  Q22 (missing, breakdown) What testable acceptance conditions apply to 'Ensure the platform is modern'?
+  Q23 (missing, breakdown) What testable acceptance conditions apply to 'Ensure the platform is secure'?
+Rejected: None
+
+##############################################################################
+# STAGE 5+6 TICKETS AND REPORT
+##############################################################################
+==============================================================================
+TICKETS (16)
+==============================================================================
+TASK-001  [Epic]  Customer Web Ordering Platform
+  Children: TASK-002, TASK-003, TASK-004, TASK-005, TASK-006, TASK-007, TASK-008, TASK-009
+  Description: Develop the customer-facing web platform for ordering groceries, adhering to the web-only constraint for the first version.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-002, TASK-003, TASK-004, TASK-005, TASK-006, TASK-007, TASK-008, TASK-009
+  Source: S10: "web only for the first version"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-016] (missing) Who are the primary target users for the application, including any specific demographics, technical proficiency levels, or accessibility requirements?
+    [Q-017] (missing) Are there any other existing systems or third-party services, besides the ORMS and loyalty scheme, that the new platform needs to integrate with?
+    [Q-018] (missing) Is there any existing data (e.g., customer accounts, product catalogs, past orders) that needs to be migrated to the new digital platform?
+    [Q-019] (missing) What are the hosting and deployment requirements for the web-only version of the application?
+    [Q-020] (missing) What are the expected support and maintenance requirements for the new digital platform once it is live?
+
+TASK-002  [Story]  Develop customer web platform
+  Parent: TASK-001
+  Description: Develop the customer-facing platform for ordering groceries, ensuring it is web-only for the first version due to budget reasons.
+  Acceptance Criteria:
+    - The platform allows customers to order groceries.   <- "to order groceries"
+    - The platform is web-only for the first version.   <- "web only for the first version"
+  Source: S2: "want to finally go digital"
+  Dependencies: None stated in brief
+  Priority: as soon as possible
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) The brief states 'Customers will download our new app from the App Store and Google Play' but also 'web only for the first version'. Which platform should the first version of the customer-facing application be developed for?
+    [Q-006] (vague) What is the target date or timeframe for the project to go live?
+
+TASK-003  [Story]  Enable product browsing
+  Parent: TASK-001
+  Description: Allow customers to browse available products on the web platform.
+  Acceptance Criteria:
+    - Customers can browse products.   <- "Customers browse products"
+  Source: S5: "Customers browse products"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-010] (scope_gap) What product attributes (e.g., name, description, price, image, stock level) should be displayed when customers browse products?
+
+TASK-004  [Story]  Implement shopping basket functionality
+  Parent: TASK-001
+  Description: Allow customers to add products to a shopping basket.
+  Acceptance Criteria:
+    - Customers can add products to a basket.   <- "add them to a basket"
+  Source: S5: "add them to a basket"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-011] (scope_gap) What functionalities are required for the customer's basket, such as updating quantities, removing items, or viewing subtotals?
+
+TASK-005  [Story]  Implement online payment for orders
+  Parent: TASK-001
+  Description: Enable customers to pay for their orders online.
+  Acceptance Criteria:
+    - Customers can pay online.   <- "and pay online"
+  Source: S5: "and pay online"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-012] (scope_gap) What payment methods (e.g., credit card, debit card, digital wallets) should be supported for online payments?
+
+TASK-006  [Story]  Implement delivery slot selection
+  Parent: TASK-001
+  Description: Provide functionality for customers to select delivery slots, as this is important to the business.
+  Acceptance Criteria:
+    - Delivery slots are available for selection.   <- "Delivery slots are important to us"
+  Source: S8: "Delivery slots are important to us"
+  Dependencies: None stated in brief
+  Priority: important
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-005] (vague) How would you rank the priority of implementing delivery slots compared to other features mentioned in the brief?
+    [Q-013] (scope_gap) What are the specific requirements for delivery slot functionality, such as defining available slots, capacity limits, or customer selection rules?
+
+TASK-007  [Task]  Ensure the platform is fast
+  Parent: TASK-001
+  Description: Implement measures to ensure the customer-facing platform operates quickly.
+  Acceptance Criteria: None stated in brief
+  Source: S4: "The app must be fast"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) The brief states 'Customers will download our new app from the App Store and Google Play' but also 'web only for the first version'. Which platform should the first version of the customer-facing application be developed for?
+    [Q-021] (missing) What testable acceptance conditions apply to 'Ensure the platform is fast'?
+
+TASK-008  [Task]  Ensure the platform is modern
+  Parent: TASK-001
+  Description: Implement design and functionality to ensure the customer-facing platform is modern.
+  Acceptance Criteria: None stated in brief
+  Source: S4: "The app must be fast"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) The brief states 'Customers will download our new app from the App Store and Google Play' but also 'web only for the first version'. Which platform should the first version of the customer-facing application be developed for?
+    [Q-002] (vague) What specific criteria or characteristics define a 'modern' app for your business?
+    [Q-022] (missing) What testable acceptance conditions apply to 'Ensure the platform is modern'?
+
+TASK-009  [Task]  Ensure the platform is secure
+  Parent: TASK-001
+  Description: Implement security measures for the customer-facing platform.
+  Acceptance Criteria: None stated in brief
+  Source: S4: "The app must be fast"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (contradiction) The brief states 'Customers will download our new app from the App Store and Google Play' but also 'web only for the first version'. Which platform should the first version of the customer-facing application be developed for?
+    [Q-003] (vague) What specific security standards, certifications, or measures are required for the app?
+    [Q-023] (missing) What testable acceptance conditions apply to 'Ensure the platform is secure'?
+
+TASK-010  [Epic]  Order Management System Integration
+  Children: TASK-011, TASK-012
+  Description: Integrate the new ordering platform with the existing ORMS to ensure orders are processed efficiently.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-011, TASK-012
+  Source: S6: "Orders should sync with our ORMS"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-016] (missing) Who are the primary target users for the application, including any specific demographics, technical proficiency levels, or accessibility requirements?
+    [Q-017] (missing) Are there any other existing systems or third-party services, besides the ORMS and loyalty scheme, that the new platform needs to integrate with?
+    [Q-018] (missing) Is there any existing data (e.g., customer accounts, product catalogs, past orders) that needs to be migrated to the new digital platform?
+    [Q-019] (missing) What are the hosting and deployment requirements for the web-only version of the application?
+    [Q-020] (missing) What are the expected support and maintenance requirements for the new digital platform once it is live?
+
+TASK-011  [Task]  Integrate with ORMS for order sync
+  Parent: TASK-010
+  Description: Establish a connection and mechanism to sync customer orders from the web platform to the existing ORMS.
+  Acceptance Criteria:
+    - Orders sync with the ORMS.   <- "Orders should sync with our ORMS"
+  Source: S6: "Orders should sync with our ORMS"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-007] (undefined_term) What does ORMS stand for, and what interface or API does it expose for integration?
+
+TASK-012  [Task]  Ensure warehouse sees orders straight away
+  Parent: TASK-010
+  Description: Configure the ORMS integration to ensure that the warehouse has immediate visibility of new orders.
+  Acceptance Criteria:
+    - The warehouse sees orders straight away.   <- "the warehouse sees them straight away"
+  Source: S6: "the warehouse sees them straight away"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-004] (vague) What is the maximum acceptable delay for orders to be visible to the warehouse after a customer places them?
+
+TASK-013  [Epic]  Loyalty Scheme Implementation
+  Children: TASK-014
+  Description: Implement the loyalty scheme functionality within the new platform, replicating its previous behavior.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-014
+  Source: S7: "the loyalty scheme to work like last time"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-016] (missing) Who are the primary target users for the application, including any specific demographics, technical proficiency levels, or accessibility requirements?
+    [Q-017] (missing) Are there any other existing systems or third-party services, besides the ORMS and loyalty scheme, that the new platform needs to integrate with?
+    [Q-018] (missing) Is there any existing data (e.g., customer accounts, product catalogs, past orders) that needs to be migrated to the new digital platform?
+    [Q-019] (missing) What are the hosting and deployment requirements for the web-only version of the application?
+    [Q-020] (missing) What are the expected support and maintenance requirements for the new digital platform once it is live?
+
+TASK-014  [Story]  Implement loyalty scheme functionality
+  Parent: TASK-013
+  Description: Develop the loyalty scheme to function as it did previously.
+  Acceptance Criteria:
+    - The loyalty scheme works like last time.   <- "the loyalty scheme to work like last time"
+  Source: S7: "the loyalty scheme to work like last time"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-008] (undefined_term) Please describe the functionalities and rules of the loyalty scheme you are referring to as 'last time'.
+
+TASK-015  [Epic]  Admin Reporting
+  Children: TASK-016
+  Description: Provide administrators with access to weekly reports.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-016
+  Source: S9: "Admins should get the usual reports every week."
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-016] (missing) Who are the primary target users for the application, including any specific demographics, technical proficiency levels, or accessibility requirements?
+    [Q-017] (missing) Are there any other existing systems or third-party services, besides the ORMS and loyalty scheme, that the new platform needs to integrate with?
+    [Q-018] (missing) Is there any existing data (e.g., customer accounts, product catalogs, past orders) that needs to be migrated to the new digital platform?
+    [Q-019] (missing) What are the hosting and deployment requirements for the web-only version of the application?
+    [Q-020] (missing) What are the expected support and maintenance requirements for the new digital platform once it is live?
+
+TASK-016  [Story]  Generate weekly reports for admins
+  Parent: TASK-015
+  Description: Create a system to generate the usual reports for admins on a weekly basis.
+  Acceptance Criteria:
+    - Admins get reports.   <- "Admins should get the usual reports"
+    - Reports are generated every week.   <- "reports every week"
+  Source: S9: "get the usual reports"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-009] (undefined_term) What specific reports are considered 'the usual reports' for admins?
+    [Q-014] (scope_gap) What specific data points or metrics should be included in the weekly reports for admins?
+    [Q-015] (scope_gap) In what format (e.g., CSV, PDF, in-app dashboard) should the weekly reports be delivered to admins?
+
+==============================================================================
+OPEN QUESTIONS BY CATEGORY (23)
+==============================================================================
+[missing] (8)
+  Q-016: Who are the primary target users for the application, including any specific demographics, technical proficiency levels, or accessibility requirements?
+      linked tickets: TASK-001, TASK-010, TASK-013, TASK-015
+  Q-017: Are there any other existing systems or third-party services, besides the ORMS and loyalty scheme, that the new platform needs to integrate with?
+      linked tickets: TASK-001, TASK-010, TASK-013, TASK-015
+  Q-018: Is there any existing data (e.g., customer accounts, product catalogs, past orders) that needs to be migrated to the new digital platform?
+      linked tickets: TASK-001, TASK-010, TASK-013, TASK-015
+  Q-019: What are the hosting and deployment requirements for the web-only version of the application?
+      linked tickets: TASK-001, TASK-010, TASK-013, TASK-015
+  Q-020: What are the expected support and maintenance requirements for the new digital platform once it is live?
+      linked tickets: TASK-001, TASK-010, TASK-013, TASK-015
+  Q-021: What testable acceptance conditions apply to 'Ensure the platform is fast'?
+      linked tickets: TASK-007
+  Q-022: What testable acceptance conditions apply to 'Ensure the platform is modern'?
+      linked tickets: TASK-008
+  Q-023: What testable acceptance conditions apply to 'Ensure the platform is secure'?
+      linked tickets: TASK-009
+
+[vague] (5)
+  Q-002: What specific criteria or characteristics define a 'modern' app for your business?
+      quote: "The app must be fast, modern and secure."
+      linked tickets: TASK-008
+  Q-003: What specific security standards, certifications, or measures are required for the app?
+      quote: "The app must be fast, modern and secure."
+      linked tickets: TASK-009
+  Q-004: What is the maximum acceptable delay for orders to be visible to the warehouse after a customer places them?
+      quote: "the warehouse sees them straight away"
+      linked tickets: TASK-012
+  Q-005: How would you rank the priority of implementing delivery slots compared to other features mentioned in the brief?
+      quote: "Delivery slots are important to us"
+      linked tickets: TASK-006
+  Q-006: What is the target date or timeframe for the project to go live?
+      quote: "live as soon as possible"
+      linked tickets: TASK-002
+
+[contradiction] (1)
+  Q-001: The brief states 'Customers will download our new app from the App Store and Google Play' but also 'web only for the first version'. Which platform should the first version of the customer-facing application be developed for?
+      quote A: "Customers will download our new app from the App Store and Google Play"
+      quote B: "web only for the first version"
+      linked tickets: TASK-002, TASK-007, TASK-008, TASK-009
+
+[undefined_term] (3)
+  Q-007: What does ORMS stand for, and what interface or API does it expose for integration?
+      quote: "our ORMS"
+      linked tickets: TASK-011
+  Q-008: Please describe the functionalities and rules of the loyalty scheme you are referring to as 'last time'.
+      quote: "the loyalty scheme to work like last time"
+      linked tickets: TASK-014
+  Q-009: What specific reports are considered 'the usual reports' for admins?
+      quote: "the usual reports"
+      linked tickets: TASK-016
+
+[scope_gap] (6)
+  Q-010: What product attributes (e.g., name, description, price, image, stock level) should be displayed when customers browse products?
+      quote: "Customers browse products"
+      linked tickets: TASK-003
+  Q-011: What functionalities are required for the customer's basket, such as updating quantities, removing items, or viewing subtotals?
+      quote: "add them to a basket"
+      linked tickets: TASK-004
+  Q-012: What payment methods (e.g., credit card, debit card, digital wallets) should be supported for online payments?
+      quote: "and pay online"
+      linked tickets: TASK-005
+  Q-013: What are the specific requirements for delivery slot functionality, such as defining available slots, capacity limits, or customer selection rules?
+      quote: "Delivery slots are important to us"
+      linked tickets: TASK-006
+  Q-014: What specific data points or metrics should be included in the weekly reports for admins?
+      quote: "get the usual reports every week"
+      linked tickets: TASK-016
+  Q-015: In what format (e.g., CSV, PDF, in-app dashboard) should the weekly reports be delivered to admins?
+      quote: "get the usual reports every week"
+      linked tickets: TASK-016
+
+General questions (not linked to a specific task, attached to every epic): Q-016, Q-017, Q-018, Q-019, Q-020
+
+==============================================================================
+REJECTED ITEMS (2)
+==============================================================================
+  [understand] quote not in brief: {"id": "F7", "category": "constraint", "text": "The app must be modern.", "quote": "must be modern"}
+  [understand] quote not in brief: {"id": "F8", "category": "constraint", "text": "The app must be secure.", "quote": "must be secure"}
+
+==============================================================================
+LINT WARNINGS (5)
+==============================================================================
+  WARNING unsourced word 'platform' in AC of TASK-002
+  WARNING unsourced word 'allows' in AC of TASK-002
+  WARNING unsourced word 'available' in AC of TASK-006
+  WARNING unsourced word 'selection' in AC of TASK-006
+  WARNING unsourced word 'generated' in AC of TASK-016
+
+==============================================================================
+COUNTS
+==============================================================================
+  Facts: 19
+  Questions: 23 (missing: 8, vague: 5, contradiction: 1, undefined_term: 3, scope_gap: 6)
+  Tickets: 16 (Ready: 0, Needs clarification: 16)
+  Rejected items: 2
+  Lint warnings: 5
+
+Wrote out/vague\tickets.json, out/vague\tickets_jira.csv, out/vague\run.log

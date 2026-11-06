@@ -1,0 +1,10 @@
+{
+  "key": "TASK-003",
+  "fields": {
+    "summary": "Book and cancel classes as members",
+    "description": "Members can book a class up to 7 days before it starts and cancel a booking up to 2 hours before the class starts.\n\nh3. Acceptance Criteria\n* Members can book a class up to 7 days before it starts.\n* Members can cancel a booking up to 2 hours before the class starts.\n* Cancelling frees the place for another member.\n* Members receive a booking confirmation after they book.\n* Members identify themselves with their membership number.\n\nh3. Source\n{quote}S6: \"Members can book a class up to 7 days before it starts.\"{quote}\n\nh3. Dependencies\nNone stated in brief\n\nh3. Open Questions\n* [Q-001] How is the booking confirmation delivered to members?\n\nh3. Details\nStatus: Needs clarification | Parent: TASK-001 | Priority: High | Estimate: Not specified | Deadline: 15 March 2027",
+    "labels": [
+      "TASK-003"
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+Brief2Jira  brief=briefs\clear.txt  model=gemini-flash-lite-latest  out=out\clear
+
+##############################################################################
+# STAGE 1 INPUT - 16 sentences
+##############################################################################
+  S1: FitLane Gym - Class Booking Web App
+  S2: FitLane Gym runs group fitness classes at one branch.
+  S3: We need a web application that works in desktop and mobile browsers.
+  S4: It has two user groups: members and front-desk staff.
+  S5: Staff create classes with a name, instructor, start time and capacity.
+  S6: Members can book a class up to 7 days before it starts.
+  S7: Members can only book classes that staff have already created.
+  S8: When a class reaches its capacity, booking closes and members see the message "Class full".
+  S9: Members can cancel a booking up to 2 hours before the class starts.
+  S10: Cancelling frees the place for another member.
+  S11: Staff can view the list of members booked into each class and print it.
+  S12: Members receive a booking confirmation after they book.
+  S13: Booking and cancellation are high priority.
+  S14: The printable list is low priority.
+  S15: The app must launch on 15 March 2027.
+  S16: Members identify themselves with their membership number.
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+  F1 [goal] FitLane Gym runs group fitness classes at one branch
+      quote: "FitLane Gym runs group fitness classes at one branch."  (S2)
+  F2 [goal] We need a web application that works in desktop and mobile browsers
+      quote: "We need a web application that works in desktop and mobile browsers."  (S3)
+  F3 [user] It has two user groups: members and front-desk staff
+      quote: "It has two user groups: members and front-desk staff."  (S4)
+  F4 [feature] Staff create classes with a name, instructor, start time and capacity
+      quote: "Staff create classes with a name, instructor, start time and capacity."  (S5)
+  F5 [feature] Members can book a class up to 7 days before it starts
+      quote: "Members can book a class up to 7 days before it starts."  (S6)
+  F6 [feature] Members can only book classes that staff have already created
+      quote: "Members can only book classes that staff have already created."  (S7)
+  F7 [feature] When a class reaches its capacity, booking closes and members see the message Class full
+      quote: "When a class reaches its capacity, booking closes and members see the message "Class full"."  (S8)
+  F8 [feature] Members can cancel a booking up to 2 hours before the class starts
+      quote: "Members can cancel a booking up to 2 hours before the class starts."  (S9)
+  F9 [feature] Cancelling frees the place for another member
+      quote: "Cancelling frees the place for another member."  (S10)
+  F10 [feature] Staff can view the list of members booked into each class and print it
+      quote: "Staff can view the list of members booked into each class and print it."  (S11)
+  F11 [feature] Members receive a booking confirmation after they book
+      quote: "Members receive a booking confirmation after they book."  (S12)
+  F12 [priority] Booking and cancellation are high priority
+      quote: "Booking and cancellation are high priority."  (S13)
+  F13 [priority] The printable list is low priority
+      quote: "The printable list is low priority."  (S14)
+  F14 [deadline] The app must launch on 15 March 2027
+      quote: "The app must launch on 15 March 2027."  (S15)
+  F15 [feature] Members identify themselves with their membership number
+      quote: "Members identify themselves with their membership number."  (S16)
+Rejected: None
+
+##############################################################################
+# STAGE 3 GAPS (LLM + templates) - verified questions
+##############################################################################
+Transient API error (429/503). Waiting 30 s and retrying once...
+  [missing]
+  Q2 (missing, template) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+  [scope_gap]
+  Q1 (scope_gap, llm) How is the booking confirmation delivered to members?
+      quote: "Members receive a booking confirmation after they book."
+      related facts: F11
+Templated questions added: 1
+Rejected: None
+
+##############################################################################
+# STAGE 4 BREAK DOWN (LLM) - verified epics and tasks
+##############################################################################
+Transient API error (429/503). Waiting 30 s and retrying once...
+ERROR: stage failed: Gemini rate limit / overload (429 or 503) hit twice; wait a minute and re-run. API said: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+No export written.

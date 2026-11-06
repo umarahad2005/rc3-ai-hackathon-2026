@@ -1,0 +1,2 @@
+{"checks":[{"context":"ai-pr-reviewer","state":"SUCCESS"}],"mergedAt":"2026-11-05T09:00:22Z","number":4,"state":"MERGED","title":"RC3-7 cancel booking up to 2 hours before class"}
+{"checks":[{"context":"ai-pr-reviewer","state":"FAILURE"}],"mergedAt":null,"number":5,"state":"OPEN","title":"RC3-8 booking window"}

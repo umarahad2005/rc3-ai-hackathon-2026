@@ -1,0 +1,8 @@
+# Alias so `python analyze <url>` works the same as `python analyze.py <url>`.
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from analyze import main  # noqa: E402  (imports analyze.py)
+
+sys.exit(main())

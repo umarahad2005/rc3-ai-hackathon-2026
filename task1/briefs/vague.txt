@@ -1,0 +1,18 @@
+Hi team,
+
+We are a family-run grocery business and want to finally go digital. Customers will download
+our new app from the App Store and Google Play to order groceries. The app must be fast,
+modern and secure.
+
+Customers browse products, add them to a basket and pay online. Orders should sync with our
+ORMS so the warehouse sees them straight away. We would also like the loyalty scheme to work
+like last time. Delivery slots are important to us.
+
+Admins should get the usual reports every week.
+
+For budget reasons we want web only for the first version.
+
+We need this live as soon as possible.
+
+Thanks,
+Bilal

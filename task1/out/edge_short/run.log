@@ -1,0 +1,124 @@
+Brief2Jira  brief=tests/edge/short.txt  model=gemini-3-flash-preview  out=out/edge_short
+
+##############################################################################
+# STAGE 1 INPUT - 1 sentences
+##############################################################################
+  S1: Build an app.
+
+##############################################################################
+# STAGE 2 UNDERSTAND (LLM) - verified facts
+##############################################################################
+  F1 [goal] Build an app
+      quote: "Build an app"  (S1)
+Rejected: None
+
+##############################################################################
+# STAGE 3 GAPS (LLM + templates) - verified questions
+##############################################################################
+  [missing]
+  Q1 (missing, llm) Who are the target users for this application?
+      related facts: F1
+  Q2 (missing, llm) Which platforms should the application be built for?
+      related facts: F1
+  Q3 (missing, llm) What is the specific deadline for this project?
+      related facts: F1
+  Q5 (missing, template) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+  Q6 (missing, template) Which features have the highest priority for the first release?
+  [scope_gap]
+  Q4 (scope_gap, llm) What are the core features and functionalities required for the application?
+      quote: "Build an app"
+      related facts: F1
+Templated questions added: 2
+Rejected: None
+
+##############################################################################
+# STAGE 4 BREAK DOWN (LLM) - verified epics and tasks
+##############################################################################
+  E1 Build an app
+    E1.T1 [Story] Build an app  facts=F1  AC=0  deps=-  blocked_by=Q3,Q4,Q6,Q7
+Questions raised by code in Stage 4:
+  Q7 (missing, breakdown) What testable acceptance conditions apply to 'Build an app'?
+Rejected (1):
+  [breakdown] question link dropped: question is not about this task (its quote is not one of the task's source/AC quotes): {"task": "Build an app", "blocked_by_dropped": ["Q1", "Q2", "Q5"]}
+
+##############################################################################
+# STAGE 5+6 TICKETS AND REPORT
+##############################################################################
+==============================================================================
+TICKETS (2)
+==============================================================================
+TASK-001  [Epic]  Build an app
+  Children: TASK-002
+  Description: Build an app.
+  Acceptance Criteria: Not applicable (epic) - see child tickets TASK-002
+  Source: S1: "Build an app"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-001] (missing) Who are the target users for this application?
+    [Q-002] (missing) Which platforms should the application be built for?
+    [Q-005] (missing) Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+
+TASK-002  [Story]  Build an app
+  Parent: TASK-001
+  Description: Build an app as requested.
+  Acceptance Criteria: None stated in brief
+  Source: S1: "Build an app"
+  Dependencies: None stated in brief
+  Priority: Not specified
+  Estimate: Not specified
+  Deadline: Not specified
+  Status: Needs clarification
+  Open Questions:
+    [Q-003] (missing) What is the specific deadline for this project?
+    [Q-004] (scope_gap) What are the core features and functionalities required for the application?
+    [Q-006] (missing) Which features have the highest priority for the first release?
+    [Q-007] (missing) What testable acceptance conditions apply to 'Build an app'?
+
+==============================================================================
+OPEN QUESTIONS BY CATEGORY (7)
+==============================================================================
+[missing] (6)
+  Q-001: Who are the target users for this application?
+      linked tickets: TASK-001
+  Q-002: Which platforms should the application be built for?
+      linked tickets: TASK-001
+  Q-003: What is the specific deadline for this project?
+      linked tickets: TASK-002
+  Q-005: Does the system need to integrate with any existing systems (payments, accounts, notifications)? If so, which?
+      linked tickets: TASK-001
+  Q-006: Which features have the highest priority for the first release?
+      linked tickets: TASK-002
+  Q-007: What testable acceptance conditions apply to 'Build an app'?
+      linked tickets: TASK-002
+
+[scope_gap] (1)
+  Q-004: What are the core features and functionalities required for the application?
+      quote: "Build an app"
+      linked tickets: TASK-002
+
+General questions (not linked to a specific task, attached to every epic): Q-001, Q-002, Q-005
+
+==============================================================================
+REJECTED ITEMS (1)
+==============================================================================
+  [breakdown] question link dropped: question is not about this task (its quote is not one of the task's source/AC quotes): {"task": "Build an app", "blocked_by_dropped": ["Q1", "Q2", "Q5"]}
+
+==============================================================================
+LINT WARNINGS (1)
+==============================================================================
+  WARNING unsourced word 'requested' in description of TASK-002
+
+==============================================================================
+COUNTS
+==============================================================================
+  Facts: 1
+  Questions: 7 (missing: 6, scope_gap: 1)
+  Tickets: 2 (Ready: 0, Needs clarification: 2)
+  Rejected items: 1
+  Lint warnings: 1
+
+Wrote out/edge_short\tickets.json, out/edge_short\tickets_jira.csv, out/edge_short\run.log

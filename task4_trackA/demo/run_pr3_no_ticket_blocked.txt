@@ -1,0 +1,21 @@
+[1/6 webhook] reviewing umarahad2005/rc3-pr-reviewer-demo#3
+[1/6 webhook] PR #3 'Fix readme' branch=fix-readme-typo sha=845bdf4
+[2/6 story] no ticket ID in branch or title
+[5/6 decision] decision=BLOCK reason=No ticket ID (e.g. PROJ-123) found in the branch name or PR title.
+[6/6 action] POST /repos/umarahad2005/rc3-pr-reviewer-demo/statuses/845bdf490da55541aab1fa01e093ddf1fcbb8745 (status failure on 845bdf4)
+[6/6 action] POST /repos/umarahad2005/rc3-pr-reviewer-demo/issues/3/comments (comment FAILED on PR #3)
+{
+  "ticket_id": null,
+  "decision": "BLOCK",
+  "reason": "No ticket ID (e.g. PROJ-123) found in the branch name or PR title.",
+  "actions": [
+    "POST /repos/umarahad2005/rc3-pr-reviewer-demo/statuses/845bdf490da55541aab1fa01e093ddf1fcbb8745 (status failure on 845bdf4)",
+    "POST /repos/umarahad2005/rc3-pr-reviewer-demo/issues/3/comments (comment FAILED on PR #3)"
+  ],
+  "verdict": {
+    "fulfilled": false,
+    "feedback": "",
+    "error": "No ticket ID (e.g. PROJ-123) found in the branch name or PR title.",
+    "reason": "No ticket ID (e.g. PROJ-123) found in the branch name or PR title."
+  }
+}

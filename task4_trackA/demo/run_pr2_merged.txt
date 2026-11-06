@@ -1,0 +1,28 @@
+[1/6 webhook] reviewing umarahad2005/rc3-pr-reviewer-demo#2
+[1/6 webhook] PR #2 'TASK-004 Close booking when class is full' branch=feature/TASK-004-class-full sha=b556213
+[2/6 story] ticket ID TASK-004
+[2/6 story] 'Manage class capacity and closing' source=csv AC=1
+[3/6 code] diff 870 chars
+[4/6 llm] asking LLM for a verdict
+[4/6 llm] fulfilled=True error=None
+[5/6 decision] decision=MERGE reason=All acceptance criteria fulfilled.
+[6/6 action] POST /repos/umarahad2005/rc3-pr-reviewer-demo/statuses/b556213cc5783d6ea20c310bb6a6bf19316a9da8 (status success on b556213)
+[6/6 action] POST /repos/umarahad2005/rc3-pr-reviewer-demo/issues/2/comments (comment PASSED on PR #2)
+[6/6 action] PUT /repos/umarahad2005/rc3-pr-reviewer-demo/pulls/2/merge (squash-merge PR #2)
+{
+  "ticket_id": "TASK-004",
+  "decision": "MERGE",
+  "reason": "All acceptance criteria fulfilled.",
+  "actions": [
+    "POST /repos/umarahad2005/rc3-pr-reviewer-demo/statuses/b556213cc5783d6ea20c310bb6a6bf19316a9da8 (status success on b556213)",
+    "POST /repos/umarahad2005/rc3-pr-reviewer-demo/issues/2/comments (comment PASSED on PR #2)",
+    "PUT /repos/umarahad2005/rc3-pr-reviewer-demo/pulls/2/merge (squash-merge PR #2)"
+  ],
+  "verdict": {
+    "fulfilled": true,
+    "feedback": "The code changes successfully implement the capacity check and class closing logic. The `is_full` function checks if the bookings list length has reached or exceeded the class capacity, and the `book` function prevents further bookings and returns the exact message 'Class full' as required by the acceptance criteria.",
+    "error": null,
+    "reason": "All acceptance criteria fulfilled.",
+    "raw": "{\n  \"fulfilled\": true,\n  \"feedback\": \"The code changes successfully implement the capacity check and class closing logic. The `is_full` function checks if the bookings list length has reached or exceeded the class capacity, and the `book` function prevents further bookings and returns the exact message 'Class full' as required by the acceptance criteria.\"\n}"
+  }
+}

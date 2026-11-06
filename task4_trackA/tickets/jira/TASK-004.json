@@ -1,0 +1,10 @@
+{
+  "key": "TASK-004",
+  "fields": {
+    "summary": "Manage class capacity and closing",
+    "description": "When a class reaches its capacity, booking closes and members see the message Class full.\n\nh3. Acceptance Criteria\n* When a class reaches its capacity, booking closes and members see the message \"Class full\".\n\nh3. Source\n{quote}S8: \"When a class reaches its capacity, booking closes and members see the message \"Class full\".\"{quote}\n\nh3. Dependencies\nTASK-003\n\nh3. Open Questions\nNone\n\nh3. Details\nStatus: Ready | Parent: TASK-001 | Priority: High | Estimate: Not specified | Deadline: 15 March 2027",
+    "labels": [
+      "TASK-004"
+    ]
+  }
+}

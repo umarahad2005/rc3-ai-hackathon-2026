@@ -1,0 +1,178 @@
+"Summary","Issue Type","Description","Priority","Labels"
+"Sign up page","Epic","A new visitor can create an account with a name, email and password, then verify the email address before first login.
+
+h3. Acceptance Criteria
+Not applicable (epic) - see child tickets TASK-002, TASK-003, TASK-004
+
+h3. Source
+{quote}S29: ""A new visitor can create an account with a name, email and password, then verify the email address before first login.""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-003] Where can the documentation or assets for the product's existing design system be accessed?
+* [Q-006] What are the functional requirements and fields for the Login page?
+
+h3. Details
+Status: Needs clarification | Parent: None | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-001"
+"Display sign up form","Story","The system shall display the sign up form with the fields above and a ""Sign up"" button.
+
+h3. Acceptance Criteria
+* The system shall display the sign up form with the fields above and a ""Sign up"" button.
+* Full name must be 2 to 60 characters; letters, spaces, hyphens and apostrophes.
+* Email must be valid email format; maximum 254 characters; unique, case-insensitive.
+* Password must be 8 to 64 characters with at least one uppercase letter, one lowercase letter, one digit and one symbol.
+* Confirm password must match the password.
+* Terms and privacy checkbox must be ticked to submit.
+* The system shall validate each field on blur and again on submit, showing the error under the field.
+* The system shall keep the ""Sign up"" button disabled until all required fields are valid.
+* The system shall let the user show or hide the password and confirm password values.
+* The system shall show a password strength indicator while the user types.
+* The page shall include a ""Already have an account? Log in"" link to the login page.
+
+h3. Source
+{quote}S29: ""A new visitor can create an account with a name, email and password""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-001] What is the target deadline for the completion of the Sign Up and Login pages?
+* [Q-002] What is the priority ranking for the features listed in the scope?
+* [Q-005] What are the specific visual levels or calculation rules for the password strength indicator?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-001 | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-002"
+"Process account registration","Task","On submit, the system shall check that the email is not already registered and reject the request with a clear message if it is.
+
+h3. Acceptance Criteria
+* The system shall check that the email is not already registered and reject the request with a clear message if it is.
+* The system shall store the password only as a salted hash and never return it in any response.
+* The system shall create the account in an unverified state and send a verification email containing a link valid for 24 hours.
+
+h3. Source
+{quote}S22: ""The backend stores passwords only as salted hashes (bcrypt or Argon2).""{quote}
+
+h3. Dependencies
+TASK-002
+
+h3. Open Questions
+* [Q-001] What is the target deadline for the completion of the Sign Up and Login pages?
+* [Q-002] What is the priority ranking for the features listed in the scope?
+* [Q-004] What is the specific measurable definition of a 'clear message' when an email is already registered?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-001 | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-003"
+"Verify email address","Story","When the user opens a valid verification link, the system shall mark the account verified and redirect to the login page with a success message.
+
+h3. Acceptance Criteria
+* The system shall show a confirmation screen telling the user to check their email, with a ""Resend email"" action limited to once every 60 seconds.
+* When the user opens a valid verification link, the system shall mark the account verified and redirect to the login page with a success message.
+* If the verification link is expired or invalid, the system shall explain this and offer to send a new link.
+
+h3. Source
+{quote}S8: ""In scope: account creation with email and password, email verification""{quote}
+
+h3. Dependencies
+TASK-003
+
+h3. Open Questions
+* [Q-001] What is the target deadline for the completion of the Sign Up and Login pages?
+* [Q-002] What is the priority ranking for the features listed in the scope?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-001 | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-004"
+"Login pages","Epic","This document specifies the requirements for the Sign Up and Login pages of the application.
+
+h3. Acceptance Criteria
+Not applicable (epic) - see child tickets TASK-006, TASK-007, TASK-008, TASK-009
+
+h3. Source
+{quote}S5: ""This document specifies the requirements for the Sign Up and Login pages of the application.""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-003] Where can the documentation or assets for the product's existing design system be accessed?
+* [Q-006] What are the functional requirements and fields for the Login page?
+
+h3. Details
+Status: Needs clarification | Parent: None | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-005"
+"Sign in returning user","Story","Returning user: has a verified account and wants to sign in.
+
+h3. Acceptance Criteria
+None stated in brief
+
+h3. Source
+{quote}S8: ""In scope: account creation with email and password, email verification, login, logout""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-001] What is the target deadline for the completion of the Sign Up and Login pages?
+* [Q-002] What is the priority ranking for the features listed in the scope?
+* [Q-007] What are the functional requirements for the logout functionality?
+* [Q-010] What testable acceptance conditions apply to 'Sign in returning user'?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-005 | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-006"
+"Logout user","Story","In scope: account creation with email and password, email verification, login, logout
+
+h3. Acceptance Criteria
+None stated in brief
+
+h3. Source
+{quote}S8: ""In scope: account creation with email and password, email verification, login, logout""{quote}
+
+h3. Dependencies
+TASK-006
+
+h3. Open Questions
+* [Q-001] What is the target deadline for the completion of the Sign Up and Login pages?
+* [Q-002] What is the priority ranking for the features listed in the scope?
+* [Q-007] What are the functional requirements for the logout functionality?
+* [Q-011] What testable acceptance conditions apply to 'Logout user'?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-005 | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-007"
+"Remember login session","Story","In scope: account creation with email and password, email verification, login, logout, ""remember me""
+
+h3. Acceptance Criteria
+None stated in brief
+
+h3. Source
+{quote}S8: ""In scope: account creation with email and password, email verification, login, logout, ""remember me""""{quote}
+
+h3. Dependencies
+TASK-006
+
+h3. Open Questions
+* [Q-001] What is the target deadline for the completion of the Sign Up and Login pages?
+* [Q-002] What is the priority ranking for the features listed in the scope?
+* [Q-008] What are the functional requirements for the 'remember me' feature?
+* [Q-012] What testable acceptance conditions apply to 'Remember login session'?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-005 | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-008"
+"Access password reset","Story","In scope: account creation with email and password, email verification, login, logout, ""remember me"", and password reset entry points.
+
+h3. Acceptance Criteria
+None stated in brief
+
+h3. Source
+{quote}S8: ""In scope: account creation with email and password, email verification, login, logout, ""remember me"", and password reset entry points.""{quote}
+
+h3. Dependencies
+None stated in brief
+
+h3. Open Questions
+* [Q-001] What is the target deadline for the completion of the Sign Up and Login pages?
+* [Q-002] What is the priority ranking for the features listed in the scope?
+* [Q-009] What are the functional requirements for the password reset entry points?
+* [Q-013] What testable acceptance conditions apply to 'Access password reset'?
+
+h3. Details
+Status: Needs clarification | Parent: TASK-005 | Priority: Not specified | Estimate: Not specified | Deadline: Not specified","","TASK-009"
